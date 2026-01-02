@@ -1,194 +1,176 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Virex Media – Dijital Çözümler</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virex Media</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Virex Media – Dijital dünyada markanızı büyütüyoruz. Yakında hizmetinizde." />
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  background: #050a2a;
+  overflow: hidden;
+}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #050a2a;
-      overflow: hidden;
-    }
+/* HERO */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url("hero-desktop.webp");
+  background-size: cover;
+  background-position: center;
+  animation: blurUp 1.2s ease forwards;
+}
 
-    /* HERO */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background-image: url("hero-desktop.webp");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      filter: blur(12px);
-      transition: filter 1s ease;
-    }
+/* Responsive images */
+@media (max-width: 1024px) {
+  .hero { background-image: url("hero-tablet.webp"); }
+}
+@media (max-width: 768px) {
+  .hero { background-image: url("hero-mobile.webp"); }
+}
 
-    /* Görsel yüklendiğinde blur kalksın */
-    body.loaded .hero {
-      filter: blur(0);
-    }
+/* Overlay */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,0,.25), rgba(0,0,0,.75));
+}
 
-    /* Tablet */
-    @media (max-width: 1024px) {
-      .hero {
-        background-image: url("hero-tablet.webp");
-      }
-    }
+/* CONTENT */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  animation: fadeInUp 1.2s ease forwards;
+}
 
-    /* Mobil */
-    @media (max-width: 768px) {
-      .hero {
-        background-image: url("hero-mobile.webp");
-      }
-    }
+h1 {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
 
-    /* KARARTMA */
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.35);
-    }
+p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 28px;
+}
 
-    /* İÇERİK */
-    .content {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #fff;
-      padding: 20px;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1.2s ease forwards;
-      animation-delay: 0.5s;
-    }
+/* BUTTON */
+.cta {
+  padding: 14px 34px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #5f8cff, #9f6bff);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 0 25px rgba(130,120,255,.45);
+  transition: all .35s ease;
+}
 
-    h1 {
-      font-size: clamp(28px, 4vw, 56px);
-      margin-bottom: 16px;
-    }
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 45px rgba(130,120,255,.75);
+}
 
-    p {
-      font-size: clamp(16px, 2vw, 22px);
-      max-width: 700px;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
+/* CONTACT */
+.contact {
+  margin-top: 26px;
+  font-size: 0.95rem;
+}
 
-    .buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+.contact a {
+  color: #cfd6ff;
+  text-decoration: none;
+}
+.contact a:hover { text-decoration: underline; }
 
-    .btn {
-      padding: 14px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
+/* SOCIALS */
+.socials {
+  display: flex;
+  gap: 18px;
+  margin-top: 30px;
+}
 
-    .btn-primary {
-      background: linear-gradient(135deg, #4fd1ff, #7b5cff);
-      color: #fff;
-    }
+.socials a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(6px);
+  transition: all .35s ease;
+}
 
-    .btn-primary:hover {
-      transform: scale(1.05);
-    }
+.socials a:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 18px rgba(120,140,255,.7);
+}
 
-    .btn-outline {
-      border: 2px solid #fff;
-      color: #fff;
-    }
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .btn-outline:hover {
-      background: #fff;
-      color: #000;
-    }
-
-    /* MAİL */
-    .mail {
-      margin-top: 30px;
-      font-size: 16px;
-    }
-
-    .mail a {
-      color: #9fd6ff;
-      text-decoration: none;
-    }
-
-    .mail a:hover {
-      text-decoration: underline;
-    }
-
-    /* ANİMASYON */
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+@keyframes blurUp {
+  from { filter: blur(14px); }
+  to { filter: blur(0); }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="hero">
-    <div class="overlay"></div>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Yakında Hizmetinizde</h1>
+    <p>Dijitalde markanızı geleceğe taşıyoruz</p>
 
-    <div class="content">
-      <!-- SEO için HTML yazı -->
-      <h1>Yakında Hizmetinizde</h1>
+    <a href="mailto:infovirex@virexmedia.net" class="cta">
+      Bizimle İletişime Geç
+    </a>
 
-      <p>
-        Virex Media olarak markanızı dijital dünyada
-        daha güçlü, daha görünür ve daha etkili hale getiriyoruz.
-      </p>
+    <div class="contact">
+      <a href="mailto:infovirex@virexmedia.net">
+        infovirex@virexmedia.net
+      </a>
+    </div>
 
-      <div class="buttons">
-        <a href="mailto:infovirex@virexmedia.net" class="btn btn-primary">
-          Bizimle İletişime Geç
-        </a>
+    <div class="socials">
+      <!-- Telegram -->
+      <a href="https://t.me/virex_uzay" target="_blank" aria-label="Telegram">
+        🚀
+      </a>
 
-        <a href="mailto:infovirex@virexmedia.net" class="btn btn-outline">
-          Mail Gönder
-        </a>
-      </div>
-
-      <div class="mail">
-        <a href="mailto:infovirex@virexmedia.net">
-          infovirex@virexmedia.net
-        </a>
-      </div>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/virex_media/" target="_blank" aria-label="Instagram">
+        📸
+      </a>
     </div>
   </div>
-
-  <script>
-    // Görsel yüklenince blur kalksın
-    window.addEventListener("load", () => {
-      document.body.classList.add("loaded");
-    });
-  </script>
+</section>
 
 </body>
 </html>
-
