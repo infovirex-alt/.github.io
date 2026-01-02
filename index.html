@@ -13,35 +13,35 @@
       height: 100%;
     }
 
-    .hero {
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
+    body {
+      background-color: #050a2a;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
     }
 
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    /* MOBİL */
+    @media (max-width: 767px) {
+      body {
+        background-image: url("hero-mobile.webp");
+      }
+    }
+
+    /* TABLET */
+    @media (min-width: 768px) and (max-width: 1199px) {
+      body {
+        background-image: url("hero-tablet.webp");
+      }
+    }
+
+    /* DESKTOP + FULL HD + 2K */
+    @media (min-width: 1200px) {
+      body {
+        background-image: url("hero-desktop.webp");
+      }
     }
   </style>
 </head>
-
 <body>
-
-  <div class="hero">
-    <picture>
-      <!-- Mobil -->
-      <source media="(max-width: 768px)" srcset="images/hero-mobile.webp">
-
-      <!-- Tablet -->
-      <source media="(max-width: 1024px)" srcset="images/hero-tablet.webp">
-
-      <!-- Desktop / Full HD / 2K -->
-      <img src="images/hero-desktop.webp" alt="Virex Media">
-    </picture>
-  </div>
-
 </body>
 </html>
