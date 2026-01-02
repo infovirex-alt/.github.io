@@ -1,47 +1,194 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virex Media</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virex Media – Dijital Çözümler</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Virex Media – Dijital dünyada markanızı büyütüyoruz. Yakında hizmetinizde." />
 
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
       width: 100%;
       height: 100%;
-    }
-
-    body {
+      font-family: Arial, Helvetica, sans-serif;
       background-color: #050a2a;
-      background-repeat: no-repeat;
-      background-position: center;
+      overflow: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background-image: url("hero-desktop.webp");
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(12px);
+      transition: filter 1s ease;
     }
 
-    /* MOBİL */
-    @media (max-width: 767px) {
-      body {
-        background-image: url("hero-mobile.webp");
-      }
+    /* Görsel yüklendiğinde blur kalksın */
+    body.loaded .hero {
+      filter: blur(0);
     }
 
-    /* TABLET */
-    @media (min-width: 768px) and (max-width: 1199px) {
-      body {
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .hero {
         background-image: url("hero-tablet.webp");
       }
     }
 
-    /* DESKTOP + FULL HD + 2K */
-    @media (min-width: 1200px) {
-      body {
-        background-image: url("hero-desktop.webp");
+    /* Mobil */
+    @media (max-width: 768px) {
+      .hero {
+        background-image: url("hero-mobile.webp");
+      }
+    }
+
+    /* KARARTMA */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    /* İÇERİK */
+    .content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1.2s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 56px);
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: clamp(16px, 2vw, 22px);
+      max-width: 700px;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4fd1ff, #7b5cff);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-outline {
+      border: 2px solid #fff;
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* MAİL */
+    .mail {
+      margin-top: 30px;
+      font-size: 16px;
+    }
+
+    .mail a {
+      color: #9fd6ff;
+      text-decoration: none;
+    }
+
+    .mail a:hover {
+      text-decoration: underline;
+    }
+
+    /* ANİMASYON */
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   </style>
 </head>
 <body>
+
+  <div class="hero">
+    <div class="overlay"></div>
+
+    <div class="content">
+      <!-- SEO için HTML yazı -->
+      <h1>Yakında Hizmetinizde</h1>
+
+      <p>
+        Virex Media olarak markanızı dijital dünyada
+        daha güçlü, daha görünür ve daha etkili hale getiriyoruz.
+      </p>
+
+      <div class="buttons">
+        <a href="mailto:infovirex@virexmedia.net" class="btn btn-primary">
+          Bizimle İletişime Geç
+        </a>
+
+        <a href="mailto:infovirex@virexmedia.net" class="btn btn-outline">
+          Mail Gönder
+        </a>
+      </div>
+
+      <div class="mail">
+        <a href="mailto:infovirex@virexmedia.net">
+          infovirex@virexmedia.net
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Görsel yüklenince blur kalksın
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
+  </script>
+
 </body>
 </html>
+
