@@ -1,174 +1,234 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virex Media</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Virex Media – Yakında Hizmetinizde</title>
 
 <style>
-/* RESET */
+:root {
+  --blue: #5dbbff;
+  --dark: #050a2a;
+}
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 html, body {
-  width: 100%;
+  margin: 0;
+  padding: 0;
   height: 100%;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #fff;
-  background: #050a2a;
-  overflow: hidden;
 }
 
-/* HERO */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+/* ===== BACKGROUND ===== */
+body {
   background-image: url("hero-desktop.webp");
   background-size: cover;
   background-position: center;
-  animation: blurUp 1.2s ease forwards;
+  background-repeat: no-repeat;
+  color: white;
+  overflow: hidden;
 }
 
-/* Responsive images */
 @media (max-width: 1024px) {
-  .hero { background-image: url("hero-tablet.webp"); }
+  body { background-image: url("hero-tablet.webp"); }
 }
 @media (max-width: 768px) {
-  .hero { background-image: url("hero-mobile.webp"); }
+  body { background-image: url("hero-mobile.webp"); }
 }
 
-/* Overlay */
-.hero::after {
-  content: "";
-  position: absolute;
+/* ===== OVERLAY ===== */
+.overlay {
+  position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(0,0,0,.25), rgba(0,0,0,.75));
+  background: radial-gradient(
+    circle at center,
+    rgba(0,0,0,0.35),
+    rgba(0,0,0,0.75)
+  );
 }
 
-/* CONTENT */
-.hero-content {
+/* ===== HERO ===== */
+.hero {
   position: relative;
   z-index: 2;
   height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 20px;
-  animation: fadeInUp 1.2s ease forwards;
+  justify-content: center;
+  padding: 24px;
 }
 
+.glass {
+  max-width: 980px;
+  width: 100%;
+  padding: 48px;
+  border-radius: 22px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.08);
+  animation: fadeUp 1.2s ease forwards;
+}
+
+/* ===== LOGO NEON ===== */
+.logo-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.logo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px solid var(--blue);
+  filter: blur(6px);
+  opacity: .8;
+  animation: pulse 2.8s infinite;
+}
+
+/* ===== TEXT ===== */
 h1 {
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  margin-bottom: 16px;
-  letter-spacing: -0.5px;
+  font-size: clamp(32px, 5vw, 52px);
+  margin: 12px 0;
 }
 
 p {
-  font-size: 1.1rem;
-  opacity: 0.85;
-  margin-bottom: 28px;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: .9;
 }
 
-/* BUTTON */
-.cta {
-  padding: 14px 34px;
-  border-radius: 50px;
-  background: linear-gradient(135deg, #5f8cff, #9f6bff);
-  color: #fff;
+/* ===== BUTTONS ===== */
+.buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 32px 0;
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
-  box-shadow: 0 0 25px rgba(130,120,255,.45);
-  transition: all .35s ease;
+  transition: .3s ease;
 }
 
-.cta:hover {
+.btn.primary {
+  background: linear-gradient(135deg, #6ec6ff, #4d9fff);
+  color: #000;
+}
+.btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 45px rgba(130,120,255,.75);
+  box-shadow: 0 0 24px rgba(93,187,255,.6);
 }
 
-/* CONTACT */
-.contact {
-  margin-top: 26px;
-  font-size: 0.95rem;
+.btn.outline {
+  border: 2px solid white;
+  color: white;
+}
+.btn.outline:hover {
+  background: white;
+  color: black;
 }
 
-.contact a {
-  color: #cfd6ff;
+/* ===== MAIL ===== */
+.mail {
+  margin-top: 16px;
+}
+.mail a {
+  color: var(--blue);
   text-decoration: none;
 }
-.contact a:hover { text-decoration: underline; }
 
-/* SOCIALS */
-.socials {
+/* ===== SOCIAL ===== */
+.social {
+  margin-top: 32px;
   display: flex;
   gap: 18px;
-  margin-top: 30px;
 }
 
-.socials a {
-  width: 42px;
-  height: 42px;
+.social a {
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,.08);
-  backdrop-filter: blur(6px);
-  transition: all .35s ease;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.08);
+  transition: .3s ease;
+}
+.social a:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 0 18px rgba(93,187,255,.6);
 }
 
-.socials a:hover {
-  transform: scale(1.12);
-  box-shadow: 0 0 18px rgba(120,140,255,.7);
+.social img {
+  width: 22px;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(25px); }
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes blurUp {
-  from { filter: blur(14px); }
-  to { filter: blur(0); }
+@keyframes pulse {
+  0% { opacity: .3; }
+  50% { opacity: .9; }
+  100% { opacity: .3; }
 }
 </style>
 </head>
 
 <body>
+<div class="overlay"></div>
 
 <section class="hero">
-  <div class="hero-content">
+  <div class="glass">
+
+    <!-- LOGO -->
+    <div class="logo-wrap">
+      <img src="index.webp" alt="Virex Media Logo" width="90">
+    </div>
+
+    <!-- SEO TEXT -->
     <h1>Yakında Hizmetinizde</h1>
-    <p>Dijitalde markanızı geleceğe taşıyoruz</p>
+    <p>
+      Virex Media olarak markanızı dijital dünyada daha güçlü,
+      daha görünür ve daha etkili hale getiriyoruz.
+    </p>
 
-    <a href="mailto:infovirex@virexmedia.net" class="cta">
-      Bizimle İletişime Geç
-    </a>
+    <!-- BUTTONS -->
+    <div class="buttons">
+      <a href="mailto:infovirex@virexmedia.net" class="btn primary">
+        Bizimle İletişime Geç
+      </a>
+      <a href="mailto:infovirex@virexmedia.net" class="btn outline">
+        Mail Gönder
+      </a>
+    </div>
 
-    <div class="contact">
+    <!-- MAIL -->
+    <div class="mail">
       <a href="mailto:infovirex@virexmedia.net">
         infovirex@virexmedia.net
       </a>
     </div>
 
-    <div class="socials">
-      <!-- Telegram -->
-      <a href="https://t.me/virex_uzay" target="_blank" aria-label="Telegram">
-        🚀
+    <!-- SOCIAL -->
+    <div class="social">
+      <a href="https://t.me/virex_uzay" target="_blank">
+        <img src="Telegram_logo.svg.webp" alt="Telegram">
       </a>
-
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/virex_media/" target="_blank" aria-label="Instagram">
-        📸
+      <a href="https://www.instagram.com/virex_media/" target="_blank">
+        <img src="Instagram_logo_2016.svg.png" alt="Instagram">
       </a>
     </div>
+
   </div>
 </section>
 
