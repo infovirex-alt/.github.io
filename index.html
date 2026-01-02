@@ -1,27 +1,47 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virex Media</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virex Media</title>
 
-<style>
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
 
-body {
-  background-image: url("index.webp"); /* 4K görsel */
-  background-size: cover;        /* TAM EKRAN */
-  background-position: center;   /* ORTALA */
-  background-repeat: no-repeat;
-  background-color: #050a2a;     /* Yüklenene kadar */
-}
-</style>
+    .hero {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
 </head>
+
 <body>
+
+  <div class="hero">
+    <picture>
+      <!-- Mobil -->
+      <source media="(max-width: 768px)" srcset="images/hero-mobile.webp">
+
+      <!-- Tablet -->
+      <source media="(max-width: 1024px)" srcset="images/hero-tablet.webp">
+
+      <!-- Desktop / Full HD / 2K -->
+      <img src="images/hero-desktop.webp" alt="Virex Media">
+    </picture>
+  </div>
+
 </body>
 </html>
