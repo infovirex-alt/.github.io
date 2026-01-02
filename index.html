@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Virex Media – Yakında</title>
 
-<!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
@@ -20,16 +19,14 @@ body {
   font-family: Inter, system-ui, sans-serif;
   background: var(--bg);
   color: #fff;
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
-/* === HERO BACKGROUND === */
+/* HERO */
 .hero {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 40px;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 50px;
   padding: 60px;
   background:
     linear-gradient(180deg, rgba(6,11,31,.7), rgba(6,11,31,.95)),
@@ -40,78 +37,80 @@ body {
   .hero {
     grid-template-columns: 1fr;
     background:
-      linear-gradient(180deg, rgba(6,11,31,.7), rgba(6,11,31,.95)),
+      linear-gradient(180deg, rgba(6,11,31,.75), rgba(6,11,31,.95)),
       url("hero-tablet.webp") center / cover no-repeat;
   }
 }
+
 @media (max-width: 600px) {
   .hero {
     padding: 32px;
     background:
-      linear-gradient(180deg, rgba(6,11,31,.75), rgba(6,11,31,.95)),
+      linear-gradient(180deg, rgba(6,11,31,.8), rgba(6,11,31,.96)),
       url("hero-mobile.webp") center / cover no-repeat;
   }
 }
 
-/* === LEFT === */
+/* LEFT */
 .left {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
   animation: fadeUp 1s ease forwards;
 }
 
-/* LOGO */
+/* LOGO (BÜYÜTÜLDÜ) */
 .logo-wrap {
   width: fit-content;
-  padding: 14px 18px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.05);
-  box-shadow: 0 0 40px rgba(76,195,255,.35);
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.06);
+  box-shadow:
+    0 0 40px rgba(76,195,255,.5),
+    0 0 80px rgba(140,120,255,.35);
   animation: neonPulse 3s ease-in-out infinite;
 }
 
 .logo-wrap img {
-  height: 42px;
+  height: 64px;
 }
 
-/* GLASS CARD */
+/* GLASS */
 .glass {
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
   background: linear-gradient(
     180deg,
-    rgba(255,255,255,.08),
-    rgba(255,255,255,.02)
+    rgba(255,255,255,.1),
+    rgba(255,255,255,.03)
   );
-  border-radius: 26px;
-  padding: 40px;
-  box-shadow: 0 40px 120px rgba(0,0,0,.6);
+  border-radius: 28px;
+  padding: 46px;
+  box-shadow: 0 40px 120px rgba(0,0,0,.65);
 }
 
 h1 {
-  font-size: clamp(36px, 5vw, 64px);
-  margin-bottom: 16px;
+  font-size: clamp(38px, 5vw, 66px);
+  margin-bottom: 18px;
 }
 
 p {
   font-size: 18px;
-  line-height: 1.6;
-  opacity: .9;
+  line-height: 1.65;
+  opacity: .92;
 }
 
 /* BUTTONS */
 .buttons {
   display: flex;
-  gap: 14px;
-  margin-top: 28px;
+  gap: 16px;
+  margin-top: 30px;
   flex-wrap: wrap;
 }
 
 .btn {
-  padding: 14px 26px;
+  padding: 15px 28px;
   border-radius: 999px;
   font-weight: 600;
-  cursor: pointer;
   text-decoration: none;
   transition: .3s;
 }
@@ -132,69 +131,68 @@ p {
 }
 
 .email {
-  margin-top: 14px;
+  margin-top: 16px;
   color: var(--blue);
 }
 
 /* SOCIAL */
 .social {
   display: flex;
-  gap: 14px;
-  margin-top: 22px;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .social a {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.1);
   display: grid;
   place-items: center;
   transition: .3s;
 }
 .social a:hover {
-  background: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.22);
   transform: translateY(-2px);
 }
 
 .social img {
-  width: 22px;
+  width: 24px;
 }
 
-/* === RIGHT PDF === */
+/* RIGHT PDF (BÜYÜTÜLDÜ) */
 .right {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 18px;
   animation: fadeUp 1.3s ease forwards;
 }
 
 .pdf-box {
   width: 100%;
-  max-width: 520px;
-  background: rgba(255,255,255,.04);
-  border-radius: 22px;
-  padding: 18px;
-  box-shadow: 0 30px 90px rgba(0,0,0,.6);
+  max-width: 720px;
+  background: rgba(255,255,255,.05);
+  border-radius: 26px;
+  padding: 22px;
+  box-shadow: 0 35px 120px rgba(0,0,0,.65);
 }
 
 canvas {
   width: 100%;
-  border-radius: 14px;
+  border-radius: 18px;
 }
 
 .pdf-controls {
   display: flex;
   justify-content: space-between;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .pdf-controls button {
-  background: rgba(255,255,255,.15);
+  background: rgba(255,255,255,.18);
   border: none;
   color: #fff;
-  padding: 10px 18px;
+  padding: 12px 22px;
   border-radius: 999px;
   cursor: pointer;
 }
@@ -205,8 +203,8 @@ canvas {
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes neonPulse {
-  0%,100% { box-shadow: 0 0 25px rgba(76,195,255,.4); }
-  50% { box-shadow: 0 0 60px rgba(140,120,255,.7); }
+  0%,100% { box-shadow: 0 0 40px rgba(76,195,255,.5); }
+  50% { box-shadow: 0 0 90px rgba(140,120,255,.75); }
 }
 </style>
 </head>
@@ -215,7 +213,6 @@ canvas {
 
 <section class="hero">
 
-  <!-- LEFT -->
   <div class="left">
 
     <div class="logo-wrap">
@@ -242,16 +239,15 @@ canvas {
 
       <div class="social">
         <a href="https://t.me/virex_uzay" target="_blank">
-          <img src="Telegram_logo.svg.webp" alt="Telegram">
+          <img src="Telegram_logo.svg.webp">
         </a>
         <a href="https://www.instagram.com/virex_media/" target="_blank">
-          <img src="icon-instagram.svg" alt="Instagram">
+          <img src="icon-instagram.svg">
         </a>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT PDF -->
   <div class="right">
     <div class="pdf-box">
       <canvas id="pdfCanvas"></canvas>
@@ -266,10 +262,9 @@ canvas {
 
 <script>
 const url = "virex.pdf";
-let pdfDoc = null,
-    pageNum = 1,
-    canvas = document.getElementById("pdfCanvas"),
-    ctx = canvas.getContext("2d");
+let pdfDoc = null, pageNum = 1;
+const canvas = document.getElementById("pdfCanvas");
+const ctx = canvas.getContext("2d");
 
 pdfjsLib.getDocument(url).promise.then(pdf => {
   pdfDoc = pdf;
@@ -278,7 +273,7 @@ pdfjsLib.getDocument(url).promise.then(pdf => {
 
 function renderPage(num) {
   pdfDoc.getPage(num).then(page => {
-    const viewport = page.getViewport({ scale: 1.4 });
+    const viewport = page.getViewport({ scale: 1.8 });
     canvas.height = viewport.height;
     canvas.width = viewport.width;
     page.render({ canvasContext: ctx, viewport });
@@ -286,15 +281,10 @@ function renderPage(num) {
 }
 
 document.getElementById("prev").onclick = () => {
-  if (pageNum <= 1) return;
-  pageNum--;
-  renderPage(pageNum);
+  if (pageNum > 1) renderPage(--pageNum);
 };
-
 document.getElementById("next").onclick = () => {
-  if (pageNum >= pdfDoc.numPages) return;
-  pageNum++;
-  renderPage(pageNum);
+  if (pageNum < pdfDoc.numPages) renderPage(++pageNum);
 };
 </script>
 
