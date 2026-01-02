@@ -2,290 +2,223 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Virex Media – Yakında</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
 <style>
-:root {
-  --blue: #4cc3ff;
-  --bg: #060b1f;
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui}
+body{
+  min-height:100vh;
+  background:radial-gradient(1200px 600px at 20% 20%, #0b3a66, #050716);
+  color:#fff;
+  overflow:hidden;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: Inter, system-ui, sans-serif;
-  background: var(--bg);
-  color: #fff;
+/* === LAYOUT === */
+.wrapper{
+  display:flex;
+  gap:40px;
+  padding:50px;
+  align-items:center;
 }
 
-/* HERO */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 50px;
-  padding: 60px;
-  background:
-    linear-gradient(180deg, rgba(6,11,31,.7), rgba(6,11,31,.95)),
-    url("hero-desktop.webp") center / cover no-repeat;
+/* === LEFT HERO === */
+.hero{
+  flex:1;
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,.06);
+  border-radius:28px;
+  padding:50px;
+  box-shadow:0 0 80px rgba(0,140,255,.25);
+  animation:fadeUp 1s ease forwards;
 }
 
-@media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-    background:
-      linear-gradient(180deg, rgba(6,11,31,.75), rgba(6,11,31,.95)),
-      url("hero-tablet.webp") center / cover no-repeat;
-  }
+.logo{
+  width:120px;
+  margin-bottom:25px;
+  filter:drop-shadow(0 0 20px rgba(0,180,255,.7));
 }
 
-@media (max-width: 600px) {
-  .hero {
-    padding: 32px;
-    background:
-      linear-gradient(180deg, rgba(6,11,31,.8), rgba(6,11,31,.96)),
-      url("hero-mobile.webp") center / cover no-repeat;
-  }
+.hero h1{
+  font-size:56px;
+  margin-bottom:20px;
 }
 
-/* LEFT */
-.left {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  animation: fadeUp 1s ease forwards;
+.hero p{
+  opacity:.85;
+  line-height:1.6;
+  margin-bottom:30px;
+  max-width:600px;
 }
 
-/* LOGO (BÜYÜTÜLDÜ) */
-.logo-wrap {
-  width: fit-content;
-  padding: 18px 22px;
-  border-radius: 18px;
-  background: rgba(255,255,255,.06);
-  box-shadow:
-    0 0 40px rgba(76,195,255,.5),
-    0 0 80px rgba(140,120,255,.35);
-  animation: neonPulse 3s ease-in-out infinite;
+.buttons{
+  display:flex;
+  gap:15px;
+  margin-bottom:20px;
 }
 
-.logo-wrap img {
-  height: 64px;
+.btn{
+  padding:14px 26px;
+  border-radius:30px;
+  font-weight:600;
+  cursor:pointer;
+  border:none;
 }
 
-/* GLASS */
-.glass {
-  backdrop-filter: blur(16px);
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,.1),
-    rgba(255,255,255,.03)
-  );
-  border-radius: 28px;
-  padding: 46px;
-  box-shadow: 0 40px 120px rgba(0,0,0,.65);
+.btn.primary{
+  background:linear-gradient(135deg,#4cc3ff,#2f8cff);
+  color:#000;
 }
 
-h1 {
-  font-size: clamp(38px, 5vw, 66px);
-  margin-bottom: 18px;
+.btn.outline{
+  background:transparent;
+  border:2px solid #fff;
+  color:#fff;
 }
 
-p {
-  font-size: 18px;
-  line-height: 1.65;
-  opacity: .92;
+.email{
+  margin-bottom:20px;
+  color:#7ad0ff;
 }
 
-/* BUTTONS */
-.buttons {
-  display: flex;
-  gap: 16px;
-  margin-top: 30px;
-  flex-wrap: wrap;
+.socials{
+  display:flex;
+  gap:14px;
 }
 
-.btn {
-  padding: 15px 28px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: .3s;
+.socials a{
+  width:44px;height:44px;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  display:grid;
+  place-items:center;
+  transition:.3s;
 }
 
-.btn.primary {
-  background: linear-gradient(135deg, #5fd0ff, #3aa4ff);
-  color: #00131f;
-}
-.btn.primary:hover { transform: translateY(-2px); }
-
-.btn.outline {
-  border: 2px solid #fff;
-  color: #fff;
-}
-.btn.outline:hover {
-  background: #fff;
-  color: #000;
+.socials a:hover{
+  background:rgba(0,170,255,.4);
+  transform:scale(1.1);
 }
 
-.email {
-  margin-top: 16px;
-  color: var(--blue);
+.socials img{
+  width:22px;
 }
 
-/* SOCIAL */
-.social {
-  display: flex;
-  gap: 16px;
-  margin-top: 24px;
+/* === RIGHT PDF === */
+.pdf-box{
+  width:520px;
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,.06);
+  border-radius:26px;
+  padding:25px;
+  box-shadow:0 0 80px rgba(0,140,255,.25);
+  animation:fadeUp 1.2s ease forwards;
 }
 
-.social a {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.1);
-  display: grid;
-  place-items: center;
-  transition: .3s;
-}
-.social a:hover {
-  background: rgba(255,255,255,.22);
-  transform: translateY(-2px);
+.pdf-box iframe{
+  width:100%;
+  height:360px;
+  border:none;
+  border-radius:18px;
 }
 
-.social img {
-  width: 24px;
+.pdf-controls{
+  display:flex;
+  justify-content:space-between;
+  margin-top:12px;
 }
 
-/* RIGHT PDF (BÜYÜTÜLDÜ) */
-.right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: fadeUp 1.3s ease forwards;
+.pdf-controls button{
+  background:rgba(255,255,255,.15);
+  border:none;
+  padding:8px 18px;
+  border-radius:20px;
+  color:#fff;
+  cursor:pointer;
 }
 
-.pdf-box {
-  width: 100%;
-  max-width: 720px;
-  background: rgba(255,255,255,.05);
-  border-radius: 26px;
-  padding: 22px;
-  box-shadow: 0 35px 120px rgba(0,0,0,.65);
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:none}
 }
 
-canvas {
-  width: 100%;
-  border-radius: 18px;
-}
-
-.pdf-controls {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 14px;
-}
-
-.pdf-controls button {
-  background: rgba(255,255,255,.18);
-  border: none;
-  color: #fff;
-  padding: 12px 22px;
-  border-radius: 999px;
-  cursor: pointer;
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes neonPulse {
-  0%,100% { box-shadow: 0 0 40px rgba(76,195,255,.5); }
-  50% { box-shadow: 0 0 90px rgba(140,120,255,.75); }
+/* === RESPONSIVE === */
+@media(max-width:1100px){
+  .wrapper{flex-direction:column}
+  .pdf-box{width:100%}
+  .hero h1{font-size:40px}
 }
 </style>
 </head>
 
 <body>
 
-<section class="hero">
+<div class="wrapper">
 
-  <div class="left">
+  <!-- LEFT -->
+  <section class="hero">
 
-    <div class="logo-wrap">
-      <img src="logo-virex-media.svg.png" alt="Virex Media Logo">
+    <!-- LOGO -->
+    <img src="logo-virex-media.svg.png" alt="Virex Media Logo" class="logo"/>
+
+    <h1>Yakında Hizmetinizde</h1>
+
+    <p>
+      Virex Media olarak markanızı dijital dünyada daha güçlü,
+      daha görünür ve daha etkili hale getiriyoruz.
+    </p>
+
+    <div class="buttons">
+      <button class="btn primary">Bizimle İletişime Geç</button>
+      <a href="mailto:infovirex@virexmedia.net">
+        <button class="btn outline">Mail Gönder</button>
+      </a>
     </div>
 
-    <div class="glass">
-      <h1>Yakında Hizmetinizde</h1>
-      <p>
-        Virex Media olarak markanızı dijital dünyada daha güçlü,
-        daha görünür ve daha etkili hale getiriyoruz.
-      </p>
+    <div class="email">infovirex@virexmedia.net</div>
 
-      <div class="buttons">
-        <a href="mailto:infovirex@virexmedia.net" class="btn primary">
-          Bizimle İletişime Geç
-        </a>
-        <a href="mailto:infovirex@virexmedia.net" class="btn outline">
-          Mail Gönder
-        </a>
-      </div>
+    <div class="socials">
+      <!-- TELEGRAM -->
+      <a href="https://t.me/virex_uzay" target="_blank">
+        <img src="Telegram_logo.svg.webp" alt="Telegram"/>
+      </a>
 
-      <div class="email">infovirex@virexmedia.net</div>
-
-      <div class="social">
-        <a href="https://t.me/virex_uzay" target="_blank">
-          <img src="Telegram_logo.svg.webp">
-        </a>
-        <a href="https://www.instagram.com/virex_media/" target="_blank">
-          <img src="icon-instagram.svg">
-        </a>
-      </div>
+      <!-- INSTAGRAM -->
+      <a href="https://www.instagram.com/virex_media/" target="_blank">
+        <picture>
+          <source srcset="icon-instagram.svg" type="image/svg+xml">
+          <img src="icon-instagram.svg.png" alt="Instagram">
+        </picture>
+      </a>
     </div>
-  </div>
 
-  <div class="right">
-    <div class="pdf-box">
-      <canvas id="pdfCanvas"></canvas>
-      <div class="pdf-controls">
-        <button id="prev">◀ Önceki</button>
-        <button id="next">Sonraki ▶</button>
-      </div>
+  </section>
+
+  <!-- RIGHT PDF -->
+  <aside class="pdf-box">
+    <iframe id="pdfFrame" src="virex.pdf#page=1"></iframe>
+
+    <div class="pdf-controls">
+      <button onclick="prevPage()">◀ Önceki</button>
+      <button onclick="nextPage()">Sonraki ▶</button>
     </div>
-  </div>
+  </aside>
 
-</section>
+</div>
 
 <script>
-const url = "virex.pdf";
-let pdfDoc = null, pageNum = 1;
-const canvas = document.getElementById("pdfCanvas");
-const ctx = canvas.getContext("2d");
+let page = 1;
+const frame = document.getElementById("pdfFrame");
 
-pdfjsLib.getDocument(url).promise.then(pdf => {
-  pdfDoc = pdf;
-  renderPage(pageNum);
-});
-
-function renderPage(num) {
-  pdfDoc.getPage(num).then(page => {
-    const viewport = page.getViewport({ scale: 1.8 });
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-    page.render({ canvasContext: ctx, viewport });
-  });
+function nextPage(){
+  page++;
+  frame.src = `virex.pdf#page=${page}`;
 }
 
-document.getElementById("prev").onclick = () => {
-  if (pageNum > 1) renderPage(--pageNum);
-};
-document.getElementById("next").onclick = () => {
-  if (pageNum < pdfDoc.numPages) renderPage(++pageNum);
-};
+function prevPage(){
+  if(page>1){ page--; }
+  frame.src = `virex.pdf#page=${page}`;
+}
 </script>
 
 </body>
