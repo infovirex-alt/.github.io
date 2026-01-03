@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virex Media | Dijital Medya Ajansı</title>
+<title>Virex Media</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
@@ -34,14 +34,7 @@ header{
   gap:12px;
 }
 
-.logo img{
-  height:38px;
-}
-
-.logo-text{
-  font-weight:bold;
-  font-size:18px;
-}
+.logo img{height:38px}
 
 nav a{
   color:#fff;
@@ -49,18 +42,12 @@ nav a{
   text-decoration:none;
   font-size:14px;
 }
-nav a:hover{color:#2AFADF}
 
 /* SLIDER */
 .hero{
   height:100vh;
   position:relative;
   overflow:hidden;
-}
-
-.slides{
-  height:100%;
-  position:relative;
 }
 
 .slides img{
@@ -73,55 +60,39 @@ nav a:hover{color:#2AFADF}
   transition:opacity 1s ease;
 }
 
-.slides img.active{
-  opacity:1;
-}
+.slides img.active{opacity:1}
 
-/* OVERLAY */
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(90deg,rgba(0,0,0,.8),rgba(0,0,0,.3));
+  background:rgba(0,0,0,.55);
 }
 
-/* CONTENT */
+/* HERO CONTENT */
 .hero-content{
   position:absolute;
   inset:0;
   z-index:2;
   display:flex;
-  flex-direction:column;
   justify-content:center;
-  padding-left:8%;
-  max-width:700px;
-}
-
-.hero-content h1{
-  font-size:3rem;
-  margin-bottom:15px;
-}
-
-.hero-content p{
-  opacity:.85;
-  font-size:1.05rem;
+  align-items:center;
 }
 
 .btn{
-  margin-top:30px;
-  width:max-content;
-  padding:14px 42px;
+  padding:16px 48px;
   background:linear-gradient(135deg,#2AFADF,#9B5CFF);
   color:#000;
-  text-decoration:none;
   font-weight:bold;
-  border-radius:8px;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:16px;
 }
 
-/* SLIDER DOTS */
+/* DOTS */
 .dots{
   position:absolute;
-  bottom:30px;
+  bottom:25px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
@@ -132,49 +103,25 @@ nav a:hover{color:#2AFADF}
 .dots span{
   width:10px;
   height:10px;
-  background:#555;
+  background:#666;
   border-radius:50%;
   cursor:pointer;
 }
 
-.dots span.active{
-  background:#2AFADF;
-}
-
-/* SECTIONS */
-section{
-  padding:100px 60px;
-  text-align:center;
-}
-
-.dark{background:#111527}
-
-.cards{
-  display:flex;
-  gap:25px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:40px;
-}
-
-.card{
-  background:#1b1f33;
-  padding:30px;
-  width:260px;
-  border-radius:12px;
-}
+.dots span.active{background:#2AFADF}
 
 /* CONTACT */
+section{padding:80px 40px;text-align:center}
+
 .contact-icons{
-  margin-top:40px;
   display:flex;
   justify-content:center;
-  gap:30px;
+  gap:40px;
 }
 
 .contact-icons svg{
-  width:44px;
-  height:44px;
+  width:48px;
+  height:48px;
   transition:.3s;
 }
 
@@ -183,25 +130,15 @@ section{
   filter:drop-shadow(0 0 10px #2AFADF);
 }
 
-/* FOOTER */
 footer{
-  background:#000;
-  text-align:center;
   padding:20px;
-  font-size:14px;
-  opacity:.7;
+  text-align:center;
+  opacity:.6;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  header{padding:15px 20px}
   nav{display:none}
-  .hero-content{
-    padding:0 20px;
-    align-items:center;
-    text-align:center;
-  }
-  .hero-content h1{font-size:2.2rem}
 }
 </style>
 </head>
@@ -210,14 +147,8 @@ footer{
 
 <header>
   <div class="logo">
-    <img src="logo.png" alt="Virex Media">
-    <span class="logo-text">VIREX MEDIA</span>
+    <img src="logo.png">
   </div>
-  <nav>
-    <a href="#services">Hizmetler</a>
-    <a href="#about">Hakkımızda</a>
-    <a href="#contact">İletişim</a>
-  </nav>
 </header>
 
 <!-- HERO SLIDER -->
@@ -233,72 +164,71 @@ footer{
   </div>
 
   <div class="hero-content">
-    <h1>Dijitalde Gücünü Artır</h1>
-    <p>Sosyal medya, reklam ve marka stratejileriyle dijital dünyada fark yarat.</p>
     <a href="#slider" class="btn">PDF Sunumu Gör</a>
   </div>
 
   <div class="dots"></div>
 </section>
 
-<section id="services">
-  <h2>Hizmetlerimiz</h2>
-  <div class="cards">
-    <div class="card">📱 Sosyal Medya Yönetimi</div>
-    <div class="card">📊 Dijital Reklam & Performans</div>
-    <div class="card">🚀 Marka & Strateji</div>
-  </div>
-</section>
-
-<section id="about" class="dark">
-  <h2>Virex Media</h2>
-  <p>Markaları dijitalde profesyonel ve güçlü şekilde konumlandırıyoruz.</p>
-</section>
-
-<section id="contact">
-  <h2>İletişim</h2>
+<!-- CONTACT -->
+<section>
   <div class="contact-icons">
-    <a href="https://instagram.com" target="_blank">
-      <svg viewBox="0 0 24 24" fill="#9B5CFF"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/></svg>
-    </a>
-    <a href="https://t.me" target="_blank">
-      <svg viewBox="0 0 24 24" fill="#2AFADF"><path d="M22 2 2 11l5 2 2 7 4-4 5 4z"/></svg>
-    </a>
+
+    <!-- MAIL -->
     <a href="mailto:info@virexmedia.net">
-      <svg viewBox="0 0 24 24" fill="#9B5CFF"><rect x="2" y="4" width="20" height="16" rx="3"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="gradMail" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2AFADF"/>
+            <stop offset="100%" stop-color="#9B5CFF"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="4" width="20" height="16" rx="3" fill="url(#gradMail)"/>
+        <path d="M3 6l9 7 9-7" fill="none" stroke="#0e0e0e" stroke-width="2"/>
+      </svg>
     </a>
+
+    <!-- INSTAGRAM -->
+    <a href="https://instagram.com" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="gradInsta" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2AFADF"/>
+            <stop offset="100%" stop-color="#9B5CFF"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#gradInsta)" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/>
+      </svg>
+    </a>
+
   </div>
 </section>
 
-<footer>
-  © 2026 Virex Media · Tüm Hakları Saklıdır
-</footer>
+<footer>© 2026 Virex Media</footer>
 
 <script>
 const slides=document.querySelectorAll(".slides img");
-const dotsContainer=document.querySelector(".dots");
-let index=0;
+const dots=document.querySelector(".dots");
+let i=0;
 
-slides.forEach((_,i)=>{
-  const dot=document.createElement("span");
-  if(i===0) dot.classList.add("active");
-  dot.onclick=()=>showSlide(i);
-  dotsContainer.appendChild(dot);
+slides.forEach((_,idx)=>{
+  const d=document.createElement("span");
+  if(idx===0)d.classList.add("active");
+  d.onclick=()=>show(idx);
+  dots.appendChild(d);
 });
 
-const dots=document.querySelectorAll(".dots span");
+const dot=document.querySelectorAll(".dots span");
 
-function showSlide(i){
-  slides[index].classList.remove("active");
-  dots[index].classList.remove("active");
-  index=i;
-  slides[index].classList.add("active");
-  dots[index].classList.add("active");
+function show(n){
+  slides[i].classList.remove("active");
+  dot[i].classList.remove("active");
+  i=n;
+  slides[i].classList.add("active");
+  dot[i].classList.add("active");
 }
 
-setInterval(()=>{
-  showSlide((index+1)%slides.length);
-},5000);
+setInterval(()=>show((i+1)%slides.length),5000);
 </script>
 
 </body>
