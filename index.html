@@ -1,238 +1,108 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virex Media | Dijital Medya Ajansı</title>
+  <meta charset="UTF-8">
+  <title>Virex Media</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top, #0b1020, #000);
+      font-family: Arial, Helvetica, sans-serif;
+      color: #fff;
+      text-align: center;
+    }
 
-body{
-  background:#0b0f1a;
-  color:#fff;
-  line-height:1.6;
-}
+    .container {
+      max-width: 420px;
+      padding: 30px;
+    }
 
-/* HEADER */
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:15px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(0,0,0,.8);
-  backdrop-filter:blur(10px);
-  z-index:1000;
-}
+    .logo {
+      width: 220px;
+      margin-bottom: 30px;
+    }
 
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #00e5ff, #7c4dff);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 12px;
+      margin: 12px 0;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 25px rgba(124,77,255,.4);
+    }
 
-.logo-text{
-  font-size:20px;
-  font-weight:bold;
-}
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(124,77,255,.7);
+    }
 
-nav a{
-  color:#fff;
-  margin-left:25px;
-  text-decoration:none;
-  font-size:14px;
-}
-nav a:hover{color:#2AFADF}
+    .icon {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
 
-/* HERO */
-.hero{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:0 20px;
-}
-
-.hero h1{
-  font-size:3rem;
-  margin-bottom:15px;
-}
-
-.hero p{
-  max-width:600px;
-  opacity:.85;
-}
-
-.btn{
-  margin-top:30px;
-  padding:14px 40px;
-  background:linear-gradient(135deg,#2AFADF,#9B5CFF);
-  color:#000;
-  text-decoration:none;
-  font-weight:bold;
-  border-radius:6px;
-}
-
-/* SECTION */
-section{
-  padding:100px 50px;
-  text-align:center;
-}
-
-.dark{background:#111527}
-
-.cards{
-  display:flex;
-  gap:25px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:40px;
-}
-
-.card{
-  background:#1b1f33;
-  padding:30px;
-  width:260px;
-  border-radius:10px;
-}
-
-/* CONTACT ICONS */
-.contact-icons{
-  margin-top:40px;
-  display:flex;
-  justify-content:center;
-  gap:30px;
-}
-
-.contact-icons svg{
-  width:42px;
-  height:42px;
-  transition:.3s;
-}
-
-.contact-icons a:hover svg{
-  transform:scale(1.2);
-  filter:drop-shadow(0 0 10px #2AFADF);
-}
-
-/* FOOTER */
-footer{
-  background:#000;
-  text-align:center;
-  padding:20px;
-  font-size:14px;
-  opacity:.7;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  header{flex-direction:column}
-  nav{margin-top:10px}
-  .hero h1{font-size:2.2rem}
-}
-</style>
+    footer {
+      margin-top: 25px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-  <div class="logo">
-    <!-- LOGO SVG -->
-    <svg width="40" viewBox="0 0 100 100">
-      <defs>
-        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#2AFADF"/>
-          <stop offset="100%" stop-color="#9B5CFF"/>
-        </linearGradient>
-      </defs>
-      <path d="M15 80 50 10 85 80 50 65Z" fill="url(#logoGrad)"/>
-    </svg>
-    <span class="logo-text">VIREX MEDIA</span>
-  </div>
+  <div class="container">
 
-  <nav>
-    <a href="#services">Hizmetler</a>
-    <a href="#about">Hakkımızda</a>
-    <a href="#contact">İletişim</a>
-  </nav>
-</header>
+    <!-- LOGO -->
+    <img src="logo.png" alt="Virex Media Logo" class="logo">
 
-<section class="hero">
-  <h1>Dijitalde Gücünü Artır</h1>
-  <p>Sosyal medya, reklam ve marka stratejileriyle dijital dünyada fark yarat.</p>
-  <a href="#" class="btn">PDF Sunum</a>
-</section>
-
-<section id="services">
-  <h2>Hizmetlerimiz</h2>
-  <div class="cards">
-    <div class="card">📱 Sosyal Medya Yönetimi</div>
-    <div class="card">📊 Dijital Reklam & Performans</div>
-    <div class="card">🚀 Marka & Strateji</div>
-  </div>
-</section>
-
-<section id="about" class="dark">
-  <h2>Virex Media</h2>
-  <p>Markaları dijitalde profesyonel ve güçlü şekilde konumlandırıyoruz.</p>
-</section>
-
-<section id="contact">
-  <h2>İletişim</h2>
-
-  <div class="contact-icons">
-
-    <!-- Instagram -->
-    <a href="https://instagram.com/" target="_blank">
-      <svg viewBox="0 0 24 24">
-        <defs>
-          <linearGradient id="insta" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2AFADF"/>
-            <stop offset="100%" stop-color="#9B5CFF"/>
-          </linearGradient>
-        </defs>
-        <path fill="url(#insta)" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2z"/>
-      </svg>
+    <!-- PDF -->
+    <a href="virex.pdf" target="_blank" class="btn">
+      📄 PDF Sunum
     </a>
 
-    <!-- Telegram -->
-    <a href="https://t.me/" target="_blank">
-      <svg viewBox="0 0 24 24">
-        <defs>
-          <linearGradient id="tele" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2AFADF"/>
-            <stop offset="100%" stop-color="#9B5CFF"/>
-          </linearGradient>
-        </defs>
-        <path fill="url(#tele)" d="M22 2 2 11l5 2 2 7 4-4 5 4z"/>
+    <!-- INSTAGRAM -->
+    <a href="https://instagram.com/" target="_blank" class="btn">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm5 5a5 5 0 100 10 5 5 0 000-10zm6.5-.9a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0z"/>
       </svg>
+      Instagram
     </a>
 
-    <!-- Mail -->
-    <a href="mailto:info@virexmedia.net">
-      <svg viewBox="0 0 24 24">
-        <defs>
-          <linearGradient id="mail" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2AFADF"/>
-            <stop offset="100%" stop-color="#9B5CFF"/>
-          </linearGradient>
-        </defs>
-        <rect x="2" y="4" width="20" height="16" rx="3" fill="url(#mail)"/>
-        <path d="M3 6l9 7 9-7" fill="none" stroke="#0b0f1a" stroke-width="2"/>
+    <!-- TELEGRAM -->
+    <a href="https://t.me/" target="_blank" class="btn">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M22 2L2 11l6 2 2 7 4-5 6 4z"/>
       </svg>
+      Telegram
     </a>
+
+    <!-- MAIL -->
+    <a href="mailto:info@virexmedia.net" class="btn">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M2 6l10 7 10-7v12H2z"/>
+      </svg>
+      Mail
+    </a>
+
+    <footer>
+      © 2026 Virex Media
+    </footer>
 
   </div>
-</section>
-
-<footer>
-  © 2026 Virex Media · Tüm Hakları Saklıdır
-</footer>
 
 </body>
 </html>
