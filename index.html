@@ -5,23 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Virex Media</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <style>
 *{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
 body{
   margin:0;
-  background:radial-gradient(circle at top,#0b1c3d,#020617);
+  background:#050a18;
   color:#fff;
+  overflow:hidden;
 }
 
 /* HERO */
 .hero{
-  min-height:100vh;
+  position:fixed;
+  inset:0;
   display:flex;
   align-items:center;
   padding:60px;
+  z-index:10;
+  background:radial-gradient(circle at top,#0b1c3d,#020617);
   transition:.6s;
 }
-.hero.hide{display:none}
+.hero.hide{opacity:0;pointer-events:none}
 
 .hero-box{
   background:rgba(255,255,255,.06);
@@ -31,7 +37,6 @@ body{
   max-width:820px;
 }
 
-/* TITLE + LOGO */
 .hero-title{
   display:flex;
   align-items:center;
@@ -39,7 +44,7 @@ body{
 }
 .hero-title img{
   width:80px;
-  filter:drop-shadow(0 0 18px rgba(0,180,255,.9));
+  filter:drop-shadow(0 0 18px rgba(80,200,255,.9));
 }
 .hero-title h1{
   font-size:56px;
@@ -48,43 +53,51 @@ body{
 
 .hero p{
   margin:20px 0 28px;
-  opacity:.9;
+  opacity:.85;
   line-height:1.6;
 }
 
-/* BUTTONS */
-.btns{
-  display:flex;
-  gap:14px;
-  margin-bottom:18px;
-}
-.btn-primary{
+.btn{
+  display:inline-block;
+  padding:14px 28px;
   background:#4cc3ff;
   color:#000;
-  padding:14px 26px;
   border-radius:999px;
   font-weight:600;
   text-decoration:none;
-}
-.btn-outline{
-  border:2px solid #fff;
-  padding:12px 24px;
-  border-radius:999px;
-  color:#fff;
-  text-decoration:none;
+  cursor:pointer;
 }
 
-/* PDF */
-#pdfView{
-  display:none;
-  width:100vw;
-  height:100vh;
+/* PDF VIEW */
+#pdf{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-#pdfView iframe{
-  width:100%;
-  height:100%;
-  border:none;
+
+canvas{
+  max-width:90vw;
+  max-height:90vh;
+  border-radius:18px;
+  box-shadow:0 40px 120px rgba(0,0,0,.6);
 }
+
+/* ARROWS */
+.nav{
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:48px;
+  cursor:pointer;
+  user-select:none;
+  opacity:.6;
+  transition:.2s;
+}
+.nav:hover{opacity:1}
+#prev{left:40px}
+#next{right:40px}
 </style>
 </head>
 
@@ -94,7 +107,7 @@ body{
 <div class="hero" id="hero">
   <div class="hero-box">
     <div class="hero-title">
-      <img src="logo-virex-media.svg.png" alt="Virex Media Logo">
+      <img src="logo-virex-media.svg.png">
       <h1>Yakında Hizmetinizde</h1>
     </div>
 
@@ -103,27 +116,49 @@ body{
       daha görünür ve daha etkili hale getiriyoruz.
     </p>
 
-    <div class="btns">
-      <a class="btn-primary" href="mailto:infovirex@virexmedia.net">Bizimle İletişime Geç</a>
-      <a class="btn-outline" href="#" onclick="openPDF()">Sunumu Gör</a>
-    </div>
-
-    <div style="opacity:.7">Sunumu görmek için tıklayın</div>
+    <a class="btn" onclick="start()">Sunumu Gör</a>
   </div>
 </div>
 
 <!-- PDF -->
-<div id="pdfView">
-  <iframe src="virex.pdf#view=FitH"></iframe>
+<div id="pdf">
+  <div id="prev" class="nav">‹</div>
+  <canvas id="canvas"></canvas>
+  <div id="next" class="nav">›</div>
 </div>
 
 <script>
-function openPDF(){
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+let pdfDoc=null,page=1,canvas=document.getElementById("canvas"),
+ctx=canvas.getContext("2d");
+
+function render(){
+  pdfDoc.getPage(page).then(p=>{
+    let v=p.getViewport({scale:1.6});
+    canvas.width=v.width;
+    canvas.height=v.height;
+    p.render({canvasContext:ctx,viewport:v});
+  });
+}
+
+pdfjsLib.getDocument("virex.pdf").promise.then(pdf=>{
+  pdfDoc=pdf;
+  render();
+});
+
+document.getElementById("prev").onclick=()=>{
+  if(page>1){page--;render();}
+}
+document.getElementById("next").onclick=()=>{
+  if(page<pdfDoc.numPages){page++;render();}
+}
+
+function start(){
   document.getElementById("hero").classList.add("hide");
-  document.getElementById("pdfView").style.display="block";
 }
 </script>
 
 </body>
 </html>
-
