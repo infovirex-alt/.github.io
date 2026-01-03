@@ -1,1 +1,190 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virex Media | Dijital Medya Ajansı</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#0e0e0e;
+  color:#ffffff;
+  line-height:1.6;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 50px;
+  position:fixed;
+  width:100%;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+header h1{
+  font-size:22px;
+  letter-spacing:1px;
+}
+
+nav a{
+  color:#fff;
+  margin-left:25px;
+  text-decoration:none;
+  font-size:14px;
+}
+
+nav a:hover{
+  color:#00ff9c;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 20px;
+}
+
+.hero h2{
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:600px;
+  opacity:0.85;
+}
+
+.btn{
+  margin-top:30px;
+  padding:14px 40px;
+  background:#00ff9c;
+  color:#000;
+  text-decoration:none;
+  font-weight:bold;
+  border-radius:4px;
+}
+
+/* SECTIONS */
+section{
+  padding:100px 50px;
+  text-align:center;
+}
+
+.dark{
+  background:#161616;
+}
+
+.cards{
+  display:flex;
+  gap:25px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:40px;
+}
+
+.card{
+  background:#222;
+  padding:30px;
+  width:260px;
+  border-radius:8px;
+}
+
+/* CONTACT */
+.contact a{
+  color:#00ff9c;
+  text-decoration:none;
+}
+
+/* FOOTER */
+footer{
+  background:#000;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+  opacity:0.7;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  header{
+    flex-direction:column;
+  }
+  nav{
+    margin-top:10px;
+  }
+  .hero h2{
+    font-size:2.2rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>VIREX MEDIA</h1>
+  <nav>
+    <a href="#services">Hizmetler</a>
+    <a href="#about">Hakkımızda</a>
+    <a href="#contact">İletişim</a>
+  </nav>
+</header>
+
+<section class="hero" id="page-top">
+  <h2>Dijitalde Gücünü Artır</h2>
+  <p>Sosyal medya yönetimi, reklam ve marka stratejileriyle işinizi büyütüyoruz.</p>
+  <a href="#contact" class="btn">İletişime Geç</a>
+</section>
+
+<section id="services">
+  <h2>Hizmetlerimiz</h2>
+  <div class="cards">
+    <div class="card">📱 Sosyal Medya Yönetimi</div>
+    <div class="card">📊 Dijital Reklam & Performans</div>
+    <div class="card">🚀 Marka & Strateji Danışmanlığı</div>
+  </div>
+</section>
+
+<section id="about" class="dark">
+  <h2>Virex Media</h2>
+  <p>
+    Markaların dijital dünyada fark yaratması için yaratıcı ve stratejik çözümler sunuyoruz.
+  </p>
+</section>
+
+<section id="contact">
+  <h2>İletişim</h2>
+  <p>Email: <a href="mailto:info@virexmedia.net">info@virexmedia.net</a></p>
+  <p>
+    <a href="#">Instagram</a> ·
+    <a href="#">Telegram</a>
+  </p>
+</section>
+
+<footer>
+  © 2026 Virex Media · Tüm Hakları Saklıdır
+</footer>
+
+<script>
+console.log("Virex Media site aktif");
+</script>
+
+</body>
+</html>
+
 
