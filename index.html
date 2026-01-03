@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Virex Media</title>
 
 <style>
@@ -11,42 +11,35 @@ body{
   margin:0;
   background:radial-gradient(circle at top,#0b1c3d,#020617);
   color:#fff;
-  overflow:hidden;
 }
 
 /* HERO */
 .hero{
-  position:absolute;
-  inset:0;
+  min-height:100vh;
   display:flex;
   align-items:center;
   padding:60px;
-  transition:opacity .6s,visibility .6s;
-  z-index:10;
+  transition:.6s;
 }
-.hero.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
+.hero.hide{display:none}
+
 .hero-box{
   background:rgba(255,255,255,.06);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(18px);
   border-radius:28px;
   padding:50px;
   max-width:820px;
-  cursor:pointer;
 }
 
-/* LOGO + TITLE */
+/* TITLE + LOGO */
 .hero-title{
   display:flex;
   align-items:center;
   gap:20px;
 }
 .hero-title img{
-  width:78px;
-  filter:drop-shadow(0 0 22px rgba(0,180,255,.9));
+  width:80px;
+  filter:drop-shadow(0 0 18px rgba(0,180,255,.9));
 }
 .hero-title h1{
   font-size:56px;
@@ -54,11 +47,12 @@ body{
 }
 
 .hero p{
-  margin:18px 0 28px;
+  margin:20px 0 28px;
   opacity:.9;
   line-height:1.6;
 }
 
+/* BUTTONS */
 .btns{
   display:flex;
   gap:14px;
@@ -81,46 +75,15 @@ body{
 }
 
 /* PDF */
-#pdfArea{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .6s;
+#pdfView{
+  display:none;
+  width:100vw;
+  height:100vh;
 }
-#pdfArea.show{
-  opacity:1;
-  pointer-events:auto;
-}
-.pdf-box{
-  width:90vw;
-  height:90vh;
-  background:#111;
-  border-radius:22px;
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-}
-canvas{
-  flex:1;
-  max-width:100%;
-  border-radius:16px;
-}
-.pdf-nav{
-  display:flex;
-  justify-content:space-between;
-  margin-top:10px;
-}
-.pdf-nav button{
-  background:#2a2a2a;
-  color:#fff;
+#pdfView iframe{
+  width:100%;
+  height:100%;
   border:none;
-  padding:10px 18px;
-  border-radius:999px;
-  cursor:pointer;
 }
 </style>
 </head>
@@ -129,17 +92,20 @@ canvas{
 
 <!-- HERO -->
 <div class="hero" id="hero">
-  <div class="hero-box" onclick="openPDF()">
+  <div class="hero-box">
     <div class="hero-title">
       <img src="logo-virex-media.svg.png" alt="Virex Media Logo">
       <h1>Yakında Hizmetinizde</h1>
     </div>
 
-    <p>Virex Media olarak markanızı dijital dünyada daha güçlü, daha görünür ve daha etkili hale getiriyoruz.</p>
+    <p>
+      Virex Media olarak markanızı dijital dünyada daha güçlü,
+      daha görünür ve daha etkili hale getiriyoruz.
+    </p>
 
     <div class="btns">
       <a class="btn-primary" href="mailto:infovirex@virexmedia.net">Bizimle İletişime Geç</a>
-      <a class="btn-outline" href="mailto:infovirex@virexmedia.net">Mail Gönder</a>
+      <a class="btn-outline" href="#" onclick="openPDF()">Sunumu Gör</a>
     </div>
 
     <div style="opacity:.7">Sunumu görmek için tıklayın</div>
@@ -147,47 +113,17 @@ canvas{
 </div>
 
 <!-- PDF -->
-<div id="pdfArea">
-  <div class="pdf-box">
-    <canvas id="pdfCanvas"></canvas>
-    <div class="pdf-nav">
-      <button onclick="prevPage()">◀ Önceki</button>
-      <button onclick="nextPage()">Sonraki ▶</button>
-    </div>
-  </div>
+<div id="pdfView">
+  <iframe src="virex.pdf#view=FitH"></iframe>
 </div>
 
-<!-- PDF.JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
-const url = "virex.pdf";
-let pdfDoc=null,pageNum=1,ctx;
-
-const canvas=document.getElementById("pdfCanvas");
-ctx=canvas.getContext("2d");
-
-pdfjsLib.getDocument(url).promise.then(pdf=>{
-  pdfDoc=pdf;
-  render();
-});
-
-function render(){
-  pdfDoc.getPage(pageNum).then(page=>{
-    const viewport=page.getViewport({scale:1.4});
-    canvas.height=viewport.height;
-    canvas.width=viewport.width;
-    page.render({canvasContext:ctx,viewport});
-  });
-}
-
-function nextPage(){ if(pageNum<pdfDoc.numPages){pageNum++;render();}}
-function prevPage(){ if(pageNum>1){pageNum--;render();}}
-
 function openPDF(){
   document.getElementById("hero").classList.add("hide");
-  document.getElementById("pdfArea").classList.add("show");
+  document.getElementById("pdfView").style.display="block";
 }
 </script>
 
 </body>
 </html>
+
