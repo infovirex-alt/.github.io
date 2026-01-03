@@ -3,233 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virex Media</title>
+<title>Virex Media | Yakında Hizmetinizde</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 
 body{
+  min-height:100vh;
   background:#0b0f1a;
   color:#fff;
-  overflow-x:hidden;
-}
-
-/* HEADER */
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:15px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(10px);
-  z-index:1000;
-}
-
-.logo{
   display:flex;
   align-items:center;
-  gap:12px;
-}
-
-.logo img{height:38px}
-
-nav a{
-  color:#fff;
-  margin-left:25px;
-  text-decoration:none;
-  font-size:14px;
-}
-
-/* SLIDER */
-.hero{
-  height:100vh;
-  position:relative;
-  overflow:hidden;
-}
-
-.slides img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  opacity:0;
-  transition:opacity 1s ease;
-}
-
-.slides img.active{opacity:1}
-
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.55);
-}
-
-/* HERO CONTENT */
-.hero-content{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  display:flex;
   justify-content:center;
-  align-items:center;
+  padding:40px;
 }
 
-.btn{
-  padding:16px 48px;
-  background:linear-gradient(135deg,#2AFADF,#9B5CFF);
-  color:#000;
-  font-weight:bold;
-  border-radius:10px;
-  text-decoration:none;
-  font-size:16px;
-}
-
-/* DOTS */
-.dots{
-  position:absolute;
-  bottom:25px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:10px;
-  z-index:3;
-}
-
-.dots span{
-  width:10px;
-  height:10px;
-  background:#666;
-  border-radius:50%;
-  cursor:pointer;
-}
-
-.dots span.active{background:#2AFADF}
-
-/* CONTACT */
-section{padding:80px 40px;text-align:center}
-
-.contact-icons{
-  display:flex;
-  justify-content:center;
+/* ANA ALAN */
+.container{
+  width:100%;
+  max-width:1200px;
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
   gap:40px;
 }
 
-.contact-icons svg{
-  width:48px;
-  height:48px;
-  transition:.3s;
+/* GLASS BOX */
+.glass{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-radius:18px;
+  padding:40px;
+  box-shadow:0 0 40px rgba(0,0,0,.5);
 }
 
-.contact-icons a:hover svg{
-  transform:scale(1.2);
-  filter:drop-shadow(0 0 10px #2AFADF);
+/* SOL TARAF */
+.left{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:25px;
 }
 
-footer{
-  padding:20px;
-  text-align:center;
-  opacity:.6;
+.logo{
+  max-width:200px;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-  nav{display:none}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <div class="logo">
-    <img src="logo.png">
-  </div>
-</header>
-
-<!-- HERO SLIDER -->
-<section class="hero" id="slider">
-  <div class="slides">
-    <img src="slider_1.jpg" class="active">
-    <img src="slider_2.jpg">
-    <img src="slider_3.jpg">
-    <img src="slider_4.jpg">
-    <img src="slider_5.jpg">
-    <img src="slider_6.jpg">
-    <img src="slider_7.jpg">
-  </div>
-
-  <div class="hero-content">
-    <a href="#slider" class="btn">PDF Sunumu Gör</a>
-  </div>
-
-  <div class="dots"></div>
-</section>
-
-<!-- CONTACT -->
-<section>
-  <div class="contact-icons">
-
-    <!-- MAIL -->
-    <a href="mailto:info@virexmedia.net">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <defs>
-          <linearGradient id="gradMail" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2AFADF"/>
-            <stop offset="100%" stop-color="#9B5CFF"/>
-          </linearGradient>
-        </defs>
-        <rect x="2" y="4" width="20" height="16" rx="3" fill="url(#gradMail)"/>
-        <path d="M3 6l9 7 9-7" fill="none" stroke="#0e0e0e" stroke-width="2"/>
-      </svg>
-    </a>
-
-    <!-- INSTAGRAM -->
-    <a href="https://instagram.com" target="_blank">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <defs>
-          <linearGradient id="gradInsta" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2AFADF"/>
-            <stop offset="100%" stop-color="#9B5CFF"/>
-          </linearGradient>
-        </defs>
-        <path fill="url(#gradInsta)" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/>
-      </svg>
-    </a>
-
-  </div>
-</section>
-
-<footer>© 2026 Virex Media</footer>
-
-<script>
-const slides=document.querySelectorAll(".slides img");
-const dots=document.querySelector(".dots");
-let i=0;
-
-slides.forEach((_,idx)=>{
-  const d=document.createElement("span");
-  if(idx===0)d.classList.add("active");
-  d.onclick=()=>show(idx);
-  dots.appendChild(d);
-});
-
-const dot=document.querySelectorAll(".dots span");
-
-function show(n){
-  slides[i].classList.remove("active");
-  dot[i].classList.remove("active");
-  i=n;
-  slides[i].classList.add("active");
-  dot[i].classList.add("active");
+.left h1{
+  font-size:2.4rem;
+  letter-spacing:1px;
 }
 
-setInterval(()=>show((i+1)%slides.length),5000);
-</script>
+.left p{
+  opacity:.85;
+  line-height:1.6;
+}
 
-</body>
-</html>
+/* İLETİŞİM */
+.contact a{
+  display:block;
+  color:#2AFADF;
+  text-decoration:none;
+  margin-top:8px;
+  font-size:15px;
+}
+
+.contact a:hover{
+  text-decoration:underline;
+}
+
+/* SLIDER */
+.slider{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+}
+
+.slides{
+  display:flex;
+  width:700%;
+  animation:slide 28s infinite;
+}
+
+.slides img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+}
+
+/* SLIDER ANİMASYON */
+@keyframes slide{
+  0%{transform:translateX(0%)}
+  14%{transform:translateX(0%)}
+  20%{transform:translateX(-100%)}
+  34%{transform:translateX(-100%)}
+  40%{transform:translateX(-200%)}
+  54%{transform:translateX(-200%)}
+  60%{transform:translateX(-300%)
