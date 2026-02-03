@@ -782,4 +782,44 @@ textarea:focus {
     .footer-brand p {
         margin: 20px auto;
     }
+
+    .slider-container {
+        height: 300px;
+        /* Reduced height for mobile */
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .vision .section-subtitle {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .slider-container {
+        height: 250px;
+    }
+
+    .section {
+        padding: 60px 0;
+    }
+
+    .service-card {
+        padding: 25px 20px;
+    }
 }
