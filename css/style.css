@@ -604,8 +604,11 @@ textarea:focus {
 }
 
 .footer-brand p {
-    margin-top: 20px;
-    max-width: 300px;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: var(--text-color);
+    opacity: 0.8;
 }
 
 .footer h4 {
