@@ -137,3 +137,45 @@ if (slides.length > 0) {
     // Auto Play
     slideTimer = setInterval(nextSlide, slideInterval);
 }
+
+// Contact Form AJAX Handling
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+const submitBtn = document.getElementById('submit-btn');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Gönderiliyor...';
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                formStatus.textContent = 'Mesajınız başarıyla gönderildi! Sizinle en kısa sürede iletişime geçeceğiz.';
+                formStatus.classList.add('success');
+                contactForm.reset();
+            } else {
+                formStatus.textContent = 'Bir hata oluştu. Lütfen mailinizi onayladığınızdan emin olun veya daha sonra tekrar deneyin.';
+                formStatus.classList.add('error');
+            }
+        } catch (error) {
+            formStatus.textContent = 'Bağlantı hatası. Lütfen daha sonra tekrar deneyin.';
+            formStatus.classList.add('error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Gönder';
+        }
+    });
+}
