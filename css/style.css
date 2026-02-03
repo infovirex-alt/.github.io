@@ -350,6 +350,29 @@ p {
     padding: 100px 0;
 }
 
+/* Vision Section Refinement */
+.vision {
+    background: rgba(6, 182, 212, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.vision-container {
+    max-width: 900px !important;
+    text-align: center;
+}
+
+.vision-content {
+    padding: 20px;
+}
+
+.vision-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    margin-top: 1.5rem;
+    font-weight: 300;
+}
+
 .section-header {
     margin-bottom: 60px;
     text-align: center;
