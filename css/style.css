@@ -607,16 +607,19 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
 }
 
 .footer-brand p {
-    margin-top: 10px;
+    margin-top: 8px;
+    /* Slightly tighter for better grouping */
     font-size: 1rem;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     color: var(--text-color);
-    opacity: 0.7;
-    margin-left: 5px;
-    /* Adjusting for logo visual start point */
+    opacity: 0.8;
+    margin-bottom: 0;
+    padding-left: 2px;
 }
 
 .footer h4 {
