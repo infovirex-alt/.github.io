@@ -889,33 +889,10 @@ textarea:focus {
 }
 
 /* Responsive Media Queries */
+/* Hide hero posts on mobile to avoid clutter */
 @media (max-width: 1200px) {
     .hero-posts-container {
-        display: block;
-        /* Re-enable for mobile lite */
-        pointer-events: none;
-    }
-
-    /* Hide most posts to avoid clutter */
-    .floating-post {
         display: none;
-        width: 120px;
-        height: 120px;
-        opacity: 0.3;
-        /* More subtle on mobile */
-    }
-
-    /* Show only the best 2 posts for Mobile Lite experience */
-    .p2 {
-        display: block;
-        top: 20%;
-        left: -10px;
-    }
-
-    .p4 {
-        display: block;
-        top: 60%;
-        right: -10px;
     }
 }
 
