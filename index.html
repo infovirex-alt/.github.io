@@ -291,7 +291,8 @@
                     </div>
                 </div>
 
-                <form class="contact-form" action="https://formspree.io/infovirex@virexmedia.net" method="POST">
+                <form class="contact-form" id="contact-form" action="https://formspree.io/infovirex@virexmedia.net"
+                    method="POST">
                     <div class="form-row">
                         <div class="form-group">
                             <input type="text" name="name" placeholder="Adınız Soyadınız" required>
@@ -306,7 +307,8 @@
                     <div class="form-group">
                         <textarea name="message" placeholder="Mesajınız" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Gönder</button>
+                    <button type="submit" class="submit-btn" id="submit-btn">Gönder</button>
+                    <div id="form-status" class="form-status"></div>
                 </form>
             </div>
         </div>
