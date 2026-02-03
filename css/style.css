@@ -111,6 +111,8 @@ p {
     position: relative;
     z-index: 1;
     overflow: hidden;
+    border: none;
+    background-clip: padding-box;
 }
 
 .btn-primary::before {
