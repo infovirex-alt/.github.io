@@ -1065,3 +1065,79 @@ textarea:focus {
         padding: 25px 20px;
     }
 }
+
+/* 
+========================================
+   Scroll Progress Bar
+========================================
+*/
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--gradient-main);
+    z-index: 9999;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.6);
+}
+
+/* 
+========================================
+   Custom Cursor
+========================================
+*/
+@media (pointer: fine) {
+    body {
+        cursor: none;
+    }
+
+    a,
+    button,
+    [role="button"],
+    input,
+    textarea,
+    select,
+    label {
+        cursor: none;
+    }
+
+    .cursor-dot {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 99999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease, background 0.2s ease;
+        box-shadow: 0 0 6px rgba(6, 182, 212, 0.8);
+    }
+
+    .cursor-outline {
+        position: fixed;
+        width: 36px;
+        height: 36px;
+        border: 2px solid rgba(6, 182, 212, 0.5);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 99998;
+        transform: translate(-50%, -50%);
+    }
+
+    a:hover ~ .cursor-dot,
+    button:hover ~ .cursor-dot {
+        transform: translate(-50%, -50%) scale(1.5);
+        background: var(--secondary-color);
+    }
+}
+
+/* Hide custom cursor on touch devices */
+@media (pointer: coarse) {
+    .cursor-dot,
+    .cursor-outline {
+        display: none;
+    }
+}
