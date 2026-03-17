@@ -1,8 +1,11 @@
-// Mobile Menu Toggle
-const mobileMenu = document.getElementById('mobile-menu');
-const navMenu = document.querySelector('.nav-menu');
+/* ============================================================
+   Virex Media — main.js v2.0
+   ============================================================ */
 
-// FIX: aria-expanded state güncellemesi eklendi
+// ── Mobile Menu ──────────────────────────────────────────────
+const mobileMenu = document.getElementById('mobile-menu');
+const navMenu    = document.querySelector('.nav-menu');
+
 function toggleMenu(open) {
     const isOpen = typeof open === 'boolean' ? open : !mobileMenu.classList.contains('active');
     mobileMenu.classList.toggle('active', isOpen);
@@ -12,49 +15,27 @@ function toggleMenu(open) {
 
 mobileMenu.addEventListener('click', () => toggleMenu());
 
-// FIX: Klavye desteği eklendi (Enter / Space ile toggle)
 mobileMenu.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleMenu();
-    }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
 });
 
-// Close mobile menu when a link is clicked
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    toggleMenu(false);
-}));
+document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => toggleMenu(false)));
 
-// Smooth Scrolling for Anchor Links
+// ── Smooth Scroll ─────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
-
         const targetElement = document.querySelector(targetId);
-
         if (targetElement) {
-            const headerOffset = 80;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
+            const offsetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
     });
 });
 
-// Scroll Animation (Intersection Observer)
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
-
+// ── Scroll Reveal (Intersection Observer) ────────────────────
 const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -62,56 +43,44 @@ const observer = new IntersectionObserver((entries, obs) => {
             obs.unobserve(entry.target);
         }
     });
-}, observerOptions);
+}, { root: null, rootMargin: '0px', threshold: 0.1 });
 
-// Elements to animate
 document.querySelectorAll('.service-card, .about-content, .stat-card, .contact-wrapper').forEach(el => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(30px)";
-    el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
     observer.observe(el);
 });
 
-// FIX: Inline stil enjeksiyonu yerine class tanımını CSS'e taşıdık.
-// animate-fadeInUp CSS'te tanımlı olmalı (style.css içinde).
-// Aşağıdaki blok fallback olarak bırakıldı, CSS'te yoksa devreye girer.
-if (!document.querySelector('style[data-virex-anim]')) {
-    const animStyle = document.createElement('style');
-    animStyle.setAttribute('data-virex-anim', '1');
-    animStyle.textContent = '.animate-fadeInUp { opacity: 1 !important; transform: translateY(0) !important; }';
-    document.head.appendChild(animStyle);
-}
-
-// Navbar Scroll Effect
+// ── Navbar Scroll Effect ──────────────────────────────────────
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-        navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+        navbar.style.background  = 'rgba(15,23,42,0.95)';
+        navbar.style.boxShadow   = '0 4px 20px rgba(0,0,0,0.1)';
     } else {
-        navbar.style.background = 'rgba(15, 23, 42, 0.85)';
-        navbar.style.boxShadow = 'none';
+        navbar.style.background  = 'rgba(15,23,42,0.85)';
+        navbar.style.boxShadow   = 'none';
     }
 }, { passive: true });
 
-// Showcase Slider Logic
-const slides = document.querySelectorAll('.slide');
-const nextBtn = document.querySelector('.next-btn');
-const prevBtn = document.querySelector('.prev-btn');
-const dots = document.querySelectorAll('.dot');
+// ── Showcase Slider ───────────────────────────────────────────
+const slides    = document.querySelectorAll('.slide');
+const nextBtn   = document.querySelector('.next-btn');
+const prevBtn   = document.querySelector('.prev-btn');
+const dots      = document.querySelectorAll('.dot');
 
 if (slides.length > 0) {
-    let currentSlide = 0;
+    let currentSlide  = 0;
     const slideInterval = 5000;
     let slideTimer;
 
     const showSlide = (index) => {
         if (index >= slides.length) currentSlide = 0;
-        else if (index < 0) currentSlide = slides.length - 1;
-        else currentSlide = index;
+        else if (index < 0)         currentSlide = slides.length - 1;
+        else                         currentSlide = index;
 
         slides.forEach(slide => slide.classList.remove('active'));
-        // FIX: Dot aria-selected güncellendi
         dots.forEach((dot, i) => {
             dot.classList.remove('active');
             dot.setAttribute('aria-selected', 'false');
@@ -122,8 +91,8 @@ if (slides.length > 0) {
         dots[currentSlide].setAttribute('aria-selected', 'true');
     };
 
-    const nextSlide = () => { showSlide(currentSlide + 1); resetTimer(); };
-    const prevSlide = () => { showSlide(currentSlide - 1); resetTimer(); };
+    window.nextSlide = () => { showSlide(currentSlide + 1); resetTimer(); };
+    window.prevSlide = () => { showSlide(currentSlide - 1); resetTimer(); };
 
     const resetTimer = () => {
         clearInterval(slideTimer);
@@ -133,47 +102,59 @@ if (slides.length > 0) {
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
 
-    // FIX: Dot klavye desteği
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => { showSlide(index); resetTimer(); });
         dot.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                showSlide(index);
-                resetTimer();
-            }
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showSlide(index); resetTimer(); }
         });
     });
 
-    // FIX: Kullanıcı hover yaptığında otomatik geçişi durdur
+    // Pause on hover
     const sliderContainer = document.querySelector('.slider-container');
     if (sliderContainer) {
         sliderContainer.addEventListener('mouseenter', () => clearInterval(slideTimer));
         sliderContainer.addEventListener('mouseleave', resetTimer);
     }
 
+    // Touch / swipe support for mobile
+    if (sliderContainer) {
+        let touchStartX = 0;
+        let touchEndX   = 0;
+
+        sliderContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        sliderContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? nextSlide() : prevSlide();
+            }
+        }, { passive: true });
+    }
+
     slideTimer = setInterval(nextSlide, slideInterval);
 }
 
-// Contact Form AJAX Handling
+// ── Contact Form ──────────────────────────────────────────────
 const contactForm = document.getElementById('contact-form');
-const formStatus = document.getElementById('form-status');
-const submitBtn = document.getElementById('submit-btn');
+const formStatus  = document.getElementById('form-status');
+const submitBtn   = document.getElementById('submit-btn');
 
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // FIX: Honeypot kontrolü — bot doldurmuşsa gönderme
+        // Honeypot check
         const honeypot = contactForm.querySelector('input[name="_gotcha"]');
         if (honeypot && honeypot.value) return;
 
         const formData = new FormData(contactForm);
-        submitBtn.disabled = true;
+        submitBtn.disabled    = true;
         submitBtn.textContent = 'Gönderiliyor...';
-        // FIX: textContent kullanıldı, innerHTML değil (XSS koruması)
         formStatus.textContent = '';
-        formStatus.className = 'form-status';
+        formStatus.className   = 'form-status';
 
         try {
             const response = await fetch(contactForm.action, {
@@ -183,53 +164,124 @@ if (contactForm) {
             });
 
             if (response.ok) {
-                formStatus.textContent = 'Mesajınız başarıyla gönderildi! Sizinle en kısa sürede iletişime geçeceğiz.';
+                formStatus.textContent = 'Mesajınız başarıyla gönderildi! En kısa sürede sizinle iletişime geçeceğiz.';
                 formStatus.classList.add('success');
                 contactForm.reset();
             } else {
-                formStatus.textContent = 'Bir hata oluştu. Lütfen mailinizi onayladığınızdan emin olun veya daha sonra tekrar deneyin.';
+                formStatus.textContent = 'Bir hata oluştu. Lütfen e-postanızı kontrol edip tekrar deneyin.';
                 formStatus.classList.add('error');
             }
         } catch (_err) {
             formStatus.textContent = 'Bağlantı hatası. Lütfen daha sonra tekrar deneyin.';
             formStatus.classList.add('error');
         } finally {
-            submitBtn.disabled = false;
+            submitBtn.disabled    = false;
             submitBtn.textContent = 'Gönder';
         }
     });
 }
 
-// Custom Cursor Logic
-// FIX: pointer: fine kontrolü eklendi — dokunmatik cihazlarda cursor kodu çalışmaz
-const hasFinePonter = window.matchMedia('(pointer: fine)').matches;
-
-if (hasFinePonter) {
-    const cursorDot = document.querySelector('.cursor-dot');
+// ── Custom Cursor (pointer devices only) ──────────────────────
+if (window.matchMedia('(pointer: fine)').matches) {
+    const cursorDot     = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
 
     if (cursorDot && cursorOutline) {
         window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top  = `${e.clientY}px`;
 
             cursorOutline.animate(
-                { left: `${posX}px`, top: `${posY}px` },
-                { duration: 500, fill: "forwards" }
+                { left: `${e.clientX}px`, top: `${e.clientY}px` },
+                { duration: 500, fill: 'forwards' }
             );
         }, { passive: true });
     }
 }
 
-// Scroll Progress Logic
-// FIX: passive: true eklendi — scroll event performansı iyileştirildi
+// ── Scroll Progress Bar ───────────────────────────────────────
 window.addEventListener('scroll', () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-    const bar = document.getElementById('scrollProgress');
+    const height    = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled  = height > 0 ? (winScroll / height) * 100 : 0;
+    const bar       = document.getElementById('scrollProgress');
     if (bar) bar.style.width = scrolled + '%';
 }, { passive: true });
+
+
+// ── FAQ ACCORDION ──────────────────────────────────────────
+document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        // close all
+        document.querySelectorAll('.faq-q').forEach(b => {
+            b.setAttribute('aria-expanded', 'false');
+            b.nextElementSibling.classList.remove('open');
+        });
+        // open clicked (if was closed)
+        if (!isOpen) {
+            btn.setAttribute('aria-expanded', 'true');
+            btn.nextElementSibling.classList.add('open');
+        }
+    });
+});
+
+// ── COOKIE BANNER ──────────────────────────────────────────
+const cookieBanner = document.getElementById('cookie-banner');
+const cookieAccept = document.getElementById('cookie-accept');
+const cookieDecline = document.getElementById('cookie-decline');
+
+if (cookieBanner) {
+    if (!localStorage.getItem('virex_cookie')) {
+        setTimeout(() => { cookieBanner.style.display = 'block'; }, 1800);
+    }
+    const hideCookie = (val) => {
+        localStorage.setItem('virex_cookie', val);
+        cookieBanner.style.animation = 'none';
+        cookieBanner.style.transform = 'translateY(100%)';
+        cookieBanner.style.opacity = '0';
+        cookieBanner.style.transition = 'transform 0.35s ease, opacity 0.35s ease';
+        setTimeout(() => { cookieBanner.style.display = 'none'; }, 360);
+    };
+    cookieAccept.addEventListener('click',  () => hideCookie('accepted'));
+    cookieDecline.addEventListener('click', () => hideCookie('declined'));
+}
+
+// ── COUNTER ANIMATION ──────────────────────────────────────
+const counters = document.querySelectorAll('.counter');
+if (counters.length > 0) {
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseInt(el.dataset.target, 10);
+            const suffix = el.dataset.suffix || '';
+            const duration = 1800;
+            const step = Math.ceil(target / (duration / 16));
+            let current = 0;
+            const tick = () => {
+                current = Math.min(current + step, target);
+                el.textContent = current + suffix;
+                if (current < target) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+            counterObserver.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
+}
+
+// ── TOUCH SWIPE FOR SLIDER ─────────────────────────────────
+const sliderEl = document.querySelector('.slider-container');
+if (sliderEl && typeof nextSlide === 'function') {
+    let touchStartX = 0;
+    sliderEl.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    sliderEl.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextSlide(); else prevSlide();
+        }
+    }, { passive: true });
+}
