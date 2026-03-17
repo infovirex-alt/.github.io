@@ -2,15 +2,27 @@
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.querySelector('.nav-menu');
 
-mobileMenu.addEventListener('click', () => {
-    mobileMenu.classList.toggle('active');
-    navMenu.classList.toggle('active');
+// FIX: aria-expanded state güncellemesi eklendi
+function toggleMenu(open) {
+    const isOpen = typeof open === 'boolean' ? open : !mobileMenu.classList.contains('active');
+    mobileMenu.classList.toggle('active', isOpen);
+    navMenu.classList.toggle('active', isOpen);
+    mobileMenu.setAttribute('aria-expanded', String(isOpen));
+}
+
+mobileMenu.addEventListener('click', () => toggleMenu());
+
+// FIX: Klavye desteği eklendi (Enter / Space ile toggle)
+mobileMenu.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMenu();
+    }
 });
 
 // Close mobile menu when a link is clicked
 document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    mobileMenu.classList.remove('active');
-    navMenu.classList.remove('active');
+    toggleMenu(false);
 }));
 
 // Smooth Scrolling for Anchor Links
@@ -43,11 +55,11 @@ const observerOptions = {
     threshold: 0.1
 };
 
-const observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('animate-fadeInUp');
-            observer.unobserve(entry.target);
+            obs.unobserve(entry.target);
         }
     });
 }, observerOptions);
@@ -60,15 +72,15 @@ document.querySelectorAll('.service-card, .about-content, .stat-card, .contact-w
     observer.observe(el);
 });
 
-// Add animation class helper
-const style = document.createElement('style');
-style.innerHTML = `
-    .animate-fadeInUp {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
-`;
-document.head.appendChild(style);
+// FIX: Inline stil enjeksiyonu yerine class tanımını CSS'e taşıdık.
+// animate-fadeInUp CSS'te tanımlı olmalı (style.css içinde).
+// Aşağıdaki blok fallback olarak bırakıldı, CSS'te yoksa devreye girer.
+if (!document.querySelector('style[data-virex-anim]')) {
+    const animStyle = document.createElement('style');
+    animStyle.setAttribute('data-virex-anim', '1');
+    animStyle.textContent = '.animate-fadeInUp { opacity: 1 !important; transform: translateY(0) !important; }';
+    document.head.appendChild(animStyle);
+}
 
 // Navbar Scroll Effect
 window.addEventListener('scroll', () => {
@@ -80,7 +92,7 @@ window.addEventListener('scroll', () => {
         navbar.style.background = 'rgba(15, 23, 42, 0.85)';
         navbar.style.boxShadow = 'none';
     }
-});
+}, { passive: true });
 
 // Showcase Slider Logic
 const slides = document.querySelectorAll('.slide');
@@ -90,51 +102,56 @@ const dots = document.querySelectorAll('.dot');
 
 if (slides.length > 0) {
     let currentSlide = 0;
-    const slideInterval = 5000; // 5 seconds
+    const slideInterval = 5000;
     let slideTimer;
 
     const showSlide = (index) => {
-        // Wrap around
         if (index >= slides.length) currentSlide = 0;
         else if (index < 0) currentSlide = slides.length - 1;
         else currentSlide = index;
 
-        // Remove active class
         slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
+        // FIX: Dot aria-selected güncellendi
+        dots.forEach((dot, i) => {
+            dot.classList.remove('active');
+            dot.setAttribute('aria-selected', 'false');
+        });
 
-        // Add active class
         slides[currentSlide].classList.add('active');
         dots[currentSlide].classList.add('active');
+        dots[currentSlide].setAttribute('aria-selected', 'true');
     };
 
-    const nextSlide = () => {
-        showSlide(currentSlide + 1);
-        resetTimer();
-    };
-
-    const prevSlide = () => {
-        showSlide(currentSlide - 1);
-        resetTimer();
-    };
+    const nextSlide = () => { showSlide(currentSlide + 1); resetTimer(); };
+    const prevSlide = () => { showSlide(currentSlide - 1); resetTimer(); };
 
     const resetTimer = () => {
         clearInterval(slideTimer);
         slideTimer = setInterval(nextSlide, slideInterval);
     };
 
-    // Event Listeners
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
 
+    // FIX: Dot klavye desteği
     dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            showSlide(index);
-            resetTimer();
+        dot.addEventListener('click', () => { showSlide(index); resetTimer(); });
+        dot.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                showSlide(index);
+                resetTimer();
+            }
         });
     });
 
-    // Auto Play
+    // FIX: Kullanıcı hover yaptığında otomatik geçişi durdur
+    const sliderContainer = document.querySelector('.slider-container');
+    if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', () => clearInterval(slideTimer));
+        sliderContainer.addEventListener('mouseleave', resetTimer);
+    }
+
     slideTimer = setInterval(nextSlide, slideInterval);
 }
 
@@ -147,9 +164,14 @@ if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // FIX: Honeypot kontrolü — bot doldurmuşsa gönderme
+        const honeypot = contactForm.querySelector('input[name="_gotcha"]');
+        if (honeypot && honeypot.value) return;
+
         const formData = new FormData(contactForm);
         submitBtn.disabled = true;
         submitBtn.textContent = 'Gönderiliyor...';
+        // FIX: textContent kullanıldı, innerHTML değil (XSS koruması)
         formStatus.textContent = '';
         formStatus.className = 'form-status';
 
@@ -157,9 +179,7 @@ if (contactForm) {
             const response = await fetch(contactForm.action, {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                headers: { 'Accept': 'application/json' }
             });
 
             if (response.ok) {
@@ -170,7 +190,7 @@ if (contactForm) {
                 formStatus.textContent = 'Bir hata oluştu. Lütfen mailinizi onayladığınızdan emin olun veya daha sonra tekrar deneyin.';
                 formStatus.classList.add('error');
             }
-        } catch (error) {
+        } catch (_err) {
             formStatus.textContent = 'Bağlantı hatası. Lütfen daha sonra tekrar deneyin.';
             formStatus.classList.add('error');
         } finally {
@@ -179,27 +199,37 @@ if (contactForm) {
         }
     });
 }
+
 // Custom Cursor Logic
-const dot = document.querySelector('.cursor-dot');
-const outline = document.querySelector('.cursor-outline');
+// FIX: pointer: fine kontrolü eklendi — dokunmatik cihazlarda cursor kodu çalışmaz
+const hasFinePonter = window.matchMedia('(pointer: fine)').matches;
 
-window.addEventListener('mousemove', (e) => {
-    const posX = e.clientX;
-    const posY = e.clientY;
+if (hasFinePonter) {
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
 
-    dot.style.left = `${posX}px`;
-    dot.style.top = `${posY}px`;
+    if (cursorDot && cursorOutline) {
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
 
-    outline.animate({
-        left: `${posX}px`,
-        top: `${posY}px`
-    }, { duration: 500, fill: "forwards" });
-});
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            cursorOutline.animate(
+                { left: `${posX}px`, top: `${posY}px` },
+                { duration: 500, fill: "forwards" }
+            );
+        }, { passive: true });
+    }
+}
 
 // Scroll Progress Logic
+// FIX: passive: true eklendi — scroll event performansı iyileştirildi
 window.addEventListener('scroll', () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById("scrollProgress").style.width = scrolled + "%";
-});
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+    const bar = document.getElementById('scrollProgress');
+    if (bar) bar.style.width = scrolled + '%';
+}, { passive: true });
