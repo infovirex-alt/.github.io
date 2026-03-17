@@ -311,7 +311,7 @@ p { margin-bottom: 1rem; color: var(--text-muted); }
 }
 
 /* Automation section alternate background */
-.automation-section { background: rgba(255,255,255,0.02); }
+
 
 .service-card {
     background: var(--card-bg);
