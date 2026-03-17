@@ -65,17 +65,33 @@
     }
     </script>
 
+
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Botları mevcut Telegram grubuma entegre edebilir miyim?","acceptedAnswer":{"@type":"Answer","text":"Evet. Mevcut grubunuza dakikalar içinde entegrasyon yapılır. Grubun yapısını veya üye listesini bozmaz."}},
+        {"@type":"Question","name":"Kurulum için teknik bilgi gerekiyor mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Virex Media ekibi tüm kurulumu sizin adınıza yapar. Kod yazmaya gerek yoktur."}},
+        {"@type":"Question","name":"AiMod botu rakip reklam ve spam içerikleri nasıl tespit ediyor?","acceptedAnswer":{"@type":"Answer","text":"Google Gemini yapay zeka motoru ile her mesajın niyetini analiz eder. OCR ile resim üzeri içerikleri de tarar. Reaksiyon süresi 0.8 saniyedir."}},
+        {"@type":"Question","name":"Botlar 7/24 çalışıyor mu?","acceptedAnswer":{"@type":"Answer","text":"Yüksek uptime garantisiyle kesintisiz çalışır. Gece, gündüz, tatil fark etmeksizin aktiftir."}}
+      ]
+    }
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <link rel="stylesheet" href="css/style.css?v=2.0">
+    <link rel="stylesheet" href="css/style.css?v=3.0">
 </head>
 
 <body>
@@ -106,6 +122,7 @@
                 <li><a href="#automation" class="nav-link">Otomasyon</a></li>
                 <li><a href="#botlar" class="nav-link">Bot Ekosistemi</a></li>
                 <li><a href="#about" class="nav-link">Hakkımızda</a></li>
+                <li><a href="#sss" class="nav-link">SSS</a></li>
                 <li><a href="#contact" class="nav-link btn-primary">İletişime Geç</a></li>
             </ul>
         </div>
@@ -407,10 +424,78 @@
             </div>
             <div class="about-visual">
                 <div class="stat-grid">
-                    <div class="stat-card"><span class="stat-number">100+</span><p>Mutlu Müşteri</p></div>
-                    <div class="stat-card"><span class="stat-number">500+</span><p>Tamamlanan Proje</p></div>
-                    <div class="stat-card"><span class="stat-number">5</span><p>Yıllık Deneyim</p></div>
+                    <div class="stat-card"><span class="stat-number counter" data-target="100" data-suffix="+">0</span><p>Mutlu Müşteri</p></div>
+                    <div class="stat-card"><span class="stat-number counter" data-target="500" data-suffix="+">0</span><p>Tamamlanan Proje</p></div>
+                    <div class="stat-card"><span class="stat-number counter" data-target="5" data-suffix="">0</span><p>Yıllık Deneyim</p></div>
                     <div class="stat-card"><span class="stat-number">7/24</span><p>Destek</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SSS - SIKÇA SORULAN SORULAR -->
+    <section id="sss" class="section faq-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="hero-label">❓ SSS</span>
+                <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+                <p class="section-subtitle">Aklınızdaki soruların cevapları burada. Daha fazlası için bize yazın.</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false">
+                        Botları mevcut Telegram grubuma entegre edebilir miyim?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-a">
+                        <p>Evet. Mevcut grubunuza dakikalar içinde entegrasyon yapılır. Grubun yapısını veya üye listesini bozmaz. Tek yapmanız gereken bize grup bağlantısını iletmek.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false">
+                        Kurulum için teknik bilgi gerekiyor mu?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-a">
+                        <p>Hayır. Virex Media ekibi tüm kurulumu sizin adınıza yapar. Siz sadece Telegram'daki panel üzerinden ayarları yönetirsiniz. Kod yazmaya gerek yoktur.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false">
+                        AiMod botu rakip reklam ve spam içerikleri nasıl tespit ediyor?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-a">
+                        <p>Google Gemini yapay zeka motoru ile her mesajın niyetini analiz eder. Kelime yasaklamanın ötesinde, bağlamı anlar. OCR teknolojisiyle resim üzerine yazılmış içerikleri de tarar. Reaksiyon süresi ortalama 0.8 saniyedir.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false">
+                        Botlar 7/24 çalışıyor mu, kesinti oluyor mu?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-a">
+                        <p>Yüksek uptime garantisiyle kesintisiz çalışır. Gece, gündüz, tatil fark etmeksizin aktiftir. Herhangi bir teknik sorun oluştuğunda ekibimiz anında müdahale eder.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false">
+                        Kaç farklı gruba bot kurulabilir?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-a">
+                        <p>Paketinize göre tek gruptan kurumsal çok gruplu yapıya kadar esnektir. Detaylı bilgi ve fiyatlandırma için <a href="https://t.me/virex_uzay" target="_blank" rel="noopener noreferrer">@virex_uzay</a> üzerinden bizimle iletişime geçin.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false">
+                        CRM botu hangi platformlarla uyumlu?
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="faq-a">
+                        <p>Tamamen Telegram tabanlı çalışır. Harici web paneli, ek lisans veya özel yazılım gerektirmez. Yöneticiler her şeyi Telegram arayüzünden yönetir.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -436,7 +521,7 @@
                         <div class="contact-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
                         <h3>E-posta</h3>
                         <p>Projeleriniz için teklif alın</p>
-                        <a href="mailto:info@virexmedia.net" class="link-btn">E-posta Gönder <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <a href="/cdn-cgi/l/email-protection#d3babdb5bc93a5baa1b6abbeb6b7bab2fdbdb6a7" class="link-btn">E-posta Gönder <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -504,14 +589,25 @@
     </footer>
 
 
+
+    <!-- KVKK Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner" role="alertdialog" aria-label="Çerez bildirimi" style="display:none;">
+        <div class="cookie-inner">
+            <p>🍪 Bu site, deneyiminizi iyileştirmek için çerezler kullanır. <a href="#" class="cookie-link">Gizlilik politikası</a></p>
+            <div class="cookie-btns">
+                <button id="cookie-accept" class="btn btn-primary cookie-btn">Kabul Et</button>
+                <button id="cookie-decline" class="cookie-btn cookie-btn--outline">Reddet</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating Telegram Button -->
     <a href="https://t.me/virex_uzay" target="_blank" rel="noopener noreferrer"
        class="floating-tg" aria-label="Telegram'dan ulaşın">
         <i class="fab fa-telegram-plane" aria-hidden="true"></i>
-        <span class="floating-tg__label">Demo Al</span>
+        <span class="floating-tg__label">İletişim</span>
     </a>
 
-    <script src="js/main.js?v=2.0"></script>
+    <script defer src="js/main.js?v=3.0"></script>
 </body>
-
 </html>
