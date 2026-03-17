@@ -8,16 +8,26 @@
     <meta name="description"
         content="Virex Media - Kurumsal web tasarım, dijital pazarlama ve yaratıcı medya çözümleri. Markanızı dijital dünyada öne çıkarın.">
 
-    <!-- Fonts -->
+    <!-- FIX: Canonical URL eklendi -->
+    <link rel="canonical" href="https://virexmedia.net/">
+
+    <!-- FIX: Robots meta etiketi eklendi -->
+    <meta name="robots" content="index, follow">
+
+    <!-- FIX: Content Security Policy eklendi -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' cdnjs.cloudflare.com; style-src 'self' fonts.googleapis.com fonts.gstatic.com cdnjs.cloudflare.com 'unsafe-inline'; font-src fonts.gstatic.com cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' formspree.io;">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- FIX: SRI (Subresource Integrity) hash eklendi -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://virexmedia.net/">
     <meta property="og:title" content="Virex Media | Dijital Medya & Yaratıcı Çözümler">
@@ -25,7 +35,6 @@
         content="Kurumsal web tasarım, dijital pazarlama ve yaratıcı medya çözümleri. Markanızı dijital dünyada öne çıkarın.">
     <meta property="og:image" content="https://virexmedia.net/images/virex-logo-v3.png">
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://virexmedia.net/">
     <meta property="twitter:title" content="Virex Media | Dijital Medya & Yaratıcı Çözümler">
@@ -33,54 +42,54 @@
         content="Kurumsal web tasarım, dijital pazarlama ve yaratıcı medya çözümleri. Markanızı dijital dünyada öne çıkarın.">
     <meta property="twitter:image" content="https://virexmedia.net/images/virex-logo-v3.png">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/virex-logo-v3.png">
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css?v=1.1">
 </head>
 
 <body>
-    <!-- Custom Cursor -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-    <!-- Scroll Progress Bar -->
     <div class="progress-bar" id="scrollProgress"></div>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="images/virex-logo-v3.png" alt="Virex Media" style="height: 50px;">
+                <img src="images/virex-logo-v3.png" alt="Virex Media" style="height: 50px;" width="50" height="50" loading="lazy">
             </a>
-            <div class="menu-toggle" id="mobile-menu">
+            <!-- FIX: role, aria-expanded, aria-controls eklendi -->
+            <div class="menu-toggle" id="mobile-menu"
+                role="button"
+                aria-expanded="false"
+                aria-controls="nav-menu"
+                tabindex="0">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="nav-menu">
                 <li><a href="#home" class="nav-link">Ana Sayfa</a></li>
                 <li><a href="#vision" class="nav-link">Vizyonumuz</a></li>
                 <li><a href="#services" class="nav-link">Hizmetler</a></li>
+                <li><a href="#automation" class="nav-link">Otomasyon</a></li>
                 <li><a href="#about" class="nav-link">Hakkımızda</a></li>
                 <li><a href="#contact" class="nav-link btn-primary">İletişime Geç</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
-        <!-- Floating Posts Background -->
         <div class="hero-posts-container left">
-            <div class="floating-post p1"><img src="images/post1.jpg" alt=""></div>
-            <div class="floating-post p2"><img src="images/post2.jpg" alt=""></div>
-            <div class="floating-post p3"><img src="images/post3.jpg" alt=""></div>
+            <!-- FIX: loading="lazy" ve boyut atribütleri eklendi -->
+            <div class="floating-post p1"><img src="images/post1.jpg" alt="Virex Media sosyal medya içeriği 1" loading="lazy" width="300" height="300"></div>
+            <div class="floating-post p2"><img src="images/post2.jpg" alt="Virex Media sosyal medya içeriği 2" loading="lazy" width="300" height="300"></div>
+            <div class="floating-post p3"><img src="images/post3.jpg" alt="Virex Media sosyal medya içeriği 3" loading="lazy" width="300" height="300"></div>
         </div>
         <div class="hero-posts-container right">
-            <div class="floating-post p4"><img src="images/post4.jpg" alt=""></div>
-            <div class="floating-post p5"><img src="images/post5.jpg" alt=""></div>
-            <div class="floating-post p6"><img src="images/post6.jpg" alt=""></div>
+            <div class="floating-post p4"><img src="images/post4.jpg" alt="Virex Media sosyal medya içeriği 4" loading="lazy" width="300" height="300"></div>
+            <div class="floating-post p5"><img src="images/post5.jpg" alt="Virex Media sosyal medya içeriği 5" loading="lazy" width="300" height="300"></div>
+            <div class="floating-post p6"><img src="images/post6.jpg" alt="Virex Media sosyal medya içeriği 6" loading="lazy" width="300" height="300"></div>
         </div>
 
         <div class="hero-bg-overlay"></div>
@@ -95,12 +104,10 @@
             </div>
         </div>
 
-        <!-- Animated Background Elements -->
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
     </section>
 
-    <!-- Vision Section -->
     <section id="vision" class="section vision">
         <div class="container vision-container">
             <div class="vision-content">
@@ -115,7 +122,7 @@
         </div>
     </section>
 
-    <!-- Showcase Slider -->
+    <!-- FIX: Slider'a role ve aria-label eklendi -->
     <section id="showcase" class="section showcase-section">
         <div class="container">
             <div class="section-header text-center">
@@ -123,49 +130,36 @@
                 <p class="section-subtitle">Virex Media dünyasından kareler.</p>
             </div>
 
-            <div class="slider-container">
+            <div class="slider-container" role="region" aria-label="Öne çıkan görseller slayt gösterisi">
                 <div class="slider-wrapper">
-                    <div class="slide active">
-                        <img src="images/slide1.jpg" alt="Virex Portfolio">
-                    </div>
-                    <div class="slide">
-                        <img src="images/slide2.jpg" alt="Virex About">
-                    </div>
-                    <div class="slide">
-                        <img src="images/slide3.jpg" alt="Virex Services">
-                    </div>
-                    <div class="slide">
-                        <img src="images/slide4.jpg" alt="Virex Workflow">
-                    </div>
-                    <div class="slide">
-                        <img src="images/slide5.jpg" alt="Virex References">
-                    </div>
-                    <div class="slide">
-                        <img src="images/slide6.jpg" alt="Virex Neden Biz?">
-                    </div>
-                    <div class="slide">
-                        <img src="images/slide7.jpg" alt="Virex İletişim Kanalları">
-                    </div>
+                    <!-- FIX: Slider görselleri lazy load -->
+                    <div class="slide active"><img src="images/slide1.jpg" alt="Virex Portfolyo" loading="lazy" width="1200" height="675"></div>
+                    <div class="slide"><img src="images/slide2.jpg" alt="Virex Hakkımızda" loading="lazy" width="1200" height="675"></div>
+                    <div class="slide"><img src="images/slide3.jpg" alt="Virex Hizmetler" loading="lazy" width="1200" height="675"></div>
+                    <div class="slide"><img src="images/slide4.jpg" alt="Virex İş Akışı" loading="lazy" width="1200" height="675"></div>
+                    <div class="slide"><img src="images/slide5.jpg" alt="Virex Referanslar" loading="lazy" width="1200" height="675"></div>
+                    <div class="slide"><img src="images/slide6.jpg" alt="Virex Neden Biz?" loading="lazy" width="1200" height="675"></div>
+                    <div class="slide"><img src="images/slide7.jpg" alt="Virex İletişim Kanalları" loading="lazy" width="1200" height="675"></div>
                 </div>
 
-                <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                <!-- FIX: Butonlara aria-label eklendi -->
+                <button class="slider-btn prev-btn" aria-label="Önceki slayt"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                <button class="slider-btn next-btn" aria-label="Sonraki slayt"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
 
-                <div class="slider-dots">
-                    <span class="dot active" data-slide="0"></span>
-                    <span class="dot" data-slide="1"></span>
-                    <span class="dot" data-slide="2"></span>
-                    <span class="dot" data-slide="3"></span>
-                    <span class="dot" data-slide="4"></span>
-                    <span class="dot" data-slide="5"></span>
-                    <span class="dot" data-slide="6"></span>
+                <div class="slider-dots" role="tablist" aria-label="Slayt navigasyonu">
+                    <span class="dot active" data-slide="0" role="tab" aria-selected="true" aria-label="Slayt 1" tabindex="0"></span>
+                    <span class="dot" data-slide="1" role="tab" aria-selected="false" aria-label="Slayt 2" tabindex="0"></span>
+                    <span class="dot" data-slide="2" role="tab" aria-selected="false" aria-label="Slayt 3" tabindex="0"></span>
+                    <span class="dot" data-slide="3" role="tab" aria-selected="false" aria-label="Slayt 4" tabindex="0"></span>
+                    <span class="dot" data-slide="4" role="tab" aria-selected="false" aria-label="Slayt 5" tabindex="0"></span>
+                    <span class="dot" data-slide="5" role="tab" aria-selected="false" aria-label="Slayt 6" tabindex="0"></span>
+                    <span class="dot" data-slide="6" role="tab" aria-selected="false" aria-label="Slayt 7" tabindex="0"></span>
                 </div>
             </div>
         </div>
     </section>
 
 
-    <!-- Services Section -->
     <section id="services" class="section services">
         <div class="container">
             <div class="section-header text-center">
@@ -174,121 +168,111 @@
             </div>
 
             <div class="services-grid">
-                <!-- Service 1: Sosyal Medya -->
                 <div class="service-card">
-                    <div class="icon-box">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
+                    <div class="icon-box"><i class="fas fa-bullhorn" aria-hidden="true"></i></div>
                     <h3>1. VIREX SOSYAL MEDYA YÖNETİMİ</h3>
                     <p><strong>Bütünleşik İçerik Stratejisi ve Algoritma Optimizasyonu</strong></p>
                     <ul style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"
-                                style="color: var(--primary-color); margin-right: 8px;"></i> <strong>Çok Kanallı Dinamik
-                                Yönetim:</strong> Twitter (X), Telegram, Instagram, YouTube ve Pinterest platformlarında
-                            her güne özel yüksek etkileşimli içerik planlaması.</li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"
-                                style="color: var(--primary-color); margin-right: 8px;"></i> <strong>Kreatif ve Veri
-                                Odaklı Üretim:</strong> Marka kimliğiyle uyumlu görsel tasarımlar, trend analizleri,
-                            viral potansiyelli video (Reels/Shorts) içerikleri.</li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"
-                                style="color: var(--primary-color); margin-right: 8px;"></i> <strong>Şeffaf
-                                Raporlama:</strong> Günlük performans analiz raporları ve görsel verilerle desteklenen
-                            faaliyet sunumları.</li>
-                        <li><i class="fas fa-chart-line" style="color: var(--primary-color); margin-right: 8px;"></i>
-                            <strong>Hedef:</strong> %40 etkileşim artışı ve %30 organik büyüme ile kalıcı otorite.
-                        </li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Çok Kanallı Dinamik Yönetim:</strong> Twitter (X), Telegram, Instagram, YouTube ve Pinterest platformlarında her güne özel yüksek etkileşimli içerik planlaması.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Kreatif ve Veri Odaklı Üretim:</strong> Marka kimliğiyle uyumlu görsel tasarımlar, trend analizleri, viral potansiyelli video (Reels/Shorts) içerikleri.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Şeffaf Raporlama:</strong> Günlük performans analiz raporları ve görsel verilerle desteklenen faaliyet sunumları.</li>
+                        <li><i class="fas fa-chart-line" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Hedef:</strong> %40 etkileşim artışı ve %30 organik büyüme ile kalıcı otorite.</li>
                     </ul>
                 </div>
 
-                <!-- Service 2: Marketing & Partnerlik -->
                 <div class="service-card">
-                    <div class="icon-box">
-                        <i class="fas fa-handshake"></i>
-                    </div>
+                    <div class="icon-box"><i class="fas fa-handshake" aria-hidden="true"></i></div>
                     <h3>2. VIREX MARKETING & PARTNERLİK HİZMETİ</h3>
                     <p><strong>Yüksek Performanslı Büyüme ve İş Ortaklığı Yönetimi</strong></p>
                     <ul style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"
-                                style="color: var(--primary-color); margin-right: 8px;"></i> <strong>Nokta Atışı
-                                Hedefleme:</strong> Markanızın DNA'sına en uygun sektör temsilcileri ile stratejik
-                            buluşmalar.</li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"
-                                style="color: var(--primary-color); margin-right: 8px;"></i> <strong>Kanıtlanmış Başarı
-                                Modelleri:</strong> Verimliliği ölçülmüş ve sürdürülebilir büyüme sağlayan iş ortaklığı
-                            modelleri.</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;"></i>
-                            <strong>Performans Odaklı Strateji:</strong> Maksimum dönüşüm (conversion) hedefleyen veri
-                            analizi temelli büyüme yolculuğu.
-                        </li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Nokta Atışı Hedefleme:</strong> Markanızın DNA'sına en uygun sektör temsilcileri ile stratejik buluşmalar.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Kanıtlanmış Başarı Modelleri:</strong> Verimliliği ölçülmüş ve sürdürülebilir büyüme sağlayan iş ortaklığı modelleri.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Performans Odaklı Strateji:</strong> Maksimum dönüşüm (conversion) hedefleyen veri analizi temelli büyüme yolculuğu.</li>
                     </ul>
                 </div>
 
-                <!-- Service 3: Telegram Topluluk -->
                 <div class="service-card">
-                    <div class="icon-box">
-                        <i class="fab fa-telegram-plane"></i>
-                    </div>
+                    <div class="icon-box"><i class="fab fa-telegram-plane" aria-hidden="true"></i></div>
                     <h3>3. VIREX TELEGRAM TOPLULUK YÖNETİMİ</h3>
                     <p><strong>Profesyonel Moderasyon ve Aktif Üye Kazandırma</strong></p>
                     <ul style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"
-                                style="color: var(--primary-color); margin-right: 8px;"></i> <strong>İleri Düzey
-                                Moderasyon:</strong> 7/24 kesintisiz canlı destek ve AI destekli gelişmiş moderasyon bot
-                            entegrasyonu.</li>
-                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle"
-                                style="color: var(--primary-color); margin-right: 8px;"></i> <strong>Topluluk
-                                Büyütme:</strong> Aylık ortalama 20.000 aktif ve gerçek kullanıcı kazanımı ile organik
-                            ekosistem inşası.</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;"></i>
-                            <strong>Etkileşim Mühendisliği:</strong> Sohbet grubu dinamizmini koruyan düzenli
-                            aktiviteler ve kriz önleyici topluluk kontrolü.
-                        </li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>İleri Düzey Moderasyon:</strong> 7/24 kesintisiz canlı destek ve AI destekli gelişmiş moderasyon bot entegrasyonu.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Topluluk Büyütme:</strong> Aylık ortalama 20.000 aktif ve gerçek kullanıcı kazanımı ile organik ekosistem inşası.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Etkileşim Mühendisliği:</strong> Sohbet grubu dinamizmini koruyan düzenli aktiviteler ve kriz önleyici topluluk kontrolü.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- FIX: Tüm [cite: ...] referansları temizlendi -->
+    <section id="automation" class="section services" style="background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Otomasyon Çözümlerimiz</h2>
+                <p class="section-subtitle">Yapay zeka destekli botlarımızla iş yükünüzü %70 azaltın.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-shield-halved" aria-hidden="true"></i></div>
+                    <h3>AiMod: YAPAY ZEKA GÜVENLİK</h3>
+                    <p><strong>Niyet Okuyan Akıllı Kalkan</strong></p>
+                    <ul style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>AI Niyet Analizi:</strong> Gemini AI motoru ile kelimeleri değil, mesajın arkasındaki niyeti 0.8s içinde anlar.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Görsel Koruma (OCR):</strong> Resim üzerindeki sahte dekontları ve rakip reklamları otomatik tarar.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>İtibar Kalkanı:</strong> Markaya yönelik karalama kampanyalarını ve sahte satıcıları anında banlar.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-robot" aria-hidden="true"></i></div>
+                    <h3>OTONOM TOPLULUK BOTU</h3>
+                    <p><strong>7/24 Aktif ve Rekabetçi Bir Grup</strong></p>
+                    <ul style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>6 Farklı Oyun Modu:</strong> Zar, Futbol, Basketbol ve Emoji tahmin oyunlarıyla etkileşimi katlar.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Sadakat Sistemi:</strong> Günlük görevler, XP ve Rütbe sistemiyle üyeleri topluluğa bağlar.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Veri CRM:</strong> Üye verilerini tek tıkla CSV olarak indirerek büyümenizi analiz edin.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-box"><i class="fas fa-headset" aria-hidden="true"></i></div>
+                    <h3>CRM & DESTEK OTOMASYONU</h3>
+                    <p><strong>Hatasız ve Profesyonel İlişki Yönetimi</strong></p>
+                    <ul style="color: var(--text-muted); font-size: 0.95rem; margin-top: 10px;">
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Zorunlu Belge:</strong> Dekont veya ID yüklemeden talep açılmasını engelleyerek veri kaybını önler.</li>
+                        <li style="margin-bottom: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Telegram Panel:</strong> Yöneticiler için siteye girmeden Telegram butonlarıyla kolay talep yönetimi.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary-color); margin-right: 8px;" aria-hidden="true"></i> <strong>Performans Ölçümü:</strong> İşlem bittiğinde gönderilen CSAT anketleriyle personel kalitesini ölçün.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="about" class="section about">
         <div class="container about-container">
             <div class="about-content">
                 <h2 class="section-title">Neden Virex Media?</h2>
-                <p>Biz sadece bir dijital ajans değil, işinizin büyüme ortağıyız. Teknolojiyi sanatla birleştiriyor,
-                    kullanıcı deneyimini merkeze alan tasarımlar üretiyoruz.</p>
-                <p>Her proje bizim için yeni bir heyecan, her marka anlatılmayı bekleyen yeni bir hikaye. Sizi dinliyor,
-                    anlıyor ve hedeflerinize ulaştıracak rotayı çiziyoruz.</p>
+                <p>Biz sadece bir dijital ajans değil, işinizin büyüme ortağıyız. Teknolojiyi sanatla birleştiriyor, kullanıcı deneyimini merkeze alan tasarımlar üretiyoruz.</p>
                 <ul class="about-list">
-                    <li><i class="fas fa-check-circle"></i> Yenilikçi ve Modern Tasarımlar</li>
-                    <li><i class="fas fa-check-circle"></i> Sonuç Odaklı Stratejiler</li>
-                    <li><i class="fas fa-check-circle"></i> Şeffaf Çalışma Prensibi</li>
-                    <li><i class="fas fa-check-circle"></i> Tam Zamanında Teslimat</li>
+                    <li><i class="fas fa-check-circle" aria-hidden="true"></i> Yenilikçi ve Modern Tasarımlar</li>
+                    <li><i class="fas fa-check-circle" aria-hidden="true"></i> Sonuç Odaklı Stratejiler</li>
+                    <li><i class="fas fa-check-circle" aria-hidden="true"></i> Şeffaf Çalışma Prensibi</li>
+                    <li><i class="fas fa-check-circle" aria-hidden="true"></i> Tam Zamanında Teslimat</li>
                 </ul>
             </div>
             <div class="about-visual">
                 <div class="stat-grid">
-                    <div class="stat-card">
-                        <span class="stat-number">100+</span>
-                        <p>Mutlu Müşteri</p>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">500+</span>
-                        <p>Tamamlanan Proje</p>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">5</span>
-                        <p>Yıllık Deneyim</p>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">7/24</span>
-                        <p>Destek</p>
-                    </div>
+                    <div class="stat-card"><span class="stat-number">100+</span><p>Mutlu Müşteri</p></div>
+                    <div class="stat-card"><span class="stat-number">500+</span><p>Tamamlanan Proje</p></div>
+                    <div class="stat-card"><span class="stat-number">5</span><p>Yıllık Deneyim</p></div>
+                    <div class="stat-card"><span class="stat-number">7/24</span><p>Destek</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="section contact">
         <div class="container">
             <div class="section-header text-center">
@@ -299,54 +283,43 @@
             <div class="contact-wrapper">
                 <div class="contact-info">
                     <div class="contact-card-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-telegram-plane"></i>
-                        </div>
+                        <div class="contact-icon"><i class="fab fa-telegram-plane" aria-hidden="true"></i></div>
                         <h3>Telegram</h3>
                         <p>Hızlı iletişim için bize yazın</p>
-                        <a href="https://t.me/virex_media" target="_blank" class="link-btn">Mesaj Gönder <i
-                                class="fas fa-arrow-right"></i></a>
+                        <!-- FIX: rel="noopener noreferrer" eklendi -->
+                        <a href="https://t.me/virex_media" target="_blank" rel="noopener noreferrer" class="link-btn">Mesaj Gönder <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                     <div class="contact-card-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
+                        <div class="contact-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
                         <h3>E-posta</h3>
                         <p>Projeleriniz için teklif alın</p>
-                        <a href="mailto:infovirex@virexmedia.net" class="link-btn">E-posta Gönder <i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="mailto:infovirex@virexmedia.net" class="link-btn">E-posta Gönder <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
                 <form class="contact-form" id="contact-form" action="https://formspree.io/f/maqbkpqn" method="POST">
                     <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="Adınız Soyadınız" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="E-posta Adresiniz" required>
-                        </div>
+                        <div class="form-group"><input type="text" name="name" placeholder="Adınız Soyadınız" required autocomplete="name"></div>
+                        <div class="form-group"><input type="email" name="email" placeholder="E-posta Adresiniz" required autocomplete="email"></div>
                     </div>
-                    <div class="form-group">
-                        <input type="text" name="subject" placeholder="Konu" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" placeholder="Mesajınız" rows="5" required></textarea>
-                    </div>
+                    <div class="form-group"><input type="text" name="subject" placeholder="Konu" required></div>
+                    <div class="form-group"><textarea name="message" placeholder="Mesajınız" rows="5" required></textarea></div>
+                    <!-- FIX: Honeypot alanı eklendi (bot koruması) -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
                     <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">Gönder</button>
-                    <div id="form-status" class="form-status"></div>
+                    <!-- FIX: role="alert" ve aria-live="polite" eklendi -->
+                    <div id="form-status" class="form-status" role="alert" aria-live="polite"></div>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-top">
                 <div class="footer-brand">
                     <a href="#" class="logo">
-                        <img src="images/virex-logo-v3.png" alt="Virex Media" style="height: 50px;">
+                        <img src="images/virex-logo-v3.png" alt="Virex Media" style="height: 50px;" width="50" height="50" loading="lazy">
                     </a>
                 </div>
                 <div class="footer-links">
@@ -362,12 +335,11 @@
                 <div class="footer-social">
                     <h4>Bizi Takip Edin</h4>
                     <div class="social-icons">
-                        <a href="https://www.instagram.com/virex_media/" target="_blank"><i
-                                class="fab fa-instagram"></i></a>
-                        <a href="https://x.com/virex_media" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/in/virex-media-3175653aa" target="_blank"><i
-                                class="fab fa-linkedin-in"></i></a>
-                        <a href="https://t.me/virex_media" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <!-- FIX: rel="noopener noreferrer" ve aria-label eklendi -->
+                        <a href="https://www.instagram.com/virex_media/" target="_blank" rel="noopener noreferrer" aria-label="Instagram'da Virex Media"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="https://x.com/virex_media" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)'da Virex Media"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/in/virex-media-3175653aa" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn'de Virex Media"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="https://t.me/virex_media" target="_blank" rel="noopener noreferrer" aria-label="Telegram'da Virex Media"><i class="fab fa-telegram" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -377,8 +349,8 @@
         </div>
     </footer>
 
-    <!-- Custom JS -->
-    <script src="js/main.js"></script>
+    <!-- FIX: main.js versiyonlandırıldı -->
+    <script src="js/main.js?v=1.1"></script>
 </body>
 
 </html>
