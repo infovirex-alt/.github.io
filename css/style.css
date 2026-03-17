@@ -1068,6 +1068,48 @@ textarea:focus {
 
 /* 
 ========================================
+   Missing / Fix Classes
+========================================
+*/
+
+/* Hero background overlay — darkens floating posts for readability */
+.hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(11, 15, 26, 0.45) 0%, rgba(11, 15, 26, 0.75) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Vision section body text */
+.section-text {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--text-color);
+    margin-top: 1.25rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Prevent fixed navbar from covering section anchors */
+#home,
+#vision,
+#showcase,
+#services,
+#automation,
+#about,
+#contact {
+    scroll-margin-top: var(--navbar-height);
+}
+
+/* Dot keyboard focus ring */
+.dot:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+/* 
+========================================
    Scroll Progress Bar
 ========================================
 */
