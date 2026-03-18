@@ -669,9 +669,16 @@ input:focus, textarea:focus {
     box-shadow: 0 0 8px rgba(6,182,212,0.6);
 }
 
-/* ── Custom Cursor (pointer devices only) ── */
-@media (pointer: fine) {
-    body, a, button, [role="button"], input, textarea, select, label { cursor: none; }
+/* Custom cursor disabled — normal OS cursor restored */
+body, a, button, input, textarea, select, label, [role="button"] {
+    cursor: auto;
+}
+a, button, [role="button"], .btn, .nav-link, .faq-q, .dot, .slider-btn,
+.menu-toggle, .social-icons a, .service-card, .bot-card, .stat-card,
+.cookie-btn, .floating-tg {
+    cursor: pointer;
+}
+.cursor-dot, .cursor-outline { display: none !important; }
 
     .cursor-dot {
         position: fixed;
@@ -696,9 +703,7 @@ input:focus, textarea:focus {
     }
 }
 
-@media (pointer: coarse) {
-    .cursor-dot, .cursor-outline { display: none; }
-}
+
 
 /* ── Responsive ── */
 @media (max-width: 1200px) {
@@ -1134,3 +1139,452 @@ input:focus, textarea:focus {
    ================================================ */
 
 .stat-number.counter { transition: color 0.3s; }
+
+
+/* ================================================
+   SKIP LINK (Erişilebilirlik)
+   ================================================ */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 0 0 8px 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 99999;
+    text-decoration: none;
+    transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ================================================
+   GLOBAL FOCUS STYLES (Erişilebilirlik)
+   ================================================ */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ================================================
+   ACTIVE NAV HIGHLIGHT
+   ================================================ */
+.nav-link.active-section {
+    color: var(--primary-color) !important;
+    position: relative;
+}
+.nav-link.active-section::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--gradient-main);
+    border-radius: 2px;
+}
+
+/* ================================================
+   SOSYAL KANIT / İSTATİSTİK BÖLÜMÜ
+   ================================================ */
+.stats-trust {
+    padding: 60px 0;
+    background: rgba(6,182,212,0.02);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.trust-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 48px;
+}
+.trust-stat {
+    text-align: center;
+    padding: 16px 40px;
+    flex: 1;
+    min-width: 140px;
+}
+.trust-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255,255,255,0.08);
+    flex-shrink: 0;
+}
+.trust-num {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 800;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+.trust-lbl {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.trust-logos { text-align: center; }
+.trust-logos__label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.trust-logos__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.trust-logo-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: border-color 0.2s, color 0.2s;
+}
+.trust-logo-pill:hover {
+    border-color: rgba(6,182,212,0.3);
+    color: var(--text-color);
+}
+.trust-logo-pill i { color: var(--primary-color); font-size: 0.9rem; }
+
+/* logo görselleri için (ileride eklenince) */
+.trust-logos__row img {
+    height: 32px;
+    width: auto;
+    opacity: 0.5;
+    filter: grayscale(1) brightness(2);
+    transition: opacity 0.2s, filter 0.2s;
+}
+.trust-logos__row img:hover { opacity: 1; filter: none; }
+
+/* ================================================
+   BOT CTA HEADING (h3 → p dönüşümü)
+   ================================================ */
+.bot-cta-heading {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ================================================
+   FORM VALIDATION STYLES
+   ================================================ */
+input.input-error,
+textarea.input-error {
+    border-color: rgba(239, 68, 68, 0.6) !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15) !important;
+}
+.field-error {
+    font-size: 0.8rem;
+    color: #ef4444;
+    margin-top: 5px;
+    display: none;
+}
+.field-error.show { display: block; }
+
+/* ================================================
+   HIZMET KARTI HOVER GÜÇLENDİRME
+   ================================================ */
+.service-card {
+    position: relative;
+}
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--border-radius);
+    padding: 1px;
+    background: var(--gradient-main);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+.service-card:hover::before { opacity: 1; }
+
+/* ================================================
+   PREFERS REDUCED MOTION
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+    .floating-tg { animation: none; }
+    .shape { animation: none; }
+    .floating-post { animation: none; }
+}
+
+/* ================================================
+   RENK KONTRAST — muted text iyileştirme
+   ================================================ */
+:root {
+    --text-muted: #a0aec0; /* #94a3b8 yerine daha yüksek kontrast */
+}
+
+@media (max-width: 768px) {
+    .trust-stats { flex-direction: column; gap: 8px; }
+    .trust-divider { width: 60px; height: 1px; }
+    .trust-stat { padding: 12px 20px; }
+}
+
+/* ── BACK TO TOP ── */
+.back-top {
+    position: fixed;
+    bottom: 90px;
+    right: 28px;
+    z-index: 8998;
+    width: 44px; height: 44px;
+    background: rgba(6,182,212,0.15);
+    border: 1px solid rgba(6,182,212,0.3);
+    border-radius: 50%;
+    color: var(--primary-color);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    pointer-events: none;
+}
+.back-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.back-top:hover { background: rgba(6,182,212,0.3); }
+@media (max-width: 480px) { .back-top { bottom: 80px; right: 16px; } }
+
+
+/* ================================================
+   SKIP TO CONTENT
+   ================================================ */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 0 0 8px 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 99999;
+    text-decoration: none;
+    transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ================================================
+   GLOBAL FOCUS STYLES (Keyboard nav)
+   ================================================ */
+*:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+*:focus:not(:focus-visible) { outline: none; }
+
+/* ================================================
+   FORM FIELD ERRORS
+   ================================================ */
+.field-err {
+    display: block;
+    font-size: 0.8rem;
+    color: #f87171;
+    min-height: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s, margin 0.2s;
+    margin-top: 0;
+}
+.field-err.show {
+    max-height: 40px;
+    margin-top: 5px;
+}
+input.invalid, textarea.invalid {
+    border-color: #f87171 !important;
+    box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.2) !important;
+}
+
+/* ================================================
+   BACK TO TOP BUTTON
+   ================================================ */
+.back-to-top {
+    position: fixed;
+    bottom: 96px;
+    right: 28px;
+    z-index: 8998;
+    width: 44px;
+    height: 44px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 50%;
+    color: var(--primary-color);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    backdrop-filter: blur(8px);
+}
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+.back-to-top:hover {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+/* ================================================
+   ACTIVE NAV LINK
+   ================================================ */
+.nav-link.active {
+    color: var(--primary-color) !important;
+    position: relative;
+}
+.nav-link.active:not(.btn-primary)::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--gradient-main);
+    border-radius: 2px;
+}
+
+/* ================================================
+   KURULUM TİMELINE
+   ================================================ */
+.timeline-section {
+    background: var(--bg-color);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.timeline-steps {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-top: 3rem;
+    justify-content: center;
+}
+.timeline-step {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 32px 28px;
+    flex: 1;
+    max-width: 300px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+}
+.timeline-step:hover {
+    transform: translateY(-4px);
+    border-color: rgba(6,182,212,0.35);
+}
+.timeline-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    opacity: 0.5;
+    margin-top: 80px;
+}
+.ts-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+.ts-icon {
+    width: 52px; height: 52px;
+    background: rgba(6,182,212,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin: 0 auto 16px;
+    transition: background 0.3s;
+}
+.timeline-step:hover .ts-icon {
+    background: var(--gradient-main);
+    color: #fff;
+}
+.ts-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+.ts-desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 14px;
+}
+.ts-time {
+    font-size: 0.78rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    background: rgba(6,182,212,0.08);
+    border: 1px solid rgba(6,182,212,0.15);
+    border-radius: 20px;
+    padding: 4px 12px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .timeline-steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+    .timeline-step { max-width: 100%; width: 100%; }
+    .timeline-arrow {
+        transform: rotate(90deg);
+        margin: 8px auto;
+        padding: 0;
+    }
+}
+
+/* ================================================
+   REDUCED MOTION
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .floating-tg { animation: none !important; }
+}
