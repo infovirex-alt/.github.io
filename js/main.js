@@ -285,3 +285,163 @@ if (sliderEl && typeof nextSlide === 'function') {
         }
     }, { passive: true });
 }
+
+
+// ── AKTİF NAV HIGHLIGHT ────────────────────────────────────
+const navLinks = document.querySelectorAll('.nav-link[data-nav]');
+const sections = document.querySelectorAll('section[id]');
+
+if (navLinks.length && sections.length) {
+    const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.toggle('active-section', link.dataset.nav === id);
+                });
+            }
+        });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => navObserver.observe(s));
+}
+
+// ── FORM VALIDATION ────────────────────────────────────────
+const validatedForm = document.getElementById('contact-form');
+if (validatedForm) {
+    const showError = (input, msg) => {
+        input.classList.add('input-error');
+        let err = input.parentNode.querySelector('.field-error');
+        if (!err) {
+            err = document.createElement('span');
+            err.className = 'field-error';
+            input.parentNode.appendChild(err);
+        }
+        err.textContent = msg;
+        err.classList.add('show');
+    };
+    const clearError = (input) => {
+        input.classList.remove('input-error');
+        const err = input.parentNode.querySelector('.field-error');
+        if (err) err.classList.remove('show');
+    };
+
+    validatedForm.querySelectorAll('input[required], textarea[required]').forEach(input => {
+        input.addEventListener('blur', () => {
+            if (!input.value.trim()) {
+                showError(input, 'Bu alan zorunludur.');
+            } else if (input.type === 'email' && !input.value.includes('@')) {
+                showError(input, 'Geçerli bir e-posta adresi girin.');
+            } else {
+                clearError(input);
+            }
+        });
+        input.addEventListener('input', () => {
+            if (input.value.trim()) clearError(input);
+        });
+    });
+
+    validatedForm.addEventListener('submit', (e) => {
+        let hasError = false;
+        validatedForm.querySelectorAll('input[required], textarea[required]').forEach(input => {
+            if (!input.value.trim()) {
+                showError(input, 'Bu alan zorunludur.');
+                hasError = true;
+            } else if (input.type === 'email' && !input.value.includes('@')) {
+                showError(input, 'Geçerli bir e-posta adresi girin.');
+                hasError = true;
+            }
+        });
+        if (hasError) e.preventDefault();
+    });
+}
+
+// ── BACK TO TOP BUTONU ─────────────────────────────────────
+const backTopBtn = document.getElementById('back-top');
+if (backTopBtn) {
+    window.addEventListener('scroll', () => {
+        backTopBtn.classList.toggle('visible', window.scrollY > 500);
+    }, { passive: true });
+    backTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+
+// ── BACK TO TOP ────────────────────────────────────────────
+const backToTop = document.getElementById('back-to-top');
+if (backToTop) {
+    window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ── ACTIVE NAV HIGHLIGHT (Intersection Observer) ───────────
+const navLinks = document.querySelectorAll('.nav-link:not(.btn-primary)');
+const sections = document.querySelectorAll('section[id]');
+
+const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+        }
+    });
+}, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+
+sections.forEach(s => navObserver.observe(s));
+
+// ── FORM VALIDATION ────────────────────────────────────────
+const validatedForm = document.getElementById('contact-form');
+if (validatedForm) {
+    const showErr = (id, msg) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = msg;
+        el.classList.toggle('show', !!msg);
+    };
+    const markInvalid = (input, invalid) => {
+        input.classList.toggle('invalid', invalid);
+    };
+
+    validatedForm.addEventListener('submit', (e) => {
+        let valid = true;
+
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const subject = document.getElementById('subject');
+        const message = document.getElementById('message');
+
+        if (name && !name.value.trim()) {
+            showErr('err-name', 'Ad Soyad zorunludur.'); markInvalid(name, true); valid = false;
+        } else if (name) { showErr('err-name', ''); markInvalid(name, false); }
+
+        if (email && !email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            showErr('err-email', 'Geçerli bir e-posta girin.'); markInvalid(email, true); valid = false;
+        } else if (email) { showErr('err-email', ''); markInvalid(email, false); }
+
+        if (subject && !subject.value.trim()) {
+            showErr('err-subject', 'Konu zorunludur.'); markInvalid(subject, true); valid = false;
+        } else if (subject) { showErr('err-subject', ''); markInvalid(subject, false); }
+
+        if (message && !message.value.trim()) {
+            showErr('err-message', 'Mesaj zorunludur.'); markInvalid(message, true); valid = false;
+        } else if (message) { showErr('err-message', ''); markInvalid(message, false); }
+
+        if (!valid) e.preventDefault();
+    });
+
+    // Clear errors on input
+    ['name','email','subject','message'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', () => {
+            markInvalid(el, false);
+            const errId = 'err-' + (id === 'message' ? 'message' : id);
+            showErr(errId, '');
+        });
+    });
+}
