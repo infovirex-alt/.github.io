@@ -273,6 +273,18 @@
                 <button class="slider-btn prev-btn" aria-label="Önceki slayt"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
                 <button class="slider-btn next-btn" aria-label="Sonraki slayt"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
 
+                <!-- Slayt sayacı -->
+                <div class="slide-counter" aria-live="polite" aria-atomic="true">
+                    <span id="slide-num">01</span>
+                    <span class="slide-sep">/</span>
+                    <span>07</span>
+                </div>
+
+                <!-- İlerleme çubuğu -->
+                <div class="slide-progress" aria-hidden="true">
+                    <div class="slide-progress-bar" id="slideProgressBar"></div>
+                </div>
+
                 <div class="slider-dots" role="tablist" aria-label="Slayt navigasyonu">
                     <span class="dot active" data-slide="0" role="tab" aria-selected="true"  aria-label="Slayt 1" tabindex="0"></span>
                     <span class="dot"        data-slide="1" role="tab" aria-selected="false" aria-label="Slayt 2" tabindex="0"></span>
