@@ -1720,69 +1720,6 @@ body.intro-active {
 }
 
 /* ================================================
-   SERVICES TICKER STRIP
-   ================================================ */
-.services-ticker {
-    overflow: hidden;
-    padding: 15px 0;
-    background: rgba(6,182,212,0.03);
-    border-top: 1px solid rgba(6,182,212,0.12);
-    border-bottom: 1px solid rgba(6,182,212,0.12);
-    position: relative;
-}
-
-.services-ticker::before,
-.services-ticker::after {
-    content: '';
-    position: absolute;
-    top: 0; height: 100%;
-    width: 120px;
-    z-index: 2;
-    pointer-events: none;
-}
-.services-ticker::before {
-    left: 0;
-    background: linear-gradient(to right, var(--bg-color), transparent);
-}
-.services-ticker::after {
-    right: 0;
-    background: linear-gradient(to left, var(--bg-color), transparent);
-}
-
-.ticker-inner {
-    display: flex;
-    align-items: center;
-    width: max-content;
-    animation: ticker-go 24s linear infinite;
-}
-
-.ticker-inner span {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    padding: 0 20px;
-    background: var(--gradient-main);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    flex-shrink: 0;
-}
-
-.ticker-inner em {
-    font-style: normal;
-    font-size: 0.55rem;
-    color: rgba(6,182,212,0.45);
-    flex-shrink: 0;
-    line-height: 1;
-}
-
-@keyframes ticker-go {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-/* ================================================
    3D CARD TILT
    ================================================ */
 .service-card,
@@ -1834,7 +1771,7 @@ body.intro-active {
 .marquee-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 0;
 }
 
 .marquee-row {
@@ -1860,23 +1797,24 @@ body.intro-active {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    padding: 10px 24px;
+    padding: 10px 28px;
     border-radius: 10px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.09);
-    font-size: 0.88rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.9rem;
     font-weight: 600;
-    color: rgba(255,255,255,0.65);
-    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.40);
+    letter-spacing: 0.03em;
     transition: background 0.3s, color 0.3s, border-color 0.3s;
     cursor: default;
     flex-shrink: 0;
+    /* Gerçek logo img için: filter: grayscale(1) brightness(0.75); */
 }
 
 .m-logo:hover {
-    background: rgba(6,182,212,0.1);
-    border-color: rgba(6,182,212,0.35);
-    color: #fff;
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.85);
 }
 
 /* Pause on hover */
