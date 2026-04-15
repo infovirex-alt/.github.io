@@ -79,6 +79,15 @@
     }
     </script>
 
+    <!-- Google Analytics GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KK6PY9Y8F6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KK6PY9Y8F6');
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preload" href="css/style.css?v=3.0" as="style">
     <link rel="dns-prefetch" href="https://t.me">
@@ -93,7 +102,18 @@
     <link rel="stylesheet" href="css/style.css?v=4.0">
 </head>
 
-<body>
+<body class="intro-active">
+
+    <!-- ── Giriş Animasyonu ── -->
+    <div id="virex-intro" aria-hidden="true">
+        <div class="intro-bg"></div>
+        <div class="intro-content">
+            <img id="intro-logo" src="images/virex-logo-v3.png" alt="Virex Media" width="260" height="auto">
+            <div class="intro-glow"></div>
+        </div>
+        <button class="intro-skip" onclick="skipIntro()">Geç</button>
+    </div>
+
     <a href="#home" class="skip-link">İçeriğe geç</a>
     <div class="cursor-dot" aria-hidden="true"></div>
     <div class="cursor-outline" aria-hidden="true"></div>
@@ -139,6 +159,7 @@
             <div class="floating-post p6"><img src="images/post6.jpg" alt="" role="presentation" loading="lazy" width="300" height="300"></div>
         </div>
 
+        <div class="hero-spotlight" aria-hidden="true"></div>
         <div class="hero-bg-overlay" aria-hidden="true"></div>
 
         <div class="container hero-content">
@@ -153,6 +174,103 @@
 
         <div class="shape shape-1" aria-hidden="true"></div>
         <div class="shape shape-2" aria-hidden="true"></div>
+        <div class="hero-grain" aria-hidden="true"></div>
+    </section>
+
+    <!-- ── Hizmetler Ticker ── -->
+    <div class="services-ticker" aria-hidden="true">
+        <div class="ticker-inner">
+            <span>WEB TASARIMI</span><em>✦</em>
+            <span>SOSYAL MEDYA</span><em>✦</em>
+            <span>TELEGRAM BOTU</span><em>✦</em>
+            <span>MARKA KİMLİĞİ</span><em>✦</em>
+            <span>SEO &amp; BÜYÜME</span><em>✦</em>
+            <span>DİJİTAL PAZARLAMA</span><em>✦</em>
+            <span>BOT EKOSİSTEMİ</span><em>✦</em>
+            <span>YAPAY ZEKA</span><em>✦</em>
+            <span>WEB TASARIMI</span><em>✦</em>
+            <span>SOSYAL MEDYA</span><em>✦</em>
+            <span>TELEGRAM BOTU</span><em>✦</em>
+            <span>MARKA KİMLİĞİ</span><em>✦</em>
+            <span>SEO &amp; BÜYÜME</span><em>✦</em>
+            <span>DİJİTAL PAZARLAMA</span><em>✦</em>
+            <span>BOT EKOSİSTEMİ</span><em>✦</em>
+            <span>YAPAY ZEKA</span><em>✦</em>
+        </div>
+    </div>
+
+    <!-- ── Referans Marquee ── -->
+    <section class="clients-marquee" aria-label="Referanslarımız">
+        <div class="container">
+            <p class="marquee-heading">Güvenilen Markalar Bizimle Büyüyor</p>
+        </div>
+        <div class="marquee-wrapper">
+
+            <!-- Sıra 1 — sola kayan -->
+            <div class="marquee-row" role="list">
+                <div class="marquee-content">
+                    <span class="m-logo" role="listitem">PrimeBahis</span>
+                    <span class="m-logo" role="listitem">BiBahiS</span>
+                    <span class="m-logo" role="listitem">Vurdum</span>
+                    <span class="m-logo" role="listitem">SupraBahis</span>
+                    <span class="m-logo" role="listitem">TurboBahis</span>
+                    <span class="m-logo" role="listitem">Rams Bahis</span>
+                    <span class="m-logo" role="listitem">JackBom</span>
+                    <span class="m-logo" role="listitem">Vadica</span>
+                    <span class="m-logo" role="listitem">PaşaCasino</span>
+                    <span class="m-logo" role="listitem">RoboBet</span>
+                    <span class="m-logo" role="listitem">NoraBahis</span>
+                    <span class="m-logo" role="listitem">BetMoon</span>
+                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    <span class="m-logo">PrimeBahis</span>
+                    <span class="m-logo">BiBahiS</span>
+                    <span class="m-logo">Vurdum</span>
+                    <span class="m-logo">SupraBahis</span>
+                    <span class="m-logo">TurboBahis</span>
+                    <span class="m-logo">Rams Bahis</span>
+                    <span class="m-logo">JackBom</span>
+                    <span class="m-logo">Vadica</span>
+                    <span class="m-logo">PaşaCasino</span>
+                    <span class="m-logo">RoboBet</span>
+                    <span class="m-logo">NoraBahis</span>
+                    <span class="m-logo">BetMoon</span>
+                </div>
+            </div>
+
+            <!-- Sıra 2 — sağa kayan -->
+            <div class="marquee-row marquee-row--reverse" role="list">
+                <div class="marquee-content">
+                    <span class="m-logo" role="listitem">SekaBet</span>
+                    <span class="m-logo" role="listitem">PiaBet</span>
+                    <span class="m-logo" role="listitem">OsloBet</span>
+                    <span class="m-logo" role="listitem">HermesBet</span>
+                    <span class="m-logo" role="listitem">BetLivo</span>
+                    <span class="m-logo" role="listitem">Betturka</span>
+                    <span class="m-logo" role="listitem">BeWins</span>
+                    <span class="m-logo" role="listitem">SlotSpor</span>
+                    <span class="m-logo" role="listitem">ViaBahis</span>
+                    <span class="m-logo" role="listitem">VertuBet</span>
+                    <span class="m-logo" role="listitem">Tombet</span>
+                    <span class="m-logo" role="listitem">TurboBahis</span>
+                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    <span class="m-logo">SekaBet</span>
+                    <span class="m-logo">PiaBet</span>
+                    <span class="m-logo">OsloBet</span>
+                    <span class="m-logo">HermesBet</span>
+                    <span class="m-logo">BetLivo</span>
+                    <span class="m-logo">Betturka</span>
+                    <span class="m-logo">BeWins</span>
+                    <span class="m-logo">SlotSpor</span>
+                    <span class="m-logo">ViaBahis</span>
+                    <span class="m-logo">VertuBet</span>
+                    <span class="m-logo">Tombet</span>
+                    <span class="m-logo">TurboBahis</span>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <section id="vision" class="section vision">
