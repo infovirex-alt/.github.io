@@ -365,3 +365,82 @@ if (backTopBtn) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
+
+// ══════════════════════════════════════════
+// Virex — Giriş Animasyonu
+// ══════════════════════════════════════════
+(function () {
+    const intro = document.getElementById('virex-intro');
+    if (!intro) return;
+
+    // Aynı oturumda bir kez göster
+    if (sessionStorage.getItem('virexIntroShown')) {
+        intro.remove();
+        document.body.classList.remove('intro-active');
+        return;
+    }
+
+    function triggerExplode() {
+        intro.classList.add('exploding');
+        setTimeout(() => {
+            intro.remove();
+            document.body.classList.remove('intro-active');
+            sessionStorage.setItem('virexIntroShown', '1');
+            scrambleHeroTitle();
+        }, 560);
+    }
+
+    // V çizimi (1.5s) + parlama (0.9s) + kısa bekleme
+    setTimeout(triggerExplode, 2400);
+
+    window.skipIntro = function () {
+        intro.style.transition = 'opacity 0.3s ease';
+        intro.style.opacity = '0';
+        setTimeout(() => {
+            intro.remove();
+            document.body.classList.remove('intro-active');
+            sessionStorage.setItem('virexIntroShown', '1');
+            scrambleHeroTitle();
+        }, 320);
+    };
+})();
+
+// ══════════════════════════════════════════
+// Text Scramble — Hero Başlık
+// ══════════════════════════════════════════
+function scrambleHeroTitle() {
+    const el = document.querySelector('.hero-title');
+    if (!el) return;
+
+    const originalHTML = el.innerHTML;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!%&';
+
+    // İç metni çıkar
+    const gradSpan = el.querySelector('.gradient-text');
+    const plainNode = el.childNodes[0];
+    const plainText = plainNode ? plainNode.textContent : '';
+    const gradText  = gradSpan  ? gradSpan.textContent  : '';
+
+    const FRAMES = 20;
+    let frame = 0;
+
+    const scramble = (text) =>
+        text.split('').map((char, i) => {
+            if (char === ' ') return ' ';
+            return (frame / FRAMES) > (i / text.length)
+                ? char
+                : chars[Math.floor(Math.random() * chars.length)];
+        }).join('');
+
+    const interval = setInterval(() => {
+        frame++;
+        el.innerHTML =
+            scramble(plainText) +
+            (gradSpan ? ' <span class="gradient-text">' + scramble(gradText) + '</span>' : '');
+
+        if (frame >= FRAMES) {
+            clearInterval(interval);
+            el.innerHTML = originalHTML;
+        }
+    }, 45);
+}
