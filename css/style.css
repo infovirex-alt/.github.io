@@ -1606,20 +1606,19 @@ input.invalid, textarea.invalid {
     justify-content: center;
 }
 
-#intro-v {
-    width: 130px;
-    height: 143px;
-    filter: drop-shadow(0 0 18px rgba(6,182,212,0.6)) drop-shadow(0 0 36px rgba(217,70,239,0.3));
+#intro-logo {
+    width: 260px;
+    height: auto;
+    opacity: 0;
+    filter: drop-shadow(0 0 0px rgba(6,182,212,0)) brightness(0);
+    animation: logoReveal 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
 }
 
-#intro-v polyline {
-    stroke-dasharray: 320;
-    stroke-dashoffset: 320;
-    animation: drawV 1.3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
-}
-
-@keyframes drawV {
-    to { stroke-dashoffset: 0; }
+@keyframes logoReveal {
+    0%   { opacity: 0; transform: scale(0.85); filter: brightness(0) drop-shadow(0 0 0 rgba(6,182,212,0)); }
+    40%  { opacity: 1; transform: scale(1.02); filter: brightness(1.2) drop-shadow(0 0 30px rgba(6,182,212,0.7)) drop-shadow(0 0 60px rgba(217,70,239,0.4)); }
+    70%  { opacity: 1; transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 20px rgba(6,182,212,0.5)) drop-shadow(0 0 40px rgba(217,70,239,0.3)); }
+    100% { opacity: 1; transform: scale(1);    filter: brightness(1)   drop-shadow(0 0 25px rgba(6,182,212,0.6)) drop-shadow(0 0 50px rgba(217,70,239,0.35)); }
 }
 
 .intro-glow {

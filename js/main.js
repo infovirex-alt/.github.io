@@ -386,7 +386,6 @@ if (backTopBtn) {
             intro.remove();
             document.body.classList.remove('intro-active');
             sessionStorage.setItem('virexIntroShown', '1');
-            scrambleHeroTitle();
         }, 560);
     }
 
@@ -400,47 +399,6 @@ if (backTopBtn) {
             intro.remove();
             document.body.classList.remove('intro-active');
             sessionStorage.setItem('virexIntroShown', '1');
-            scrambleHeroTitle();
         }, 320);
     };
 })();
-
-// ══════════════════════════════════════════
-// Text Scramble — Hero Başlık
-// ══════════════════════════════════════════
-function scrambleHeroTitle() {
-    const el = document.querySelector('.hero-title');
-    if (!el) return;
-
-    const originalHTML = el.innerHTML;
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!%&';
-
-    // İç metni çıkar
-    const gradSpan = el.querySelector('.gradient-text');
-    const plainNode = el.childNodes[0];
-    const plainText = plainNode ? plainNode.textContent : '';
-    const gradText  = gradSpan  ? gradSpan.textContent  : '';
-
-    const FRAMES = 20;
-    let frame = 0;
-
-    const scramble = (text) =>
-        text.split('').map((char, i) => {
-            if (char === ' ') return ' ';
-            return (frame / FRAMES) > (i / text.length)
-                ? char
-                : chars[Math.floor(Math.random() * chars.length)];
-        }).join('');
-
-    const interval = setInterval(() => {
-        frame++;
-        el.innerHTML =
-            scramble(plainText) +
-            (gradSpan ? ' <span class="gradient-text">' + scramble(gradText) + '</span>' : '');
-
-        if (frame >= FRAMES) {
-            clearInterval(interval);
-            el.innerHTML = originalHTML;
-        }
-    }, 45);
-}
