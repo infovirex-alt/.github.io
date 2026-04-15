@@ -75,6 +75,16 @@ if (slides.length > 0) {
     const slideInterval = 5000;
     let slideTimer;
 
+    const slideNumEl  = document.getElementById('slide-num');
+    const progressBar = document.getElementById('slideProgressBar');
+
+    const restartProgressBar = () => {
+        if (!progressBar) return;
+        progressBar.style.animation = 'none';
+        void progressBar.offsetWidth; // reflow
+        progressBar.style.animation = 'sliderBar 5s linear forwards';
+    };
+
     const showSlide = (index) => {
         if (index >= slides.length) currentSlide = 0;
         else if (index < 0)         currentSlide = slides.length - 1;
@@ -89,6 +99,20 @@ if (slides.length > 0) {
         slides[currentSlide].classList.add('active');
         dots[currentSlide].classList.add('active');
         dots[currentSlide].setAttribute('aria-selected', 'true');
+
+        // Sayacı güncelle
+        if (slideNumEl) slideNumEl.textContent = String(currentSlide + 1).padStart(2, '0');
+
+        // Ken Burns: aktif slayt image'ını sıfırla
+        const img = slides[currentSlide].querySelector('img');
+        if (img) {
+            img.style.animation = 'none';
+            void img.offsetWidth;
+            img.style.animation = 'kenBurns 5.5s ease-out forwards';
+        }
+
+        // İlerleme çubuğunu yeniden başlat
+        restartProgressBar();
     };
 
     window.nextSlide = () => { showSlide(currentSlide + 1); resetTimer(); };
