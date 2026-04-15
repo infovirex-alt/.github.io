@@ -366,6 +366,55 @@ if (backTopBtn) {
     });
 }
 
+// ── Hero Spotlight ─────────────────────────────────────────────
+(function () {
+    const heroSection = document.getElementById('home');
+    const spotlight   = document.querySelector('.hero-spotlight');
+    if (!heroSection || !spotlight) return;
+
+    let raf;
+    heroSection.addEventListener('mousemove', (e) => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width)  * 100;
+            const y = ((e.clientY - rect.top)  / rect.height) * 100;
+            spotlight.style.setProperty('--mx', x + '%');
+            spotlight.style.setProperty('--my', y + '%');
+        });
+    }, { passive: true });
+
+    heroSection.addEventListener('mouseleave', () => {
+        spotlight.style.setProperty('--mx', '50%');
+        spotlight.style.setProperty('--my', '50%');
+    });
+})();
+
+// ── 3D Kart Tilt ───────────────────────────────────────────────
+(function () {
+    const TILT_MAX = 9;       // max derece
+    const SCALE    = 1.025;   // hover'da scale
+
+    document.querySelectorAll('.service-card, .bot-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x    = e.clientX - rect.left;
+            const y    = e.clientY - rect.top;
+            const cx   = rect.width  / 2;
+            const cy   = rect.height / 2;
+            const rotX = ((y - cy) / cy) * -TILT_MAX;
+            const rotY = ((x - cx) / cx) *  TILT_MAX;
+            card.style.transition = 'transform 0.06s ease-out, box-shadow 0.06s ease-out';
+            card.style.transform  = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(${SCALE},${SCALE},${SCALE})`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transition = 'transform 0.55s cubic-bezier(0.23,1,0.32,1), box-shadow 0.55s ease-out';
+            card.style.transform  = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+        });
+    });
+})();
+
 // ══════════════════════════════════════════
 // Virex — Giriş Animasyonu
 // ══════════════════════════════════════════
