@@ -215,7 +215,7 @@ p { margin-bottom: 1rem; color: var(--text-muted); }
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 4;
     max-width: 800px;
     text-align: center;
     margin: 0 auto;
@@ -1686,6 +1686,109 @@ input.invalid, textarea.invalid {
 
 body.intro-active {
     overflow: hidden;
+}
+
+/* ================================================
+   HERO SPOTLIGHT
+   ================================================ */
+.hero-spotlight {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(
+        700px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(6,182,212,0.10) 0%,
+        rgba(217,70,239,0.05) 35%,
+        transparent 70%
+    );
+    transition: background 0.08s linear;
+}
+
+/* ================================================
+   HERO GRAIN TEXTURE
+   ================================================ */
+.hero-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: 0.038;
+    mix-blend-mode: overlay;
+}
+
+/* ================================================
+   SERVICES TICKER STRIP
+   ================================================ */
+.services-ticker {
+    overflow: hidden;
+    padding: 15px 0;
+    background: rgba(6,182,212,0.03);
+    border-top: 1px solid rgba(6,182,212,0.12);
+    border-bottom: 1px solid rgba(6,182,212,0.12);
+    position: relative;
+}
+
+.services-ticker::before,
+.services-ticker::after {
+    content: '';
+    position: absolute;
+    top: 0; height: 100%;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+}
+.services-ticker::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-color), transparent);
+}
+.services-ticker::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-color), transparent);
+}
+
+.ticker-inner {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: ticker-go 24s linear infinite;
+}
+
+.ticker-inner span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0 20px;
+    background: var(--gradient-main);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    flex-shrink: 0;
+}
+
+.ticker-inner em {
+    font-style: normal;
+    font-size: 0.55rem;
+    color: rgba(6,182,212,0.45);
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+@keyframes ticker-go {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* ================================================
+   3D CARD TILT
+   ================================================ */
+.service-card,
+.bot-card {
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 /* ================================================
