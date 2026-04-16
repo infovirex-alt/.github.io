@@ -1877,6 +1877,39 @@ body.intro-active {
     color: rgba(255,255,255,0.85);
 }
 
+/* Logo görsel versiyonu */
+.m-logo--img {
+    padding: 8px 20px;
+    background: rgba(255,255,255,0.04);
+}
+
+.m-logo--img img {
+    height: 32px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    display: block;
+    filter: grayscale(1) brightness(1.4) contrast(0.85);
+    opacity: 0.55;
+    transition: filter 0.35s ease, opacity 0.35s ease;
+}
+
+.m-logo--img:hover img {
+    filter: grayscale(0) brightness(1) contrast(1);
+    opacity: 1;
+}
+
+/* Beyaz arkaplan logolar için (VertuBet, JaglerBet gibi) */
+.m-logo--img.logo-light img {
+    filter: grayscale(1) brightness(0.6) invert(1) contrast(0.9);
+    opacity: 0.5;
+}
+
+.m-logo--img.logo-light:hover img {
+    filter: grayscale(0) brightness(1) invert(0) contrast(1);
+    opacity: 1;
+}
+
 /* Pause on hover */
 .marquee-row:hover .marquee-content {
     animation-play-state: paused;
