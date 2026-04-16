@@ -2,6 +2,20 @@
    Virex Media — main.js v2.0
    ============================================================ */
 
+// ── Intro güvenlik kapısı: herhangi bir JS hatası olursa intro kapanır ──
+(function () {
+    function forceCloseIntro() {
+        try {
+            const i = document.getElementById('virex-intro');
+            if (i) i.remove();
+            document.body.classList.remove('intro-active');
+        } catch (e) {}
+    }
+    window.addEventListener('error', forceCloseIntro);
+    // Ekstra güvenlik: 6 saniyede hâlâ açıksa kapat
+    setTimeout(forceCloseIntro, 6000);
+})();
+
 // ── Mobile Menu ──────────────────────────────────────────────
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu    = document.querySelector('.nav-menu');
