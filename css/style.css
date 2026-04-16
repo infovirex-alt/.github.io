@@ -1906,15 +1906,10 @@ body.intro-active {
     opacity: 1;
 }
 
-/* Beyaz arkaplan logolar: mix-blend-mode:screen ile beyaz zemin silinir */
-.m-logo--img.logo-white {
-    background: transparent;
-    border-color: rgba(255,255,255,0.06);
-}
-
+/* Beyaz arkaplan logolar: kutu diğerleriyle aynı, sadece img karışım modu değişir */
 .m-logo--img.logo-white img {
-    filter: grayscale(1) brightness(1.8) contrast(0.7);
-    opacity: 0.45;
+    filter: grayscale(1) brightness(2) contrast(0.65);
+    opacity: 0.5;
     mix-blend-mode: screen;
 }
 
@@ -1931,7 +1926,7 @@ body.intro-active {
 
 @keyframes marquee-left {
     0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    100% { transform: translateX(-25%); }
 }
 
 @keyframes marquee-right {
