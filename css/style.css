@@ -1649,6 +1649,11 @@ input.invalid, textarea.invalid {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    /* CSS güvenlik kapısı: JS çalışmazsa 5sn sonra intro solar */
+    animation: introCSSFallback 0.5s ease 5s forwards;
+}
+@keyframes introCSSFallback {
+    to { opacity: 0; pointer-events: none; visibility: hidden; }
 }
 
 .intro-bg {
