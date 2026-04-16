@@ -1882,16 +1882,18 @@ body.intro-active {
     color: rgba(255,255,255,0.85);
 }
 
-/* Logo görsel versiyonu */
+/* Logo görsel versiyonu — hepsi aynı kutu boyutu */
 .m-logo--img {
-    padding: 8px 20px;
+    width: 148px;
+    height: 56px;
+    padding: 0 18px;
     background: rgba(255,255,255,0.03);
+    flex-shrink: 0;
 }
 
 .m-logo--img img {
-    height: 22px;
-    width: auto;
-    max-width: 90px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     display: block;
     filter: grayscale(1) brightness(1.5) contrast(0.8);
@@ -1902,12 +1904,6 @@ body.intro-active {
 .m-logo--img:hover img {
     filter: grayscale(0) brightness(1) contrast(1);
     opacity: 1;
-}
-
-/* Kare logolar (JaglerBet, SlotSpor) */
-.m-logo--img.logo-square img {
-    height: 26px;
-    max-width: 70px;
 }
 
 /* Beyaz arkaplan logolar: mix-blend-mode:screen ile beyaz zemin silinir */
