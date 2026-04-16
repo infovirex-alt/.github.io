@@ -256,11 +256,14 @@ const cookieAccept = document.getElementById('cookie-accept');
 const cookieDecline = document.getElementById('cookie-decline');
 
 if (cookieBanner) {
-    if (!localStorage.getItem('virex_cookie')) {
+    // KVKK: 12 aydan eski onayları geçersiz say
+    const stored = localStorage.getItem('virex_cookie');
+    const isExpired = stored ? (Date.now() - JSON.parse(stored).ts > 365 * 24 * 60 * 60 * 1000) : true;
+    if (!stored || isExpired) {
         setTimeout(() => { cookieBanner.style.display = 'block'; }, 1800);
     }
     const hideCookie = (val) => {
-        localStorage.setItem('virex_cookie', val);
+        localStorage.setItem('virex_cookie', JSON.stringify({ val, ts: Date.now() }));
         cookieBanner.style.animation = 'none';
         cookieBanner.style.transform = 'translateY(100%)';
         cookieBanner.style.opacity = '0';
@@ -465,13 +468,16 @@ if (backTopBtn) {
     // V çizimi (1.5s) + parlama (0.9s) + kısa bekleme
     setTimeout(triggerExplode, 2400);
 
-    window.skipIntro = function () {
-        intro.style.transition = 'opacity 0.3s ease';
-        intro.style.opacity = '0';
-        setTimeout(() => {
-            intro.remove();
-            document.body.classList.remove('intro-active');
-            sessionStorage.setItem('virexIntroShown', '1');
-        }, 320);
-    };
+    const skipBtn = document.getElementById('intro-skip-btn');
+    if (skipBtn) {
+        skipBtn.addEventListener('click', () => {
+            intro.style.transition = 'opacity 0.3s ease';
+            intro.style.opacity = '0';
+            setTimeout(() => {
+                intro.remove();
+                document.body.classList.remove('intro-active');
+                sessionStorage.setItem('virexIntroShown', '1');
+            }, 320);
+        });
+    }
 })();
