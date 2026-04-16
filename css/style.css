@@ -1926,7 +1926,7 @@ body.intro-active {
 
 @keyframes marquee-left {
     0%   { transform: translateX(0); }
-    100% { transform: translateX(-25%); }
+    100% { transform: translateX(-100%); }
 }
 
 @keyframes marquee-right {
