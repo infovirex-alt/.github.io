@@ -1877,6 +1877,52 @@ body.intro-active {
     color: rgba(255,255,255,0.85);
 }
 
+/* Logo görsel versiyonu */
+.m-logo--img {
+    padding: 8px 20px;
+    background: rgba(255,255,255,0.03);
+}
+
+.m-logo--img img {
+    height: 32px;
+    width: auto;
+    max-width: 130px;
+    object-fit: contain;
+    display: block;
+    filter: grayscale(1) brightness(1.5) contrast(0.8);
+    opacity: 0.5;
+    transition: filter 0.35s ease, opacity 0.35s ease;
+}
+
+.m-logo--img:hover img {
+    filter: grayscale(0) brightness(1) contrast(1);
+    opacity: 1;
+}
+
+/* Kare logolar (JaglerBet, SlotSpor) — daha büyük yükseklik */
+.m-logo--img.logo-square img {
+    height: 44px;
+    max-width: 100px;
+}
+
+/* Beyaz arkaplan logolar: mix-blend-mode:screen ile beyaz zemin silinir */
+.m-logo--img.logo-white {
+    background: transparent;
+    border-color: rgba(255,255,255,0.06);
+}
+
+.m-logo--img.logo-white img {
+    filter: grayscale(1) brightness(1.8) contrast(0.7);
+    opacity: 0.45;
+    mix-blend-mode: screen;
+}
+
+.m-logo--img.logo-white:hover img {
+    filter: grayscale(0) brightness(1.1) contrast(1);
+    opacity: 1;
+    mix-blend-mode: screen;
+}
+
 /* Pause on hover */
 .marquee-row:hover .marquee-content {
     animation-play-state: paused;
