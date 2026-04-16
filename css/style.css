@@ -1884,9 +1884,9 @@ body.intro-active {
 }
 
 .m-logo--img img {
-    height: 32px;
+    height: 22px;
     width: auto;
-    max-width: 130px;
+    max-width: 90px;
     object-fit: contain;
     display: block;
     filter: grayscale(1) brightness(1.5) contrast(0.8);
@@ -1899,10 +1899,10 @@ body.intro-active {
     opacity: 1;
 }
 
-/* Kare logolar (JaglerBet, SlotSpor) — daha büyük yükseklik */
+/* Kare logolar (JaglerBet, SlotSpor) */
 .m-logo--img.logo-square img {
-    height: 44px;
-    max-width: 100px;
+    height: 26px;
+    max-width: 70px;
 }
 
 /* Beyaz arkaplan logolar: mix-blend-mode:screen ile beyaz zemin silinir */
