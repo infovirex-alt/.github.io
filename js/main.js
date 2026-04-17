@@ -291,25 +291,36 @@ if (cookieBanner) {
 // ── COUNTER ANIMATION ──────────────────────────────────────
 const counters = document.querySelectorAll('.counter');
 if (counters.length > 0) {
+    const runCounter = (el) => {
+        if (el.dataset.animated) return;
+        el.dataset.animated = '1';
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1800;
+        const step = Math.ceil(target / (duration / 16));
+        let current = 0;
+        const tick = () => {
+            current = Math.min(current + step, target);
+            el.textContent = current + suffix;
+            if (current < target) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    };
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
-            const el = entry.target;
-            const target = parseInt(el.dataset.target, 10);
-            const suffix = el.dataset.suffix || '';
-            const duration = 1800;
-            const step = Math.ceil(target / (duration / 16));
-            let current = 0;
-            const tick = () => {
-                current = Math.min(current + step, target);
-                el.textContent = current + suffix;
-                if (current < target) requestAnimationFrame(tick);
-            };
-            requestAnimationFrame(tick);
-            counterObserver.unobserve(el);
+            runCounter(entry.target);
+            counterObserver.unobserve(entry.target);
         });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    counters.forEach(c => counterObserver.observe(c));
+    }, { threshold: 0.1 });
+    counters.forEach(c => {
+        const r = c.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+            runCounter(c);
+        } else {
+            counterObserver.observe(c);
+        }
+    });
 }
 
 // ── TOUCH SWIPE FOR SLIDER ─────────────────────────────────
