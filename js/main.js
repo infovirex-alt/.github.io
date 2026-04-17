@@ -308,7 +308,7 @@ if (counters.length > 0) {
             requestAnimationFrame(tick);
             counterObserver.unobserve(el);
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     counters.forEach(c => counterObserver.observe(c));
 }
 
