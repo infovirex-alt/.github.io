@@ -288,39 +288,6 @@ if (cookieBanner) {
     cookieDecline.addEventListener('click', () => hideCookie('declined'));
 }
 
-// ── COUNTER ANIMATION ──────────────────────────────────────
-const counters = document.querySelectorAll('.counter');
-if (counters.length > 0) {
-    const runCounter = (el) => {
-        if (el.dataset.animated) return;
-        el.dataset.animated = '1';
-        const target = parseInt(el.dataset.target, 10);
-        const suffix = el.dataset.suffix || '';
-        const duration = 1800;
-        const step = Math.ceil(target / (duration / 16));
-        let current = 0;
-        const tick = () => {
-            current = Math.min(current + step, target);
-            el.textContent = current + suffix;
-            if (current < target) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-    };
-
-    // Scroll reveal, stat-card'a transform:translateY(30px) uyguluyor.
-    // Bu transform IntersectionObserver'ı karıştırıyor — scroll event daha güvenilir.
-    const checkCounters = () => {
-        document.querySelectorAll('.counter:not([data-animated])').forEach(el => {
-            const r = el.getBoundingClientRect();
-            if (r.top < window.innerHeight * 0.92 && r.bottom > 0) runCounter(el);
-        });
-    };
-
-    window.addEventListener('scroll', checkCounters, { passive: true });
-    checkCounters();                      // sayfa yüklenince hemen kontrol
-    setTimeout(checkCounters, 3000);     // intro bitmeden önce
-    setTimeout(checkCounters, 6500);     // intro bittikten sonra fallback
-}
 
 // ── TOUCH SWIPE FOR SLIDER ─────────────────────────────────
 const sliderEl = document.querySelector('.slider-container');
