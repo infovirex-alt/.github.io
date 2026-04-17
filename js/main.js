@@ -306,21 +306,20 @@ if (counters.length > 0) {
         };
         requestAnimationFrame(tick);
     };
-    const counterObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            runCounter(entry.target);
-            counterObserver.unobserve(entry.target);
+
+    // Scroll reveal, stat-card'a transform:translateY(30px) uyguluyor.
+    // Bu transform IntersectionObserver'ı karıştırıyor — scroll event daha güvenilir.
+    const checkCounters = () => {
+        document.querySelectorAll('.counter:not([data-animated])').forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight * 0.92 && r.bottom > 0) runCounter(el);
         });
-    }, { threshold: 0.1 });
-    counters.forEach(c => {
-        const r = c.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) {
-            runCounter(c);
-        } else {
-            counterObserver.observe(c);
-        }
-    });
+    };
+
+    window.addEventListener('scroll', checkCounters, { passive: true });
+    checkCounters();                      // sayfa yüklenince hemen kontrol
+    setTimeout(checkCounters, 3000);     // intro bitmeden önce
+    setTimeout(checkCounters, 6500);     // intro bittikten sonra fallback
 }
 
 // ── TOUCH SWIPE FOR SLIDER ─────────────────────────────────
