@@ -841,12 +841,12 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   /* ─── FOOTER ─── */
   footer {
     border-top: 1px solid oklch(1 0 0 / 0.06);
-    padding: 48px;
+    padding: 32px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 16px;
     position: relative;
     z-index: 1;
   }
@@ -1806,17 +1806,6 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 </div>
 
 <div class="mobile-cta-bar"><a href="https://t.me/virex_uzay" target="_blank">Demo Talep Et →</a></div>
-
-  </div>
-  <div class="tweak-group">
-    <div class="tweak-label">Yıldız Yoğunluğu</div>
-    <input class="tweak-slider" type="range" min="80" max="400" value="220" oninput="setStarCount(this.value)">
-  </div>
-  <div class="tweak-group">
-    <div class="tweak-label">Hero Tagline</div>
-    <input style="width:100%;background:oklch(1 0 0/0.06);border:1px solid oklch(1 0 0/0.12);border-radius:8px;padding:8px 12px;color:var(--text);font-size:13px;outline:none;" type="text" id="taglineInput" value="#gerikalma" oninput="setTagline(this.value)">
-  </div>
-</div>
 
 <script>
 // ─── INTRO ───
