@@ -54,24 +54,6 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     pointer-events: none;
   }
 
-  /* ─── NEBULA BLOBS ─── */
-  .nebula {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.18;
-    pointer-events: none;
-    z-index: 0;
-    animation: nebulaDrift 18s ease-in-out infinite alternate;
-  }
-  .nebula-1 { width: 700px; height: 700px; background: #7c3aed; top: -200px; left: -150px; animation-delay: 0s; }
-  .nebula-2 { width: 600px; height: 600px; background: #0891b2; bottom: -150px; right: -100px; animation-delay: -8s; }
-  .nebula-3 { width: 400px; height: 400px; background: var(--gold); top: 40%; left: 45%; animation-delay: -4s; }
-
-  @keyframes nebulaDrift {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(40px, -30px) scale(1.1); }
-  }
 
   /* ─── NAV ─── */
   nav {
@@ -1300,9 +1282,6 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   <div class="intro-bar"><div class="intro-bar-fill"></div></div>
 </div>
 
-<div class="nebula nebula-1"></div>
-<div class="nebula nebula-2"></div>
-<div class="nebula nebula-3"></div>
 
 <!-- NAV -->
 <nav>
@@ -1994,15 +1973,6 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
 
-// ─── SCROLL PARALLAX ───
-window.addEventListener('scroll', () => {
-  const sy = window.scrollY;
-  const nebs = document.querySelectorAll('.nebula');
-  nebs.forEach((n, i) => {
-    const speed = i === 0 ? 0.15 : i === 1 ? 0.1 : 0.08;
-    n.style.transform = `translateY(${sy * speed}px)`;
-  });
-}, { passive: true });
 
 // ─── TESTIMONIALS ───
 (function() {
@@ -2099,8 +2069,8 @@ window.addEventListener('scroll', () => {
   setInterval(() => goTo((cur + 1) % total), 3500);
 })();
 
-// ─── PLANETS ───
-(function() {
+// ─── PLANETS REMOVED ───
+if (false) (function() {
   const canvas = document.getElementById('starCanvas');
   const planets = [
     // Mars
@@ -2249,7 +2219,7 @@ window.addEventListener('scroll', () => {
   };
   // Stop old loop, start new one
   window.draw = window.draw;
-})();
+}); // PLANETS REMOVED
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
