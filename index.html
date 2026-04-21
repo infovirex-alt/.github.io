@@ -463,6 +463,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     margin-bottom: 24px;
     background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--secondary) 15%, transparent));
     border: 1px solid oklch(1 0 0 / 0.08);
+    color: var(--accent);
   }
 
   .service-card h3 {
@@ -966,164 +967,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   }
 
   /* ─── STICKY CTA ─── */
-  #stickyCta {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    z-index: 999;
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-    transition: opacity 0.3s, transform 0.3s;
-  }
-  #stickyCta.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  #stickyCta a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    background: linear-gradient(90deg, #06b6d4 0%, #7c5cfc 60%, #a855f7 100%);
-    color: #fff;
-    border-radius: 100px;
-    font-weight: 700;
-    font-size: 14px;
-    text-decoration: none;
-    box-shadow: 0 8px 32px rgba(124,92,252,0.45), 0 0 0 1px rgba(255,255,255,0.1);
-    font-family: var(--font-head);
-    letter-spacing: 0.01em;
-    transition: transform 0.2s, box-shadow 0.2s;
-    white-space: nowrap;
-  }
-  #stickyCta a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(124,92,252,0.6);
-  }
-  #stickyCta .sticky-pulse {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #fff;
-    animation: pulse 2s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-
-  /* ─── TESTIMONIALS ─── */
-  .testi-viewport {
-    overflow: hidden;
-    border-radius: 20px;
-  }
-  .testi-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
-  }
-  .testi-card {
-    flex: 0 0 calc(33.333% - 14px);
-    background: oklch(1 0 0/0.04);
-    border: 1px solid oklch(1 0 0/0.09);
-    border-radius: 20px;
-    padding: 28px;
-    backdrop-filter: blur(16px);
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .testi-card:hover { border-color: oklch(1 0 0/0.18); transform: translateY(-3px); }
-  .testi-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-  .testi-platform {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 12px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 700;
-    border: 1px solid;
-    color: #fff;
-    letter-spacing: 0.04em;
-  }
-  .testi-stars { color: #fbbf24; font-size: 12px; letter-spacing: 2px; }
-  .testi-msg {
-    font-size: 14px;
-    line-height: 1.7;
-    color: oklch(0.85 0.01 255);
-    margin-bottom: 20px;
-    min-height: 80px;
-  }
-  .testi-footer { display: flex; align-items: center; gap: 12px; }
-  .testi-avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .testi-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
-  .testi-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 14px; height: 14px;
-    border-radius: 50%;
-    background: #06b6d4;
-    font-size: 8px;
-    margin-left: 4px;
-    vertical-align: middle;
-  }
-  .testi-handle { font-size: 11px; color: var(--muted); }
-  .testi-time { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }
-  .testi-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
-  .testi-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: oklch(1 0 0/0.2);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .testi-dot.active { background: var(--accent); transform: scale(1.5); }
-
-  /* ─── FOOTER LOGO ─── */
-  .footer-logo-img img {
-    height: 32px;
-    width: auto;
-    object-fit: contain;
-    opacity: 0.85;
-    transition: opacity 0.2s;
-  }
-  .footer-logo-img:hover img { opacity: 1; }
-
-  /* Social icons */
-  .footer-social { display: flex; gap: 12px; align-items: center; }
-  .social-icon {
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    border: 1px solid oklch(1 0 0/0.1);
-    background: oklch(1 0 0/0.04);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s, border-color 0.2s, background 0.2s;
-  }
-  .social-icon:hover { color: var(--text); border-color: var(--accent); background: oklch(1 0 0/0.08); }
-
-/* ─── INTRO ─── */
-#intro {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  background: #07050f;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-#intro.hide {
-  opacity: 0;
-  pointer-events: none;
-}
+  #stickyCta { display: none !important; }
 #intro canvas {
   position: absolute;
   inset: 0;
@@ -1263,6 +1107,256 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   }
 
   .tweak-slider { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+  .service-icon--grid {
+    width: 52px !important;
+    height: 52px !important;
+    padding: 10px !important;
+  }
+  .service-icon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    color: var(--accent);
+  }
+  .service-icon-grid svg {
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .service-card:hover .service-icon-grid svg { opacity: 1; }
+
+
+  /* ═══ RESPONSIVE — ALL BREAKPOINTS ═══ */
+
+  /* Large desktop / 1440p baseline - already default */
+
+  /* 4K & Ultra-wide (2560px+) */
+  @media (min-width: 2560px) {
+    html { font-size: 20px; }
+    nav > div, section > div, footer { max-width: 1600px !important; margin: 0 auto; }
+    .hero h1 { font-size: clamp(80px, 5.5vw, 120px) !important; }
+    .hero-sub { font-size: 22px !important; }
+    .section-title { font-size: clamp(48px, 4vw, 80px) !important; }
+    .fp { width: 180px !important; }
+  }
+
+  /* 2K / 1440p (1920px–2559px) */
+  @media (min-width: 1920px) and (max-width: 2559px) {
+    html { font-size: 17px; }
+    nav > div, section > div, footer { max-width: 1400px; margin: 0 auto; }
+    .hero h1 { font-size: clamp(64px, 5vw, 96px) !important; }
+    .fp { width: 150px !important; }
+  }
+
+  /* Full HD / 1080p (default desktop) — already handled */
+
+  /* Small desktop / laptop (1024px–1439px) */
+  @media (max-width: 1439px) and (min-width: 1025px) {
+    section { padding: 90px 40px; }
+    .hero { padding: 120px 40px 80px; }
+  }
+
+  /* Tablet landscape (900px–1024px) */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    nav { padding: 16px 28px; }
+    .nav-links { gap: 20px; font-size: 13px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-cta { display: inline-flex !important; }
+    section { padding: 80px 32px; }
+    .hero { padding: 110px 32px 70px; }
+    .hero h1 { font-size: clamp(44px, 7vw, 68px); }
+    .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .bots-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .fp { width: 120px; }
+    .stats-inner { grid-template-columns: repeat(4, 1fr); padding: 40px 28px; }
+  }
+
+  /* Tablet portrait (600px–900px) */
+  @media (max-width: 900px) and (min-width: 601px) {
+    nav { padding: 14px 24px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding: 70px 28px; }
+    .hero { padding: 100px 28px 60px; }
+    .hero h1 { font-size: clamp(38px, 8vw, 56px); }
+    .services-grid, .bots-grid { grid-template-columns: 1fr 1fr !important; }
+    .fp { width: 100px; opacity: 0.4; }
+    .stats-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 36px 24px; }
+    .contact-grid { grid-template-columns: 1fr !important; gap: 32px; }
+    [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+
+  /* Large mobile (481px–600px) */
+  @media (max-width: 600px) and (min-width: 481px) {
+    nav { padding: 14px 20px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding: 60px 20px; }
+    .hero { padding: 96px 20px 56px; }
+    .hero h1 { font-size: clamp(32px, 9vw, 44px); }
+    .hero-sub { font-size: 15px; }
+    .services-grid, .bots-grid { grid-template-columns: 1fr !important; }
+    .fp { width: 85px; opacity: 0.25; }
+    .fp1, .fp2 { left: -10px !important; }
+    .fp4, .fp5 { right: -10px !important; }
+    .stats-inner { grid-template-columns: 1fr 1fr !important; gap: 20px; padding: 28px 18px; }
+    .stat-num { font-size: 34px !important; }
+    .contact-grid, .form-row { grid-template-columns: 1fr !important; }
+    footer { flex-direction: column !important; text-align: center; gap: 20px; padding: 28px 20px; }
+    .nav-cta { padding: 8px 14px !important; font-size: 12px !important; }
+  }
+
+  /* Mobile (480px and below) */
+  @media (max-width: 480px) {
+    html { font-size: 15px; }
+    nav { padding: 12px 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-cta { padding: 8px 14px !important; font-size: 12px !important; }
+    section { padding: 52px 16px; }
+    .hero { padding: 90px 16px 48px; }
+    .hero h1 { font-size: clamp(28px, 10vw, 38px) !important; letter-spacing: -0.02em; }
+    .hero-sub { font-size: 14px; line-height: 1.6; }
+    .hero-btns { gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary, .btn-outline { padding: 12px 22px !important; font-size: 13px !important; }
+    .hero-stats { gap: 16px !important; margin-top: 36px !important; flex-wrap: wrap; justify-content: center; }
+    .hero-stat-val { font-size: 22px !important; }
+    .hero-stat-lbl { font-size: 10px !important; }
+    .fp { width: 70px !important; opacity: 0.2 !important; border-radius: 10px !important; }
+    .fp1, .fp2 { left: -15px !important; }
+    .fp4, .fp5 { right: -15px !important; }
+    .logos-band { padding: 28px 16px !important; }
+    .section-title { font-size: clamp(24px, 7vw, 34px) !important; }
+    .section-sub { font-size: 14px; }
+    .services-grid, .bots-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .service-card, .bot-card { padding: 24px 20px !important; }
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    .stats-inner { grid-template-columns: 1fr 1fr !important; gap: 16px !important; padding: 24px 16px !important; }
+    .stat-num { font-size: 28px !important; }
+    .stat-label { font-size: 11px !important; }
+    .testi-card { flex: 0 0 calc(100% - 16px) !important; }
+    .contact-grid, .form-row { grid-template-columns: 1fr !important; gap: 20px !important; }
+    footer { flex-direction: column !important; text-align: center; gap: 18px; padding: 24px 16px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+    #stickyCta { bottom: 72px !important; right: 12px !important; }
+    #stickyCta a { padding: 11px 18px !important; font-size: 12px !important; }
+    .intro-logo img { width: 120px !important; }
+    .intro-ring { width: 180px !important; height: 180px !important; }
+    .intro-ring.intro-ring-2 { width: 240px !important; height: 240px !important; }
+    .intro-ring.intro-ring-3 { width: 300px !important; height: 300px !important; }
+    .intro-tagline { font-size: 11px !important; }
+    .intro-bar { width: 160px !important; }
+    #tweaks-panel { width: calc(100% - 24px) !important; right: 12px !important; bottom: 12px !important; max-height: 70vh; overflow-y: auto; }
+    .showcase-btn { display: none !important; }
+    .showcase-slide { flex: 0 0 calc(100% - 16px) !important; }
+    .mobile-cta-bar { display: flex !important; }
+  }
+
+  /* Small mobile (360px and below) */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 26px !important; }
+    .fp { display: none !important; }
+    section { padding: 44px 14px; }
+    .stat-num { font-size: 24px !important; }
+  }
+
+  /* Mobile CTA bar — hidden by default */
+  .mobile-cta-bar {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 998;
+    padding: 10px 14px;
+    background: oklch(0.08 0.02 255 / 0.97);
+    border-top: 1px solid oklch(1 0 0/0.08);
+    backdrop-filter: blur(16px);
+  }
+  .mobile-cta-bar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(90deg, #06b6d4, #7c5cfc, #a855f7);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    font-family: var(--font-head);
+    box-shadow: 0 0 24px rgba(124,92,252,0.4);
+  }
+
+
+  /* ─── TESTIMONIALS ─── */
+  .testi-viewport {
+    overflow: hidden;
+    border-radius: 20px;
+  }
+  .testi-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .testi-card {
+    flex: 0 0 calc(33.333% - 14px);
+    background: oklch(1 0 0/0.04);
+    border: 1px solid oklch(1 0 0/0.09);
+    border-radius: 20px;
+    padding: 28px;
+    backdrop-filter: blur(16px);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .testi-card:hover { border-color: oklch(1 0 0/0.18); transform: translateY(-3px); }
+  .testi-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .testi-platform {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    border: 1px solid;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+  .testi-stars { color: #fbbf24; font-size: 12px; letter-spacing: 2px; }
+  .testi-msg {
+    font-size: 14px;
+    line-height: 1.7;
+    color: oklch(0.85 0.01 255);
+    margin-bottom: 20px;
+    min-height: 80px;
+  }
+  .testi-footer { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .testi-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .testi-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #06b6d4;
+    font-size: 8px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .testi-handle { font-size: 11px; color: var(--muted); }
+  .testi-time { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }
+  .testi-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+  .testi-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: oklch(1 0 0/0.2);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .testi-dot.active { background: var(--accent); transform: scale(1.5); }
+
 </style>
 </head>
 <body>
@@ -1425,7 +1519,12 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     <p class="section-sub">İşinizi büyütmek için ihtiyacınız olan her şeyi tek çatı altında sunuyoruz.</p>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon">📱</div>
+        <div class="service-icon service-icon--grid"><div class="service-icon-grid">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" title="Instagram"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" title="X"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.776-8.903L1.254 2.25H8.08l4.251 5.625 5.913-5.625zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" title="Telegram"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" title="Pinterest"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+</div></div>
         <h3>Sosyal Medya Yönetimi</h3>
         <p>Twitter (X), Telegram, Instagram, YouTube ve Pinterest'te her güne özel yüksek etkileşimli içerik planlaması. Veri odaklı strateji, günlük raporlar.</p>
         <div class="service-tags">
@@ -1436,7 +1535,11 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         </div>
       </div>
       <div class="service-card">
-        <div class="service-icon">🤝</div>
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 3v18h18"/>
+  <path d="M7 15l4-4 3 3 5-6"/>
+  <path d="M14 8h5v5"/>
+</svg></div>
         <h3>Marketing & Partnerlik</h3>
         <p>Markanızın DNA'sına en uygun sektör temsilcileri ile stratejik buluşmalar. Kanıtlanmış büyüme modelleri ve maksimum dönüşüm stratejileri.</p>
         <div class="service-tags">
@@ -1446,7 +1549,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         </div>
       </div>
       <div class="service-card">
-        <div class="service-icon">💬</div>
+        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h8M8 14h4"/></svg></div>
         <h3>Telegram Topluluk Yönetimi</h3>
         <p>7/24 canlı destek ve AI destekli moderasyon. Aylık 20.000 aktif ve gerçek kullanıcı kazanımı ile organik ekosistem inşası.</p>
         <div class="service-tags">
@@ -1681,30 +1784,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   </footer>
 </div>
 
-<!-- STICKY CTA -->
-<div id="stickyCta">
-  <a href="https://t.me/virex_uzay" target="_blank">
-    <span class="sticky-pulse"></span>
-    Demo Talep Et →
-  </a>
-</div>
+<div class="mobile-cta-bar"><a href="https://t.me/virex_uzay" target="_blank">Demo Talep Et →</a></div>
 
-<!-- TWEAKS PANEL -->
-<div id="tweaks-panel">
-  <h4>Tweaks</h4>
-  <div class="tweak-group">
-    <div class="tweak-label">Tema Rengi</div>
-    <div class="theme-options">
-      <div class="theme-opt active" data-theme="cosmic" onclick="setTheme('cosmic',this)">
-        <span class="theme-swatch" style="background:linear-gradient(135deg,#7c5cfc,#00d4ff)"></span>Cosmic
-      </div>
-      <div class="theme-opt" data-theme="aurora" onclick="setTheme('aurora',this)">
-        <span class="theme-swatch" style="background:linear-gradient(135deg,oklch(0.62 0.22 155),oklch(0.65 0.2 200))"></span>Aurora
-      </div>
-      <div class="theme-opt" data-theme="solar" onclick="setTheme('solar',this)">
-        <span class="theme-swatch" style="background:linear-gradient(135deg,oklch(0.72 0.22 38),oklch(0.75 0.2 55))"></span>Solar
-      </div>
-    </div>
   </div>
   <div class="tweak-group">
     <div class="tweak-label">Yıldız Yoğunluğu</div>
@@ -1939,12 +2020,7 @@ window.parent.postMessage({type:'__edit_mode_available'}, '*');
   setInterval(() => goTo((cur + 1) % (total - visible + 1)), 4000);
 })();
 
-// ─── STICKY CTA ───
-window.addEventListener('scroll', () => {
-  const sticky = document.getElementById('stickyCta');
-  if (window.scrollY > 400) sticky.classList.add('visible');
-  else sticky.classList.remove('visible');
-});
+
 
 // ─── COUNTER ANIMATION ───
 function animateCounter(el, target, duration) {
@@ -2048,25 +2124,35 @@ document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe
     track.appendChild(card);
   });
 
-  // Build dots
+  // Build dots — one per page (group of visible cards)
   const total = reviews.length;
-  const visible = window.innerWidth > 1100 ? 3 : window.innerWidth > 700 ? 2 : 1;
+  function getVisible() { return window.innerWidth > 1100 ? 3 : window.innerWidth > 700 ? 2 : 1; }
+  let visible = getVisible();
+  let pages = Math.max(1, total - visible + 1);
   let cur = 0;
-  for (let i = 0; i < total; i++) {
-    const d = document.createElement('div');
-    d.className = 'testi-dot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(d);
+
+  function buildDots() {
+    dotsEl.innerHTML = '';
+    visible = getVisible();
+    pages = Math.max(1, total - visible + 1);
+    for (let i = 0; i < pages; i++) {
+      const d = document.createElement('div');
+      d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    }
   }
+  buildDots();
 
   function goTo(idx) {
-    cur = Math.max(0, Math.min(idx, total - 1));
+    cur = Math.max(0, Math.min(idx, pages - 1));
     const cardW = track.querySelector('.testi-card').offsetWidth + 20;
     track.style.transform = `translateX(-${cur * cardW}px)`;
     dotsEl.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }
 
-  setInterval(() => goTo((cur + 1) % total), 3500);
+  window.addEventListener('resize', () => { buildDots(); goTo(0); });
+  setInterval(() => goTo((cur + 1) % pages), 4000);
 })();
 
 // ─── PLANETS REMOVED ───
