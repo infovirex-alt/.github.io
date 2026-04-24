@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virex Media | Dijital Medya & Yaratıcı Çözümler</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "cosmic",
+  "accentColor": "#7c5cfc",
+  "secondaryColor": "#00d4ff",
+  "glowIntensity": "high",
+  "starCount": 226,
+  "heroTagline": "#GeriKalma"
+}/*EDITMODE-END*/;
+</script>
+
+<style>
+  :root {
+    --bg: oklch(0.07 0.02 255);
+    --bg2: oklch(0.10 0.025 255);
+    --surface: oklch(0.13 0.03 255);
+    --border: oklch(0.22 0.05 255);
+    --accent: #06b6d4;
+    --secondary: #a855f7;
+    --gold: oklch(0.72 0.18 50);
+    --text: oklch(0.95 0.01 255);
+    --muted: oklch(0.65 0.02 255);
+    --font-head: 'Outfit', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --glow: 0 0 40px color-mix(in srgb, var(--accent) 35%, transparent);
+    --glow2: 0 0 40px color-mix(in srgb, var(--secondary) 25%, transparent);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  /* ─── CANVAS STARS ─── */
+  #starCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, oklch(0.07 0.02 255 / 0.95), transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid oklch(1 0 0 / 0.04);
+    transition: background 0.3s;
+  }
+
+  .nav-logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s;
+    opacity: 1;
+  }
+  .nav-logo img:hover { opacity: 0.85; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    padding: 10px 24px;
+    background: linear-gradient(90deg, #06b6d4 0%, #8b5cf6 100%);
+    color: #fff;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 24px rgba(139,92,246,0.4);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ─── SECTIONS WRAPPER ─── */
+  .content { position: relative; z-index: 1; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 18px;
+    border: 1px solid oklch(1 0 0 / 0.12);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    background: oklch(1 0 0 / 0.04);
+    margin-bottom: 28px;
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--secondary);
+    box-shadow: 0 0 8px var(--secondary);
+  }
+
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(42px, 7vw, 96px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 900px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 .accent-text {
+    background: linear-gradient(90deg, #06b6d4 0%, #818cf8 50%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.65;
+    margin-bottom: 44px;
+    font-weight: 400;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    padding: 16px 36px;
+    background: linear-gradient(90deg, #06b6d4 0%, #818cf8 50%, #a855f7 100%);
+    color: #fff;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 0 30px oklch(0.65 0.2 200 / 0.4);
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  .btn-outline {
+    padding: 16px 36px;
+    border: 2px solid #06b6d4;
+    color: #06b6d4;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    background: transparent;
+    transition: transform 0.2s, background 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { transform: translateY(-2px); background: oklch(1 0 0 / 0.05); }
+
+  .hero-stats {
+    display: flex;
+    gap: 60px;
+    margin-top: 72px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-stat-val {
+    font-family: var(--font-head);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .hero-stat-val span {
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* ─── FLOATING POSTS ─── */
+  .floating-posts {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .fp {
+    position: absolute;
+    width: 170px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px oklch(0 0 0 / 0.7);
+    opacity: 0.38;
+    filter: blur(0.5px) saturate(1.1);
+    border: 1px solid oklch(1 0 0 / 0.12);
+    will-change: transform;
+    animation: floatPost 9s ease-in-out infinite;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .fp1 { top: 30%; left: 1%;  animation-delay: 0s;    animation-duration: 10s; --rot: -8deg; }
+  .fp2 { top: 60%; left: 2%;  animation-delay: -3s;   animation-duration: 12s; --rot: 5deg;  }
+  .fp4 { top: 28%; right: 1%; animation-delay: -1.5s; animation-duration: 9s;  --rot: 7deg;  }
+  .fp5 { top: 58%; right: 2%; animation-delay: -4s;   animation-duration: 11s; --rot: -6deg; }
+
+  /* ─── FABRIC DECORATIONS ─── */
+  .fabric {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+    mask-image: radial-gradient(ellipse 60% 65% at center, black 35%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 65% at center, black 35%, transparent 72%);
+    opacity: 0.55;
+    animation: fabricFloat 12s ease-in-out infinite alternate;
+  }
+
+  @keyframes fabricFloat {
+    0%   { transform: var(--fab-base, translateY(0) rotate(0deg)) scale(1); }
+    100% { transform: var(--fab-base, translateY(0) rotate(0deg)) translateY(-18px) scale(1.04); }
+  }
+
+  .fabric-hero-left {
+    width: 520px;
+    bottom: -60px; left: -100px;
+    --fab-base: rotate(-20deg);
+    animation-delay: 0s;
+    opacity: 0.45;
+  }
+  .fabric-hero-right {
+    width: 480px;
+    top: 60px; right: -80px;
+    --fab-base: rotate(15deg) scaleX(-1);
+    animation-delay: -5s;
+    opacity: 0.4;
+  }
+  .fabric-section {
+    width: 600px;
+    opacity: 0.3;
+    animation-delay: -3s;
+  }
+
+  /* Replace SVG curtains with fabric image */
+  .curtain-divider {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: visible;
+    pointer-events: none;
+    margin: -40px 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .curtain-divider .fabric-div {
+    position: absolute;
+    width: 100%;
+    max-width: 1400px;
+    height: 320px;
+    object-fit: cover;
+    mix-blend-mode: screen;
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    opacity: 0.5;
+    left: 0;
+  }
+
+
+  @keyframes floatPost {
+    0%, 100% { transform: translateY(0px) rotate(var(--rot, -5deg)); }
+    33% { transform: translateY(-18px) rotate(calc(var(--rot, -5deg) + 2deg)); }
+    66% { transform: translateY(10px) rotate(calc(var(--rot, -5deg) - 1deg)); }
+  }
+
+  .hero { position: relative; overflow: hidden; }
+
+  /* ─── LOGOS BAND ─── */
+  .logos-band {
+    padding: 60px 48px;
+    border-top: 1px solid oklch(1 0 0 / 0.06);
+    border-bottom: 1px solid oklch(1 0 0 / 0.06);
+    overflow: hidden;
+  }
+
+  .logos-label {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  .logos-track-wrap { overflow: hidden; }
+
+  .logos-track {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    animation: scroll 28s linear infinite;
+    width: max-content;
+  }
+
+  .logos-track img {
+    height: 32px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.35;
+    transition: filter 0.4s, opacity 0.4s;
+  }
+  .logos-track img:hover {
+    filter: none;
+    opacity: 1;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #06b6d4;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.65;
+    margin-bottom: 60px;
+  }
+
+  /* ─── SERVICES GRID ─── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .service-card {
+    background: oklch(1 0 0 / 0.03);
+    border: 1px solid oklch(1 0 0 / 0.08);
+    border-radius: 20px;
+    padding: 36px;
+    backdrop-filter: blur(16px);
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 0;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: oklch(1 0 0 / 0.2);
+    box-shadow: 0 24px 60px oklch(0 0 0 / 0.4);
+  }
+
+  .service-card:hover::before { opacity: 0.05; }
+
+  .service-card > * { position: relative; z-index: 1; }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--secondary) 15%, transparent));
+    border: 1px solid oklch(1 0 0 / 0.08);
+    color: var(--accent);
+  }
+
+  .service-card h3 {
+    font-family: var(--font-head);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    background: oklch(1 0 0 / 0.06);
+    color: var(--muted);
+    border: 1px solid oklch(1 0 0 / 0.08);
+  }
+
+  /* ─── BOTS SECTION ─── */
+  #botlar { background: none; }
+
+  .bots-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .bots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  .bot-card {
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid oklch(1 0 0 / 0.1);
+    background: oklch(1 0 0 / 0.04);
+    backdrop-filter: blur(20px);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .bot-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 32px 80px oklch(0 0 0 / 0.5);
+  }
+
+  .bot-card-glow {
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+  }
+
+  .bot-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border: 1px solid;
+  }
+
+  .bot-card h3 {
+    font-family: var(--font-head);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .bot-card .bot-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .bot-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+
+  .bot-features li {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .bot-features li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  .bot-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .chip {
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    background: oklch(1 0 0 / 0.06);
+    border: 1px solid oklch(1 0 0 / 0.1);
+    color: var(--text);
+  }
+
+  .bot-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .bot-link:hover { gap: 12px; }
+
+  /* ─── STATS SECTION ─── */
+  .stats-section {
+    padding: 80px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .stats-inner {
+    border-radius: 28px;
+    border: 1px solid oklch(1 0 0 / 0.1);
+    background: oklch(1 0 0 / 0.04);
+    backdrop-filter: blur(20px);
+    padding: 64px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 60%);
+    pointer-events: none;
+  }
+
+  .stat-item { text-align: center; position: relative; z-index: 1; }
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--text) 30%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-lbl { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* ─── HOW IT WORKS ─── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+    border: 1px solid oklch(1 0 0 / 0.08);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .step {
+    padding: 40px 36px;
+    background: oklch(1 0 0 / 0.02);
+    backdrop-filter: blur(12px);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .step:hover { background: oklch(1 0 0 / 0.05); }
+  .step + .step { border-left: 1px solid oklch(1 0 0 / 0.08); }
+
+  .step-num {
+    font-family: var(--font-head);
+    font-size: 56px;
+    font-weight: 700;
+    color: oklch(1 0 0 / 0.06);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .step h4 {
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .step p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+  .step-time {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── FAQ ─── */
+  .faq-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .faq-item {
+    border: 1px solid oklch(1 0 0 / 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .faq-item.open { border-color: oklch(1 0 0 / 0.18); }
+
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 28px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    gap: 20px;
+    background: oklch(1 0 0 / 0.02);
+    transition: background 0.2s;
+  }
+  .faq-q:hover { background: oklch(1 0 0 / 0.05); }
+
+  .faq-icon {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid oklch(1 0 0 / 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: transform 0.3s, border-color 0.2s;
+    color: var(--accent);
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--accent); }
+
+  .faq-a {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    padding: 0 28px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 500px; padding: 0 28px 22px; }
+
+  /* ─── CONTACT ─── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .contact-info h2 { font-size: 38px !important; }
+  .contact-info p { margin-bottom: 28px !important; }
+  .contact-channels { margin-top: 0; }
+  .contact-form { align-self: center; }
+
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  .contact-info h2 {
+    font-family: var(--font-head);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .contact-info p { font-size: 16px; color: var(--muted); line-height: 1.65; margin-bottom: 40px; }
+
+  .contact-channels { display: flex; flex-direction: column; gap: 16px; }
+  .contact-ch {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    border: 1px solid oklch(1 0 0 / 0.08);
+    border-radius: 14px;
+    text-decoration: none;
+    background: oklch(1 0 0 / 0.03);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-ch:hover { border-color: var(--accent); transform: translateX(4px); }
+  .contact-ch-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 25%, transparent), color-mix(in srgb, var(--secondary) 15%, transparent));
+    flex-shrink: 0;
+  }
+  .contact-ch-title { font-weight: 600; font-size: 15px; color: #06b6d4; }
+  .contact-ch-sub { font-size: 13px; color: var(--muted); }
+
+  .contact-form {
+    background: oklch(1 0 0 / 0.03);
+    border: 1px solid oklch(1 0 0 / 0.08);
+    border-radius: 24px;
+    padding: 40px;
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .form-group input, .form-group textarea, .form-group select {
+    background: oklch(1 0 0 / 0.05);
+    border: 1px solid oklch(1 0 0 / 0.1);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--text);
+    font-family: var(--font-body);
+    transition: border-color 0.2s;
+    outline: none;
+    resize: none;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: oklch(1 0 0 / 0.2); }
+
+  .form-submit {
+    padding: 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--glow);
+    transition: opacity 0.2s, transform 0.2s;
+    font-family: var(--font-body);
+  }
+  .form-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid oklch(1 0 0 / 0.06);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo-img img {
+    height: 28px;
+    width: auto;
+    display: block;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+  .footer-logo-img { display: inline-block; }
+  .footer-logo-img:hover img { opacity: 1; }
+
+  .footer-social {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .social-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid oklch(1 0 0 / 0.08);
+    background: oklch(1 0 0 / 0.03);
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .social-icon:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    background: oklch(1 0 0 / 0.06);
+  }
+
+  .footer-logo {
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    opacity: 0.8;
+  }
+
+  .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  .footer-copy { font-size: 13px; color: oklch(1 0 0 / 0.2); }
+
+  /* ─── THEME VARIANTS ─── */
+  body.theme-aurora {
+    --accent: oklch(0.62 0.22 155);
+    --secondary: oklch(0.65 0.2 200);
+    --bg: oklch(0.07 0.03 175);
+    --surface: oklch(0.12 0.03 175);
+  }
+
+  body.theme-solar {
+    --accent: oklch(0.72 0.22 38);
+    --secondary: oklch(0.75 0.2 55);
+    --bg: oklch(0.07 0.025 40);
+    --surface: oklch(0.12 0.03 40);
+  }
+
+  /* ─── SHOWCASE ─── */
+  .showcase {
+    padding: 80px 0 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .showcase-header { margin-bottom: 40px; }
+
+  .showcase-track-wrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 48px;
+  }
+
+  .showcase-viewport {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .showcase-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .showcase-slide {
+    flex: 0 0 calc(33.333% - 14px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid oklch(1 0 0/0.08);
+    aspect-ratio: 16/9;
+    background: oklch(1 0 0/0.03);
+  }
+
+  .showcase-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s, filter 0.4s;
+    filter: brightness(0.85) saturate(0.9);
+  }
+
+  .showcase-slide img:hover {
+    transform: scale(1.04);
+    filter: brightness(1) saturate(1.1);
+  }
+
+  .showcase-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid oklch(1 0 0/0.15);
+    background: oklch(1 0 0/0.06);
+    color: var(--text);
+    font-size: 22px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .showcase-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+  .showcase-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  .showcase-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: oklch(1 0 0/0.2);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .showcase-dot.active {
+    background: var(--accent);
+    transform: scale(1.5);
+  }
+
+  /* ─── STICKY CTA ─── */
+  #stickyCta { display: none !important; }
+#intro canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.intro-logo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.intro-logo img {
+  width: 180px;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: introLogoIn 1s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards;
+}
+.intro-ring {
+  position: absolute;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  border: 1px solid rgba(124,92,252,0.3);
+  animation: introRingExpand 2s ease-out 0.2s both;
+}
+.intro-ring-2 {
+  width: 340px; height: 340px;
+  border-color: rgba(6,182,212,0.15);
+  animation-delay: 0.4s;
+}
+.intro-ring-3 {
+  width: 420px; height: 420px;
+  border-color: rgba(168,85,247,0.08);
+  animation-delay: 0.6s;
+}
+.intro-tagline {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #06b6d4, #818cf8, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  animation: introFadeUp 0.8s ease 1s forwards;
+}
+.intro-bar {
+  position: relative;
+  z-index: 2;
+  width: 200px;
+  height: 2px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+  opacity: 0;
+  animation: introFadeUp 0.5s ease 1.2s forwards;
+}
+.intro-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #06b6d4, #a855f7);
+  border-radius: 2px;
+  width: 0;
+  animation: introBarFill 1.4s ease 1.3s forwards;
+}
+
+@keyframes introLogoIn {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes introRingExpand {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+@keyframes introFadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes introBarFill {
+  to { width: 100%; }
+}
+
+/* ─── TWEAKS PANEL ─── */
+  #tweaks-panel {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: oklch(0.12 0.025 255 / 0.95);
+    border: 1px solid oklch(1 0 0 / 0.15);
+    border-radius: 20px;
+    padding: 24px;
+    width: 280px;
+    backdrop-filter: blur(24px);
+    box-shadow: 0 24px 60px oklch(0 0 0 / 0.5);
+  }
+
+  #tweaks-panel h4 {
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .tweak-group { margin-bottom: 20px; }
+  .tweak-label { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+
+  .theme-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .theme-opt {
+    padding: 10px 0;
+    border-radius: 10px;
+    border: 1px solid oklch(1 0 0 / 0.12);
+    background: oklch(1 0 0 / 0.04);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .theme-opt:hover { border-color: oklch(1 0 0 / 0.3); color: var(--text); }
+  .theme-opt.active { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+  .theme-swatch {
+    display: block;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    margin: 0 auto 6px;
+  }
+
+  .tweak-slider { width: 100%; accent-color: var(--accent); cursor: pointer; }
+
+  .service-icon--grid {
+    width: 52px !important;
+    height: 52px !important;
+    padding: 10px !important;
+  }
+  .service-icon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    color: var(--accent);
+  }
+  .service-icon-grid svg {
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .service-card:hover .service-icon-grid svg { opacity: 1; }
+
+
+  /* ═══ RESPONSIVE — ALL BREAKPOINTS ═══ */
+
+  /* Large desktop / 1440p baseline - already default */
+
+  /* 4K & Ultra-wide (2560px+) */
+  @media (min-width: 2560px) {
+    html { font-size: 20px; }
+    nav > div, section > div, footer { max-width: 1600px !important; margin: 0 auto; }
+    .hero h1 { font-size: clamp(80px, 5.5vw, 120px) !important; }
+    .hero-sub { font-size: 22px !important; }
+    .section-title { font-size: clamp(48px, 4vw, 80px) !important; }
+    .fp { width: 180px !important; }
+  }
+
+  /* 2K / 1440p (1920px–2559px) */
+  @media (min-width: 1920px) and (max-width: 2559px) {
+    html { font-size: 17px; }
+    nav > div, section > div, footer { max-width: 1400px; margin: 0 auto; }
+    .hero h1 { font-size: clamp(64px, 5vw, 96px) !important; }
+    .fp { width: 150px !important; }
+  }
+
+  /* Full HD / 1080p (default desktop) — already handled */
+
+  /* Small desktop / laptop (1024px–1439px) */
+  @media (max-width: 1439px) and (min-width: 1025px) {
+    section { padding: 90px 40px; }
+    .hero { padding: 120px 40px 80px; }
+  }
+
+  /* Tablet landscape (900px–1024px) */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    nav { padding: 16px 28px; }
+    .nav-links { gap: 20px; font-size: 13px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-cta { display: inline-flex !important; }
+    section { padding: 80px 32px; }
+    .hero { padding: 110px 32px 70px; }
+    .hero h1 { font-size: clamp(44px, 7vw, 68px); }
+    .services-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .bots-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .fp { width: 120px; }
+    .stats-inner { grid-template-columns: repeat(4, 1fr); padding: 40px 28px; }
+  }
+
+  /* Tablet portrait (600px–900px) */
+  @media (max-width: 900px) and (min-width: 601px) {
+    nav { padding: 14px 24px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding: 70px 28px; }
+    .hero { padding: 100px 28px 60px; }
+    .hero h1 { font-size: clamp(38px, 8vw, 56px); }
+    .services-grid, .bots-grid { grid-template-columns: 1fr 1fr !important; }
+    .fp { width: 100px; opacity: 0.4; }
+    .stats-inner { grid-template-columns: 1fr 1fr; gap: 28px; padding: 36px 24px; }
+    .contact-grid { grid-template-columns: 1fr !important; gap: 32px; }
+    [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+
+  /* Large mobile (481px–600px) */
+  @media (max-width: 600px) and (min-width: 481px) {
+    nav { padding: 14px 20px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    section { padding: 60px 20px; }
+    .hero { padding: 96px 20px 56px; }
+    .hero h1 { font-size: clamp(32px, 9vw, 44px); }
+    .hero-sub { font-size: 15px; }
+    .services-grid, .bots-grid { grid-template-columns: 1fr !important; }
+    .fp { width: 85px; opacity: 0.25; }
+    .fp1, .fp2 { left: -10px !important; }
+    .fp4, .fp5 { right: -10px !important; }
+    .stats-inner { grid-template-columns: 1fr 1fr !important; gap: 20px; padding: 28px 18px; }
+    .stat-num { font-size: 34px !important; }
+    .contact-grid, .form-row { grid-template-columns: 1fr !important; }
+    footer { flex-direction: column !important; text-align: center; gap: 20px; padding: 28px 20px; }
+    .nav-cta { padding: 8px 14px !important; font-size: 12px !important; }
+  }
+
+  /* Mobile (480px and below) */
+  @media (max-width: 480px) {
+    html { font-size: 15px; }
+    nav { padding: 12px 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-cta { padding: 8px 14px !important; font-size: 12px !important; }
+    section { padding: 52px 16px; }
+    .hero { padding: 90px 16px 48px; }
+    .hero h1 { font-size: clamp(28px, 10vw, 38px) !important; letter-spacing: -0.02em; }
+    .hero-sub { font-size: 14px; line-height: 1.6; }
+    .hero-btns { gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary, .btn-outline { padding: 12px 22px !important; font-size: 13px !important; }
+    .hero-stats { gap: 16px !important; margin-top: 36px !important; flex-wrap: wrap; justify-content: center; }
+    .hero-stat-val { font-size: 22px !important; }
+    .hero-stat-lbl { font-size: 10px !important; }
+    .fp { width: 70px !important; opacity: 0.2 !important; border-radius: 10px !important; }
+    .fp1, .fp2 { left: -15px !important; }
+    .fp4, .fp5 { right: -15px !important; }
+    .logos-band { padding: 28px 16px !important; }
+    .section-title { font-size: clamp(24px, 7vw, 34px) !important; }
+    .section-sub { font-size: 14px; }
+    .services-grid, .bots-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .service-card, .bot-card { padding: 24px 20px !important; }
+    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    .stats-inner { grid-template-columns: 1fr 1fr !important; gap: 16px !important; padding: 24px 16px !important; }
+    .stat-num { font-size: 28px !important; }
+    .stat-label { font-size: 11px !important; }
+    .testi-card { flex: 0 0 calc(100% - 16px) !important; }
+    .contact-grid, .form-row { grid-template-columns: 1fr !important; gap: 20px !important; }
+    footer { flex-direction: column !important; text-align: center; gap: 18px; padding: 24px 16px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+    #stickyCta { bottom: 72px !important; right: 12px !important; }
+    #stickyCta a { padding: 11px 18px !important; font-size: 12px !important; }
+    .intro-logo img { width: 120px !important; }
+    .intro-ring { width: 180px !important; height: 180px !important; }
+    .intro-ring.intro-ring-2 { width: 240px !important; height: 240px !important; }
+    .intro-ring.intro-ring-3 { width: 300px !important; height: 300px !important; }
+    .intro-tagline { font-size: 11px !important; }
+    .intro-bar { width: 160px !important; }
+    #tweaks-panel { width: calc(100% - 24px) !important; right: 12px !important; bottom: 12px !important; max-height: 70vh; overflow-y: auto; }
+    .showcase-btn { display: none !important; }
+    .showcase-slide { flex: 0 0 calc(100% - 16px) !important; }
+    .mobile-cta-bar { display: flex !important; }
+  }
+
+  /* Small mobile (360px and below) */
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 26px !important; }
+    .fp { display: none !important; }
+    section { padding: 44px 14px; }
+    .stat-num { font-size: 24px !important; }
+  }
+
+  /* Mobile CTA bar — hidden by default */
+  .mobile-cta-bar {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 998;
+    padding: 10px 14px;
+    background: oklch(0.08 0.02 255 / 0.97);
+    border-top: 1px solid oklch(1 0 0/0.08);
+    backdrop-filter: blur(16px);
+  }
+  .mobile-cta-bar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(90deg, #06b6d4, #7c5cfc, #a855f7);
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    font-family: var(--font-head);
+    box-shadow: 0 0 24px rgba(124,92,252,0.4);
+  }
+
+
+  /* ─── TESTIMONIALS ─── */
+  .testi-viewport {
+    overflow: hidden;
+    border-radius: 20px;
+  }
+  .testi-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .testi-card {
+    flex: 0 0 calc(33.333% - 14px);
+    background: oklch(1 0 0/0.04);
+    border: 1px solid oklch(1 0 0/0.09);
+    border-radius: 20px;
+    padding: 28px;
+    backdrop-filter: blur(16px);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .testi-card:hover { border-color: oklch(1 0 0/0.18); transform: translateY(-3px); }
+  .testi-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .testi-platform {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    border: 1px solid;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+  .testi-stars { color: #fbbf24; font-size: 12px; letter-spacing: 2px; }
+  .testi-msg {
+    font-size: 14px;
+    line-height: 1.7;
+    color: oklch(0.85 0.01 255);
+    margin-bottom: 20px;
+    min-height: 80px;
+  }
+  .testi-footer { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .testi-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .testi-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #06b6d4;
+    font-size: 8px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .testi-handle { font-size: 11px; color: var(--muted); }
+  .testi-time { font-size: 11px; color: var(--muted); margin-left: auto; white-space: nowrap; }
+  .testi-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+  .testi-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: oklch(1 0 0/0.2);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .testi-dot.active { background: var(--accent); transform: scale(1.5); }
+
+</style>
+</head>
+<body>
+
+<canvas id="starCanvas"></canvas>
+
+<!-- INTRO -->
+<div id="intro">
+  <canvas id="introCanvas"></canvas>
+  <div class="intro-ring"></div>
+  <div class="intro-ring intro-ring-2"></div>
+  <div class="intro-ring intro-ring-3"></div>
+  <div class="intro-logo">
+    <img src="https://virexmedia.net/images/virex-logo-v3.png" alt="Virex Media">
+  </div>
+  <div class="intro-tagline">Dijital Dünyada İzini Bırak</div>
+  <div class="intro-bar"><div class="intro-bar-fill"></div></div>
+</div>
+
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://virexmedia.net/images/virex-logo-v3.png" alt="Virex Media">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#vision">Vizyon</a></li>
+    <li><a href="#services">Hizmetler</a></li>
+    <li><a href="#botlar">Botlar</a></li>
+    <li><a href="#sss">SSS</a></li>
+  </ul>
+  <a href="https://t.me/virex_uzay" class="nav-cta" target="_blank">Bot Demo Talep Et →</a>
+</nav>
+
+<div class="content">
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+  <!-- FLOATING POSTS -->
+  <div class="floating-posts" id="floatingPosts" aria-hidden="true">
+    <img class="fp fp1" src="posts/post-sosyal.png" alt="">
+    <img class="fp fp2" src="posts/post-gelecek.png" alt="">
+    <img class="fp fp4" src="posts/post-guven.png" alt="">
+    <img class="fp fp5" src="posts/post-arkaniza.png" alt="">
+  </div>
+    <div class="hero-tag" id="heroTagEl">#gerikalma</div>
+    <h1>Dijital Dünyada<br><span class="accent-text">İzinizi Bırakın</span></h1>
+    <p class="hero-sub">Markanızın potansiyelini modern tasarım, stratejik dijital çözümler ve yaratıcı vizyonumuzla açığa çıkarıyoruz. Sadece var olmayın, fark yaratın.</p>
+    <div class="hero-btns">
+      <a href="https://t.me/virex_uzay" class="btn-primary" target="_blank">Projenizi Başlatın →</a>
+      <a href="#services" class="btn-outline">Hizmetlerimiz</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-val"><span data-target="100" data-suffix="+">100+</span></div>
+        <div class="hero-stat-label">Mutlu Müşteri</div>
+      </div>
+      <div>
+        <div class="hero-stat-val"><span data-target="500" data-suffix="+">500+</span></div>
+        <div class="hero-stat-label">Tamamlanan Proje</div>
+      </div>
+      <div>
+        <div class="hero-stat-val"><span>7/24</span></div>
+        <div class="hero-stat-label">Kesintisiz Destek</div>
+      </div>
+      <div>
+        <div class="hero-stat-val"><span data-target="98" data-prefix="%">%98</span></div>
+        <div class="hero-stat-label">Müşteri Memnuniyeti</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÖNE ÇIKANLAR SLIDESHOW -->
+  <div class="showcase" id="showcase">
+    <div class="showcase-header">
+      <div class="section-label" style="text-align:center">Öne Çıkanlar</div>
+      <p style="text-align:center;color:var(--muted);font-size:15px;margin-top:8px">Virex Media dünyasından kareler.</p>
+    </div>
+    <div class="showcase-track-wrap">
+      <button class="showcase-btn showcase-prev" id="showcasePrev">‹</button>
+      <div class="showcase-viewport">
+        <div class="showcase-track" id="showcaseTrack">
+          <div class="showcase-slide"><img src="https://virexmedia.net/images/slide1.jpg" alt="Virex Media dijital pazarlama portfolyosu"></div>
+          <div class="showcase-slide"><img src="https://virexmedia.net/images/slide2.jpg" alt="Virex Media ekibi"></div>
+          <div class="showcase-slide"><img src="https://virexmedia.net/images/slide3.jpg" alt="Sosyal medya hizmetleri"></div>
+          <div class="showcase-slide"><img src="https://virexmedia.net/images/slide4.jpg" alt="İş akışı ve proje süreci"></div>
+          <div class="showcase-slide"><img src="https://virexmedia.net/images/slide5.jpg" alt="Müşteri referansları"></div>
+          <div class="showcase-slide"><img src="https://virexmedia.net/images/slide6.jpg" alt="Neden Virex Media"></div>
+          <div class="showcase-slide"><img src="https://virexmedia.net/images/slide7.jpg" alt="İletişim bilgileri"></div>
+        </div>
+      </div>
+      <button class="showcase-btn showcase-next" id="showcaseNext">›</button>
+    </div>
+    <div class="showcase-dots" id="showcaseDots"></div>
+  </div>
+
+  <!-- PERDE EFEKTİ 1 — kaldırıldı -->
+  <div style="height:20px"></div>
+
+  <!-- LOGOS BAND -->
+  <div class="logos-band">
+    <p class="logos-label">Güvenilen Markalar Bizimle Büyüyor</p>
+    <div class="logos-track-wrap">
+      <div class="logos-track" id="logosTrack">
+        <img src="https://virexmedia.net/images/logos/rams_clean.png" alt="RAMS Bahis">
+        <img src="https://virexmedia.net/images/logos/goldengate.png" alt="GoldenGate">
+        <img src="https://virexmedia.net/images/logos/sekabet.webp" alt="SekaBet">
+        <img src="logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
+        <img src="https://virexmedia.net/images/logos/viabahis.png" alt="ViaBahis">
+        <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet">
+        <img src="https://virexmedia.net/images/logos/robobet.png" alt="RoboBet">
+        <img src="https://virexmedia.net/images/logos/norabahis.png" alt="NoraBahis">
+        <img src="https://virexmedia.net/images/logos/rams_clean.png" alt="RAMS Bahis">
+        <img src="https://virexmedia.net/images/logos/goldengate.png" alt="GoldenGate">
+        <img src="https://virexmedia.net/images/logos/sekabet.webp" alt="SekaBet">
+        <img src="logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
+        <img src="https://virexmedia.net/images/logos/viabahis.png" alt="ViaBahis">
+        <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet">
+        <img src="https://virexmedia.net/images/logos/robobet.png" alt="RoboBet">
+        <img src="https://virexmedia.net/images/logos/norabahis.png" alt="NoraBahis">
+      </div>
+    </div>
+  </div>
+
+  <!-- PERDE EFEKTİ 2 — kaldırıldı -->
+
+  <!-- VISION -->
+  <section id="vision">
+    <div class="section-label">Vizyonumuz</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div>
+        <h2 class="section-title">Markalar Sadece Var Olmasın, <span style="background:linear-gradient(135deg,var(--accent),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sektöre Yön Versin</span></h2>
+        <p class="section-sub" style="margin-bottom:0">Dijital ekosistemde markaların stratejik yaklaşımlarla sektöre yön vermesini sağlamak; yaratıcılığı veriyle harmanlayarak sürdürülebilir başarı hikayeleri inşa etmektir.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="padding:28px;background:oklch(1 0 0/0.03);border:1px solid oklch(1 0 0/0.08);border-radius:16px;text-align:center;">
+          <div style="font-family:var(--font-head);font-size:40px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">%40</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">Etkileşim Artışı</div>
+        </div>
+        <div style="padding:28px;background:oklch(1 0 0/0.03);border:1px solid oklch(1 0 0/0.08);border-radius:16px;text-align:center;">
+          <div style="font-family:var(--font-head);font-size:40px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">%30</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">Organik Büyüme</div>
+        </div>
+        <div style="padding:28px;background:oklch(1 0 0/0.03);border:1px solid oklch(1 0 0/0.08);border-radius:16px;text-align:center;">
+          <div style="font-family:var(--font-head);font-size:40px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">20K</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">Aylık Üye Kazanımı</div>
+        </div>
+        <div style="padding:28px;background:oklch(1 0 0/0.03);border:1px solid oklch(1 0 0/0.08);border-radius:16px;text-align:center;">
+          <div style="font-family:var(--font-head);font-size:40px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">5+</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px;">Yıllık Deneyim</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-label">Neler Yapıyoruz?</div>
+    <h2 class="section-title">Uçtan Uca<br>Dijital Çözümler</h2>
+    <p class="section-sub">İşinizi büyütmek için ihtiyacınız olan her şeyi tek çatı altında sunuyoruz.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon service-icon--grid"><div class="service-icon-grid">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" title="Instagram"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" title="X"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.776-8.903L1.254 2.25H8.08l4.251 5.625 5.913-5.625zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" title="Telegram"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" title="Pinterest"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+</div></div>
+        <h3>Sosyal Medya Yönetimi</h3>
+        <p>Twitter (X), Telegram, Instagram, YouTube ve Pinterest'te her güne özel yüksek etkileşimli içerik planlaması. Veri odaklı strateji, günlük raporlar.</p>
+        <div class="service-tags">
+          <span class="tag">Çok Kanallı</span>
+          <span class="tag">Reels/Shorts</span>
+          <span class="tag">Raporlama</span>
+          <span class="tag">Trend Analizi</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3 3v18h18"/>
+  <path d="M7 15l4-4 3 3 5-6"/>
+  <path d="M14 8h5v5"/>
+</svg></div>
+        <h3>Marketing & Partnerlik</h3>
+        <p>Markanızın DNA'sına en uygun sektör temsilcileri ile stratejik buluşmalar. Kanıtlanmış büyüme modelleri ve maksimum dönüşüm stratejileri.</p>
+        <div class="service-tags">
+          <span class="tag">Hedef Odaklı</span>
+          <span class="tag">Performans</span>
+          <span class="tag">Büyüme</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h8M8 14h4"/></svg></div>
+        <h3>Telegram Topluluk Yönetimi</h3>
+        <p>7/24 canlı destek ve AI destekli moderasyon. Aylık 20.000 aktif ve gerçek kullanıcı kazanımı ile organik ekosistem inşası.</p>
+        <div class="service-tags">
+          <span class="tag">7/24 Moderasyon</span>
+          <span class="tag">AI Destekli</span>
+          <span class="tag">Topluluk</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTS -->
+  <section id="botlar" style="max-width:1200px;margin:0 auto;padding:100px 48px;">
+    <div class="bots-header">
+      <div>
+        <div class="section-label">🤖 Virex Bot Ekosistemi</div>
+        <h2 class="section-title" style="margin-bottom:0">Sıfır Kaos.<br>Sonsuz Kontrol.</h2>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:13px;color:var(--muted);margin-bottom:4px;">Operasyonel yükünüzü azaltın</div>
+        <div style="font-family:var(--font-head);font-size:48px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">%70</div>
+      </div>
+    </div>
+    <div class="bots-grid">
+      <!-- Bot 1 -->
+      <div class="bot-card">
+        <div class="bot-card-glow" style="background:var(--accent)"></div>
+        <div class="bot-badge" style="color:var(--accent);border-color:color-mix(in srgb,var(--accent) 30%,transparent);background:color-mix(in srgb,var(--accent) 8%,transparent)">
+          <span>●</span> Yapay Zeka
+        </div>
+        <h3>AiMod</h3>
+        <p class="bot-sub">Niyet Okuyan Hibrit AI Kalkanı</p>
+        <ul class="bot-features">
+          <li>DeepSeek, Gemini ve OpenAI GPT-4.5 Nano entegrasyonu ile mesajların niyetini 0.8s içinde analiz eder</li>
+          <li>3 uyarılı limit sistemi, sahte admin ve görsel üzeri reklamları anında yakalar</li>
+          <li>Gruplara belirlediğiniz saatlerde otomatik duyurular (gece sessiz mod)</li>
+          <li>Moderatör Performans Rapor Sistemi — yanıt süresi, çözüm oranı ve aktiflik raporları</li>
+          <li>Etkileşim Odaklı Loyalty Sistemi — XP, seviye, ödül ve sadakat rozetleri</li>
+        </ul>
+        <div class="bot-chips">
+          <span class="chip">Hibrit AI</span>
+          <span class="chip">OCR</span>
+          <span class="chip">Zamanlayıcı</span>
+          <span class="chip">Mod Raporu</span>
+          <span class="chip">Loyalty</span>
+        </div>
+        <a href="https://t.me/virex_uzay" class="bot-link" target="_blank">Demo Talep Et →</a>
+      </div>
+      <!-- Bot 2 -->
+      <div class="bot-card">
+        <div class="bot-card-glow" style="background:var(--secondary)"></div>
+        <div class="bot-badge" style="color:var(--secondary);border-color:color-mix(in srgb,var(--secondary) 30%,transparent);background:color-mix(in srgb,var(--secondary) 8%,transparent)">
+          <span>●</span> Topluluk
+        </div>
+        <h3>@VirexEtkinlik</h3>
+        <p class="bot-sub">Otonom Topluluk & Etkileşim Botu</p>
+        <ul class="bot-features">
+          <li>15+ farklı oyun modu ile etkileşimi zirveye taşıyın</li>
+          <li>Etkinlikleri önceden zamanlayın, bot geri sayım yapsın ve otonom başlatsın</li>
+          <li>XP, Rütbe, Hediye Kodları ve Davet mekanizmalarıyla üyeleri bağlayın</li>
+          <li>Grup özel site ID kayıt sistemi — her kullanıcıya benzersiz takip</li>
+          <li>Etkinlikleri otomatik sonuçlandırma ve kazananları anında duyurma</li>
+        </ul>
+        <div class="bot-chips">
+          <span class="chip">15+ Oyun</span>
+          <span class="chip">Zamanlı Etkinlik</span>
+          <span class="chip">Davet</span>
+          <span class="chip">Site ID Kayıt</span>
+          <span class="chip">Otonom Sonuç</span>
+        </div>
+        <a href="https://t.me/virex_uzay" class="bot-link" target="_blank">Demo Talep Et →</a>
+      </div>
+      <!-- Bot 3 -->
+      <div class="bot-card">
+        <div class="bot-card-glow" style="background:var(--gold)"></div>
+        <div class="bot-badge" style="color:var(--gold);border-color:color-mix(in srgb,var(--gold) 30%,transparent);background:color-mix(in srgb,var(--gold) 8%,transparent)">
+          <span>●</span> Premium CRM
+        </div>
+        <h3>CRM & Destek</h3>
+        <p class="bot-sub">Premium CRM & Destek Otomasyonu</p>
+        <ul class="bot-features">
+          <li>Dekont/bilgi yüklemeden bilet açtırmayan akıllı sistem</li>
+          <li>Web paneline giriş sıfır — her şeyi Telegram içinden yönetin</li>
+          <li>CSAT anketleriyle personel kalitesini ölçün ve raporlayın</li>
+          <li>Bot üzerinden üyeye anında geri dönüş ve biletin tek tıkla sonuçlandırılması</li>
+        </ul>
+        <div class="bot-chips">
+          <span class="chip">Ticket</span>
+          <span class="chip">CSAT</span>
+          <span class="chip">Sıfır Altyapı</span>
+          <span class="chip">Üye Geri Dönüş</span>
+        </div>
+        <a href="https://t.me/virex_uzay" class="bot-link" target="_blank">Demo Talep Et →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="nasil">
+    <div class="section-label">🚀 Nasıl Başlarım?</div>
+    <h2 class="section-title">3 Adımda Canlıya Geç</h2>
+    <p class="section-sub">Demo'dan kuruluma kadar her şeyi biz hallederiz.</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Demo Talep Et</h4>
+        <p>@virex_uzay üzerinden bize yazın. Platform ihtiyaçlarınızı dinleyelim, size özel demo sunalım.</p>
+        <span class="step-time">⏱ Aynı gün yanıt</span>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Kurulum & Yapılandırma</h4>
+        <p>Ekibimiz botları grubunuza entegre eder. Marka adı, kurallar ve panel ayarları yapılandırılır.</p>
+        <span class="step-time">⏱ 24 saat içinde</span>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Canlıya Geç</h4>
+        <p>Botlar aktif, topluluk koruması başladı. Siz sadece Telegram panelinizden takip edin.</p>
+        <span class="step-time">⏱ 7/24 aktif</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="sss">
+    <div class="section-label">❓ SSS</div>
+    <h2 class="section-title">Sıkça Sorulan<br>Sorular</h2>
+    <p class="section-sub">Aklınızdaki soruların cevapları burada.</p>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item">
+        <div class="faq-q"><span>Botları mevcut Telegram grubuma entegre edebilir miyim?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Evet. Mevcut grubunuza dakikalar içinde entegrasyon yapılır. Grubun yapısını veya üye listesini bozmaz. Tek yapmanız gereken bize grup bağlantısını iletmek.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Kurulum için teknik bilgi gerekiyor mu?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Hayır. Virex Media ekibi tüm kurulumu sizin adınıza yapar. Siz sadece Telegram'daki panel üzerinden ayarları yönetirsiniz. Kod yazmaya gerek yoktur.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>AiMod botu rakip reklam ve spam içerikleri nasıl tespit ediyor?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Google Gemini yapay zeka motoru ile her mesajın niyetini analiz eder. Kelime yasaklamanın ötesinde, bağlamı anlar. OCR teknolojisiyle resim üzerine yazılmış içerikleri de tarar.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Botlar 7/24 çalışıyor mu?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Evet, kesinlikle. Botlarınız size özel ayrılmış yüksek performanslı sunucularda 7/24 kesintisiz çalışır. Gece, gündüz, tatil fark etmeksizin topluluğunuzun başında olur. Teknik ekibimiz sistemi 7/24 izler; herhangi bir aksaklıkta siz fark etmeden müdahale ederiz.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>CRM botu hangi platformlarla uyumlu?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Tamamen Telegram tabanlı çalışır. Harici web paneli, ek lisans veya özel yazılım gerektirmez. Yöneticiler her şeyi Telegram arayüzünden yönetir.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Sosyal medya ekibiniz kaç saat çalışıyor?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Ekibimiz neredeyse 7/24 aktif. İçerik planlaması, topluluk yönetimi ve acil durumlara anlık müdahale için vardiya sistemimiz var. Hafta sonu ve gece mesaileri dahil, markanız hiçbir zaman sahipsiz kalmaz.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Günlük/haftalık raporlar veriliyor mu?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Evet. Her gece detaylı performans raporu iletilir — etkileşim oranları, kazanılan üye sayısı, içerik performansı ve rakip analizi dahil. Haftalık özet ve aylık stratejik değerlendirme raporlarımız da mevcuttur.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Hangi sosyal medya platformlarında hizmet veriyorsunuz?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Twitter (X), Telegram, Instagram, YouTube ve Pinterest üzerinde aktif hizmet veriyoruz. Her platform için özel içerik stratejisi, Reels/Shorts dahil video prodüksiyonu ve trend takibi sunuyoruz.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Marketing & Partnerlik süreci nasıl işliyor?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Önce markanızın DNA'sını analiz ediyoruz, ardından sektöre ve hedef kitleye en uygun partnerleri seçip kanıtlanmış büyüme modelleri uyguluyoruz. Her kampanyanın ROI'si şeffaf şekilde raporlanır, performans düşükse strateji anında revize edilir.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Ne kadar sürede sonuç görürüm?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">İlk 48 saatte içerik akışı ve topluluk yönetimi aktif hale gelir. Ölçülebilir büyüme 2-4 hafta içinde başlar; 3 ay sonunda ortalama %40 etkileşim artışı ve organik üye kazanımı sağlanır.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" style="max-width:1200px;margin:0 auto;padding:80px 48px">
+    <div class="section-label" style="text-align:center">Müşteri Yorumları</div>
+    <h2 class="section-title" style="text-align:center;margin-bottom:12px">Onlar Ne Dedi?</h2>
+    <p style="text-align:center;color:var(--muted);font-size:16px;margin-bottom:48px">Gerçek müşterilerimizden gerçek deneyimler.</p>
+    <div class="testi-viewport"><div class="testi-track" id="testiTrack"></div></div>
+    <div class="testi-dots" id="testiDots"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-label">İletişime Geçin</div>
+        <h2>Yeni projenizi konuşmak için<br><span style="background:linear-gradient(135deg,var(--accent),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">sabırsızlanıyoruz.</span></h2>
+        <p>Aklınızdaki projeyi bizimle paylaşın. En kısa sürede size özel çözümler sunalım.</p>
+        <div class="contact-channels">
+          <a href="https://t.me/virex_uzay" class="contact-ch" target="_blank">
+            <div class="contact-ch-icon">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2ZM16.93 8.37L15.18 16.54C15.05 17.13 14.7 17.27 14.21 16.99L11.71 15.16L10.51 16.31C10.37 16.45 10.25 16.57 10 16.57L10.18 14.02L14.87 9.79C15.07 9.61 14.83 9.51 14.57 9.69L8.73 13.32L6.26 12.56C5.69 12.38 5.68 12 6.38 11.72L16.22 7.89C16.7 7.72 17.12 7.99 16.93 8.37Z" fill="white"/>
+  </svg>
+</div>
+            <div>
+              <div class="contact-ch-title">Telegram</div>
+              <div class="contact-ch-sub">@virex_uzay — Hızlı iletişim</div>
+            </div>
+          </a>
+          <a href="/cdn-cgi/l/email-protection#7b12151d143b0d12091e03161e1f121a55151e0f" class="contact-ch">
+            <div class="contact-ch-icon">✉️</div>
+            <div>
+              <div class="contact-ch-title">E-posta</div>
+              <div class="contact-ch-sub"><span class="__cf_email__" data-cfemail="cca5a2aaa38cbaa5bea9b4a1a9a8a5ade2a2a9b8">[email&#160;protected]</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ad Soyad</label>
+            <input type="text" placeholder="Adınız Soyadınız">
+          </div>
+          <div class="form-group">
+            <label>E-posta</label>
+            <input type="email" placeholder="ornek@mail.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Konu</label>
+          <input type="text" placeholder="Konu">
+        </div>
+        <div class="form-group">
+          <label>Mesajınız</label>
+          <textarea rows="5" placeholder="Projenizi anlatın..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Gönder →</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <a href="#" class="footer-logo-img"><img src="https://virexmedia.net/images/virex-logo-v3.png" alt="Virex Media"></a>
+    <div class="footer-links">
+      <a href="#home">Ana Sayfa</a>
+      <a href="#services">Hizmetler</a>
+      <a href="#botlar">Botlar</a>
+      <a href="#sss">SSS</a>
+      <a href="#contact">İletişim</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://t.me/virex_uzay" target="_blank" class="social-icon" title="Telegram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.944 2.506a1.5 1.5 0 0 0-1.53-.21L2.37 9.19a1.5 1.5 0 0 0 .09 2.79l4.54 1.51 2.12 6.36a1 1 0 0 0 1.71.38l2.44-2.56 4.76 3.49a1.5 1.5 0 0 0 2.34-1.01l2.96-15.93a1.5 1.5 0 0 0-.38-1.25zM10.4 14.77l-.9 2.72-.9-2.72 8.1-7.58-7.2 7.58zm8.36 4.44-4.5-3.3 2.1-2.21-4.56 4.79 1.44-4.33 6.3-9.27-1.28 14.32-2.1-2.1 2.6 2.1z" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.instagram.com/virex_media/" target="_blank" class="social-icon" title="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://x.com/virex_media" target="_blank" class="social-icon" title="X/Twitter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.776-8.903L1.254 2.25H8.08l4.251 5.625 5.913-5.625zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://tr.pinterest.com/virexmedia/" target="_blank" class="social-icon" title="Pinterest">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+      </a>
+    </div>
+    <div class="footer-copy">© 2026 Virex Media — Tüm Haklar Saklıdır.</div>
+  </footer>
+</div>
+
+<div class="mobile-cta-bar"><a href="https://t.me/virex_uzay" target="_blank">Demo Talep Et →</a></div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── INTRO ───
+(function() {
+  const intro = document.getElementById('intro');
+  const ic = document.getElementById('introCanvas');
+  const ictx = ic.getContext('2d');
+  let iW, iH, iStars = [];
+
+  function resizeIntro() {
+    iW = ic.width = window.innerWidth;
+    iH = ic.height = window.innerHeight;
+    iStars = Array.from({length: 120}, () => ({
+      x: Math.random() * iW, y: Math.random() * iH,
+      r: Math.random() * 1.4 + 0.2,
+      op: Math.random() * 0.5 + 0.15,
+      tw: Math.random() * Math.PI * 2
+    }));
+  }
+
+  function drawIntro() {
+    ictx.clearRect(0, 0, iW, iH);
+    iStars.forEach(s => {
+      s.tw += 0.02;
+      ictx.beginPath();
+      ictx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ictx.fillStyle = `rgba(255,255,255,${s.op * (0.6 + 0.4 * Math.sin(s.tw))})`;
+      ictx.fill();
+    });
+    if (!intro.classList.contains('hide')) requestAnimationFrame(drawIntro);
+  }
+
+  resizeIntro();
+  drawIntro();
+
+  // Hide intro after 3s
+  setTimeout(() => {
+    intro.classList.add('hide');
+    setTimeout(() => { intro.remove(); }, 900);
+  }, 3000);
+
+  window.addEventListener('resize', resizeIntro);
+})();
+
+// ─── STARS ───
+const canvas = document.getElementById('starCanvas');
+const ctx = canvas.getContext('2d');
+let stars = [], W, H, currentStarCount = 220;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function createStars(count) {
+  stars = [];
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.6 + 0.2,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
+      opacity: Math.random() * 0.6 + 0.2,
+      twinkle: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+// shooting stars
+let shooters = [];
+function spawnShooter() {
+  shooters.push({
+    x: Math.random() * W * 0.7,
+    y: Math.random() * H * 0.5,
+    vx: 6 + Math.random() * 4,
+    vy: 3 + Math.random() * 2,
+    len: 80 + Math.random() * 80,
+    alpha: 1,
+    life: 1
+  });
+}
+setInterval(spawnShooter, 3500);
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw shooting stars
+  shooters = shooters.filter(s => s.life > 0);
+  for (const s of shooters) {
+    s.x += s.vx;
+    s.y += s.vy;
+    s.life -= 0.025;
+    const grad = ctx.createLinearGradient(s.x - s.vx * 10, s.y - s.vy * 10, s.x, s.y);
+    grad.addColorStop(0, 'rgba(255,255,255,0)');
+    grad.addColorStop(1, `rgba(255,255,255,${s.life * 0.8})`);
+    ctx.beginPath();
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 1.5;
+    ctx.moveTo(s.x - s.vx * 10, s.y - s.vy * 10);
+    ctx.lineTo(s.x, s.y);
+    ctx.stroke();
+  }
+
+  for (const s of stars) {
+    s.x += s.vx;
+    s.y += s.vy;
+    s.twinkle += 0.012;
+    if (s.x < 0) s.x = W;
+    if (s.x > W) s.x = 0;
+    if (s.y < 0) s.y = H;
+    if (s.y > H) s.y = 0;
+    const op = s.opacity * (0.7 + 0.3 * Math.sin(s.twinkle));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${op})`;
+    ctx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+
+resize();
+createStars(currentStarCount);
+draw();
+window.addEventListener('resize', () => { resize(); createStars(currentStarCount); });
+
+// ─── FAQ ───
+document.getElementById('faqList').addEventListener('click', e => {
+  const item = e.target.closest('.faq-item');
+  if (!item) return;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+});
+
+// ─── FORM ───
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ Gönderildi!';
+  btn.style.background = 'oklch(0.62 0.18 150)';
+  setTimeout(() => { btn.textContent = 'Gönder →'; btn.style.background = ''; }, 3000);
+}
+
+// ─── TWEAKS ───
+function setTheme(name, el) {
+  document.body.className = document.body.className.replace(/theme-\w+/g, '');
+  if (name !== 'cosmic') document.body.classList.add('theme-' + name);
+  document.querySelectorAll('.theme-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{theme:name}}, '*');
+}
+
+function setStarCount(v) {
+  currentStarCount = parseInt(v);
+  createStars(currentStarCount);
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{starCount:currentStarCount}}, '*');
+}
+
+function setTagline(v) {
+  document.getElementById('heroTagEl').textContent = v;
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{heroTagline:v}}, '*');
+}
+
+// ─── TWEAKS TOGGLE ───
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode') {
+    document.getElementById('tweaks-panel').style.display = 'block';
+  }
+  if (e.data?.type === '__deactivate_edit_mode') {
+    document.getElementById('tweaks-panel').style.display = 'none';
+  }
+});
+window.parent.postMessage({type:'__edit_mode_available'}, '*');
+
+// ─── APPLY SAVED TWEAKS ───
+(function() {
+  const d = TWEAK_DEFAULTS;
+  if (d.theme && d.theme !== 'cosmic') {
+    document.body.classList.add('theme-' + d.theme);
+    document.querySelector(`[data-theme="${d.theme}"]`)?.classList.add('active');
+    document.querySelector('[data-theme="cosmic"]')?.classList.remove('active');
+  }
+  if (d.starCount) {
+    currentStarCount = d.starCount;
+    const slider = document.querySelector('.tweak-slider'); if(slider) slider.value = d.starCount;
+  }
+  if (d.heroTagline) {
+    document.getElementById('heroTagEl').textContent = d.heroTagline;
+    const ti = document.getElementById('taglineInput'); if(ti) ti.value = d.heroTagline;
+  }
+})();
+
+// ─── SHOWCASE SLIDESHOW ───
+(function() {
+  const track = document.getElementById('showcaseTrack');
+  const dotsEl = document.getElementById('showcaseDots');
+  const slides = track.querySelectorAll('.showcase-slide');
+  const total = slides.length;
+  let cur = 0;
+  const visible = 3;
+
+  // Build dots
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'showcase-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  }
+
+  function goTo(idx) {
+    cur = Math.max(0, Math.min(idx, total - visible));
+    const slideW = slides[0].getBoundingClientRect().width + 20;
+    track.style.transform = `translateX(-${cur * slideW}px)`;
+    dotsEl.querySelectorAll('.showcase-dot').forEach((d,i) => d.classList.toggle('active', i === cur));
+  }
+
+  document.getElementById('showcasePrev').addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('showcaseNext').addEventListener('click', () => goTo(cur + 1));
+
+  // Auto-advance
+  setInterval(() => goTo((cur + 1) % (total - visible + 1)), 4000);
+})();
+
+
+
+// ─── COUNTER ANIMATION ───
+function animateCounter(el, target, duration) {
+  const start = performance.now();
+  const isPercent = el.dataset.suffix === '%';
+  const suffix = el.dataset.suffix || '';
+  const prefix = el.dataset.prefix || '';
+  function update(now) {
+    const t = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    const val = Math.round(ease * target);
+    el.textContent = prefix + val + suffix;
+    if (t < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.counted) {
+      e.target.dataset.counted = '1';
+      animateCounter(e.target, parseInt(e.target.dataset.target), 2000);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+
+// ─── TESTIMONIALS ───
+(function() {
+  const reviews = [
+    { platform: 'telegram', name: 'Ahmet Y.', handle: '@ahmetyilmaz', avatar: 'AY', color: '#2AABEE', stars: 5, msg: 'abicim 2 haftada 12binden 31 bine çıktık ya inanılmaz. aimod da spam konusunda gerçekten iş yapıyor kimse reklam atamıyor', daysAgo: 0, time: '14:22', verified: true },
+    { platform: 'whatsapp', name: 'Mert K.', handle: '+90 5xx xxx xx', avatar: 'MK', color: '#25D366', stars: 4, msg: 'instagram tarafı fena değil açıkçası, etkileşim ciddi arttı. raporlar da detaylı geliyor her sabah', daysAgo: 0, time: '14:05', verified: false },
+    { platform: 'telegram', name: 'Selin A.', handle: '@selinacar', avatar: 'SA', color: '#2AABEE', stars: 5, msg: 'kurulum 1 günde bitti, şu an hiç uğraşmıyorum moderasyonla. ekip de hızlı dönüyor mesajlara', daysAgo: 1, time: '19:41', verified: true },
+    { platform: 'telegram', name: 'Burak T.', handle: '@buraktaskin', avatar: 'BT', color: '#2AABEE', stars: 5, msg: 'crm botu olmadan nasıl yaptık bilmiyorum ya. telegram üzerinden her şeyi hallediyor ekip, panel falan yok', daysAgo: 1, time: '11:33', verified: true },
+    { platform: 'telegram', name: 'Zeynep M.', handle: '@zeynepmarketing', avatar: 'ZM', color: '#2AABEE', stars: 4, msg: 'etkinlik botu sayesinde grup çok daha aktif oldu. üyeler yarışmalar falan yapıyor birbirleriyle, kalmak istiyorlar', daysAgo: 2, time: '16:20', verified: true },
+    { platform: 'telegram', name: 'Emre Ş.', handle: '@emresahin', avatar: 'EŞ', color: '#2AABEE', stars: 3, msg: 'partnerlik için geldik ama sosyal medyayı da verdik sonunda. şu an her şey virex üzerinden gidiyor', daysAgo: 2, time: '13:18', verified: false },
+    { platform: 'telegram', name: 'Caner D.', handle: '@canerdijital', avatar: 'CD', color: '#2AABEE', stars: 5, msg: 'rakipler resim üstüne yazı yazarak reklam atıyordu, aimod onu da yakalıyor. ocr falan var içinde gerçekten', daysAgo: 3, time: '09:45', verified: true },
+    { platform: 'whatsapp', name: 'Nil B.', handle: '+90 5xx xxx xx', avatar: 'NB', color: '#25D366', stars: 4, msg: 'reels içerikleri profesyonel çıkıyor, her biri trend analizine göre yapılıyor. takipçi sayısı sessiz sedasız büyüdü', daysAgo: 3, time: '10:55', verified: false },
+    { platform: 'telegram', name: 'Okan S.', handle: '@okansozer', avatar: 'OS', color: '#2AABEE', stars: 5, msg: 'aylık 22bin üye dediler, verdiler. hepsi gerçek aktif üye, bot değil. grup dinamiği çok iyi şu an', daysAgo: 4, time: '17:30', verified: true },
+    { platform: 'telegram', name: 'Pınar E.', handle: '@pinarerdogan', avatar: 'PE', color: '#2AABEE', stars: 5, msg: 'her sabah rapor geliyor, ne durumda olduğumuzu görüyoruz. bu kadar şeffaf çalışan ajans az bulunur', daysAgo: 4, time: '20:14', verified: true },
+    { platform: 'telegram', name: 'Kaan M.', handle: '@kaanmert', avatar: 'KM', color: '#2AABEE', stars: 3, msg: 'başta biraz yavaş başladı ama oturdu sonunda. bot tarafı özellikle çok iyi çalışıyor, moderasyon sıkıntısız', daysAgo: 5, time: '12:07', verified: false },
+    { platform: 'telegram', name: 'Defne Y.', handle: '@defneyld', avatar: 'DY', color: '#2AABEE', stars: 5, msg: 'grubumuz 3 ayda 4 kata çıktı. kimse inanmıyor ama gerçekten organik büyüme bu, bot üye yok içinde', daysAgo: 6, time: '21:33', verified: true },
+    { platform: 'telegram', name: 'Sercan A.', handle: '@sercanakay', avatar: 'SA', color: '#2AABEE', stars: 4, msg: 'fiyat performans açısından sektörün en iyisi diyebilirim. başka ajanslarla da çalıştık, karşılaştırma yok', daysAgo: 7, time: '15:44', verified: true },
+    { platform: 'whatsapp', name: 'Buse T.', handle: '+90 5xx xxx xx', avatar: 'BT', color: '#25D366', stars: 4, msg: 'twitter ve instagram içerikleri çok tutarlı çıkıyor. marka dili oturdu sonunda diyebilirim', daysAgo: 8, time: '09:20', verified: false },
+    { platform: 'telegram', name: 'Tarık H.', handle: '@tarikhoca', avatar: 'TH', color: '#2AABEE', stars: 5, msg: 'aimod botu rakip gruplardan gelen saldırıları gerçekten engelliyor. daha önce çok sıkıntı çekiyorduk bu konuda', daysAgo: 9, time: '18:55', verified: true },
+  ];
+
+  function censorHandle(h) {
+    if (h.startsWith('@')) {
+      const user = h.slice(1);
+      return '@' + user.slice(0, 3) + '***';
+    }
+    return h; // WhatsApp numaraları zaten gizli
+  }
+
+  function formatTime(daysAgo, time) {
+    if (daysAgo === 0) return 'Bugün ' + time;
+    if (daysAgo === 1) return 'Dün ' + time;
+    if (daysAgo < 7) return daysAgo + ' gün önce';
+    if (daysAgo < 30) return Math.floor(daysAgo / 7) + ' hafta önce';
+    if (daysAgo < 365) return Math.floor(daysAgo / 30) + ' ay önce';
+    return Math.floor(daysAgo / 365) + ' yıl önce';
+  }
+
+  // Bugünün tarihine göre daysAgo hesapla (referans: 21 Nisan 2026)
+  const BASE_DATE = new Date('2026-04-21');
+  const TODAY = new Date();
+  const daysPassed = Math.floor((TODAY - BASE_DATE) / (1000 * 60 * 60 * 24));
+  reviews.forEach(r => { r.daysAgo = r.daysAgo + daysPassed; });
+
+  const track = document.getElementById('testiTrack');
+  const dotsEl = document.getElementById('testiDots');
+  if (!track || !dotsEl) return;
+
+  reviews.forEach((r, i) => {
+    const isTg = r.platform === 'telegram';
+    const card = document.createElement('div');
+    card.className = 'testi-card';
+    card.innerHTML = `
+      <div class="testi-header">
+        <div class="testi-platform" style="background:${r.color}22;border-color:${r.color}44">
+          ${isTg
+            ? `<svg width="16" height="16" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="tgGrad" x1="120" y1="0" x2="120" y2="240" gradientUnits="userSpaceOnUse"><stop stop-color="#2AABEE"/><stop offset="1" stop-color="#229ED9"/></linearGradient></defs><circle cx="120" cy="120" r="120" fill="url(#tgGrad)"/><path d="M180.58 60.26L156.4 176.81c-1.74 7.69-6.27 9.6-12.7 5.97l-35.1-25.85-16.94 16.3c-1.87 1.87-3.44 3.44-7.06 3.44l2.52-35.7 65-58.73c2.83-2.52-0.61-3.92-4.37-1.4l-80.36 50.6-34.63-10.83c-7.53-2.35-7.68-7.53 1.57-11.14l135.4-52.22c6.27-2.27 11.75 1.53 10.86 9.01z" fill="white"/></svg> Telegram`
+            : `<svg width="16" height="16" viewBox="0 0 175.216 175.552" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="waGrad1" x1="85.915" y1="175.552" x2="85.915" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#20b038"/><stop offset="1" stop-color="#60d66a"/></linearGradient></defs><path d="M87.184 0C39.05 0 0 39.05 0 87.184c0 15.176 3.955 29.445 10.888 41.832L0 175.552l47.844-10.68c11.994 6.473 25.651 10.172 40.18 10.172 48.135 0 87.184-39.05 87.184-87.184C175.208 39.05 136.159 0 87.184 0z" fill="url(#waGrad1)"/><path d="M131.496 110.932c-2.035-1.017-12.03-5.937-13.895-6.615-1.865-.677-3.22-.846-4.577.847-1.356 1.695-5.256 6.614-6.443 7.969-1.186 1.356-2.372 1.525-4.407.508-2.034-1.017-8.59-3.169-16.357-10.089-6.04-5.39-10.12-12.04-11.306-14.075-1.187-2.034-.127-3.135.89-4.152.916-.916 2.034-2.39 3.051-3.576.678-.847 1.356-1.695 2.034-2.712.678-1.017.34-1.864-.169-2.881-.508-1.017-4.577-11.021-6.273-15.09-1.525-3.745-3.22-3.407-4.407-3.407-1.187-.17-2.543-.17-3.899-.17-1.356 0-3.56.508-5.425 2.543-1.864 2.034-7.12 6.953-7.12 16.957 0 10.004 7.29 19.668 8.306 21.024 1.017 1.356 13.726 22.38 34.41 30.517 4.813 1.864 8.56 2.881 11.49 3.56 4.815 1.187 9.2.847 12.674.508 3.899-.508 12.03-4.915 13.726-9.665 1.695-4.746 1.695-8.813 1.187-9.66-.508-.847-1.864-1.356-3.899-2.373z" fill="white"/></svg> WhatsApp`
+          }
+        </div>
+        <div class="testi-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+      </div>
+      <p class="testi-msg">${r.msg}</p>
+      <div class="testi-footer">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,${r.color}88,${r.color}44)">${r.avatar}</div>
+        <div>
+          <div class="testi-name">${r.name} ${r.verified ? '<span class="testi-badge">✓</span>' : ''}</div>
+          <div class="testi-handle">${r.platform === 'telegram' ? r.handle.slice(0,4) + '***' : r.handle}</div>
+        </div>
+        <div class="testi-time">${r.time}</div>
+      </div>
+    `;
+    track.appendChild(card);
+  });
+
+  // Build dots — one per page (group of visible cards)
+  const total = reviews.length;
+  function getVisible() { return window.innerWidth > 1100 ? 3 : window.innerWidth > 700 ? 2 : 1; }
+  let visible = getVisible();
+  let pages = Math.max(1, total - visible + 1);
+  let cur = 0;
+
+  function buildDots() {
+    dotsEl.innerHTML = '';
+    visible = getVisible();
+    pages = Math.max(1, total - visible + 1);
+    for (let i = 0; i < pages; i++) {
+      const d = document.createElement('div');
+      d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    }
+  }
+  buildDots();
+
+  function goTo(idx) {
+    cur = Math.max(0, Math.min(idx, pages - 1));
+    const cardW = track.querySelector('.testi-card').offsetWidth + 20;
+    track.style.transform = `translateX(-${cur * cardW}px)`;
+    dotsEl.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  window.addEventListener('resize', () => { buildDots(); goTo(0); });
+  setInterval(() => goTo((cur + 1) % pages), 4000);
+})();
+
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service-card, .bot-card, .step, .faq-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel">
+  <h4>Tweaks</h4>
+  <div class="tweak-group">
+    <div class="tweak-label">Tema Rengi</div>
+    <div class="theme-options">
+      <div class="theme-opt active" data-theme="cosmic" onclick="setTheme('cosmic',this)">
+        <span class="theme-swatch" style="background:linear-gradient(135deg,#7c5cfc,#00d4ff)"></span>Cosmic
+      </div>
+      <div class="theme-opt" data-theme="aurora" onclick="setTheme('aurora',this)">
+        <span class="theme-swatch" style="background:linear-gradient(135deg,oklch(0.62 0.22 155),oklch(0.65 0.2 200))"></span>Aurora
+      </div>
+      <div class="theme-opt" data-theme="solar" onclick="setTheme('solar',this)">
+        <span class="theme-swatch" style="background:linear-gradient(135deg,oklch(0.72 0.22 38),oklch(0.75 0.2 55))"></span>Solar
+      </div>
+    </div>
+  </div>
+  <div class="tweak-group">
+    <div class="tweak-label">Yıldız Yoğunluğu</div>
+    <input class="tweak-slider" type="range" min="80" max="400" value="226" oninput="setStarCount(this.value)">
+  </div>
+  <div class="tweak-group">
+    <div class="tweak-label">Hero Tagline</div>
+    <input style="width:100%;background:oklch(1 0 0/0.06);border:1px solid oklch(1 0 0/0.12);border-radius:8px;padding:8px 12px;color:var(--text);font-size:13px;outline:none;" type="text" id="taglineInput" value="#GeriKalma" oninput="setTagline(this.value)">
+  </div>
+</div>
+
+</body>
+</html>
