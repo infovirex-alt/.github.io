@@ -1007,6 +1007,27 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
   /* ─── STICKY CTA ─── */
   #stickyCta { display: none !important; }
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(ellipse at center, oklch(0.10 0.035 275) 0%, oklch(0.06 0.025 260) 60%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.55s ease, transform 0.55s ease, filter 0.55s ease;
+}
+#intro.exploding {
+  opacity: 0;
+  transform: scale(1.15);
+  filter: blur(12px);
+  pointer-events: none;
+}
+body.intro-active {
+  overflow: hidden;
+}
 #intro canvas {
   position: absolute;
   inset: 0;
@@ -2254,6 +2275,33 @@ document.querySelectorAll('.service-card, .bot-card, .step, .faq-item').forEach(
     <input style="width:100%;background:oklch(1 0 0/0.06);border:1px solid oklch(1 0 0/0.12);border-radius:8px;padding:8px 12px;color:var(--text);font-size:13px;outline:none;" type="text" id="taglineInput" value="#GeriKalma" oninput="setTagline(this.value)">
   </div>
 </div>
+
+<script>
+(function () {
+  var intro = document.getElementById('intro');
+  if (!intro) return;
+  try {
+    if (sessionStorage.getItem('virexIntroShown')) {
+      intro.remove();
+      return;
+    }
+  } catch (e) {}
+  document.body.classList.add('intro-active');
+  var done = false;
+  function closeIntro() {
+    if (done) return; done = true;
+    intro.classList.add('exploding');
+    setTimeout(function () {
+      if (intro.parentNode) intro.remove();
+      document.body.classList.remove('intro-active');
+      try { sessionStorage.setItem('virexIntroShown', '1'); } catch (e) {}
+    }, 600);
+  }
+  setTimeout(closeIntro, 2400);
+  window.addEventListener('error', closeIntro);
+  setTimeout(closeIntro, 6000);
+})();
+</script>
 
 </body>
 </html>
