@@ -12,7 +12,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accentColor": "#7c5cfc",
   "secondaryColor": "#00d4ff",
   "glowIntensity": "high",
-  "starCount": 300,
+  "starCount": 226,
   "heroTagline": "#GeriKalma"
 }/*EDITMODE-END*/;
 </script>
@@ -740,15 +740,23 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     overflow: hidden;
     transition: max-height 0.35s ease, padding 0.3s;
   }
-  .faq-item.open .faq-a { max-height: 200px; padding: 0 28px 22px; }
+  .faq-item.open .faq-a { max-height: 500px; padding: 0 28px 22px; }
 
   /* ─── CONTACT ─── */
   .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 48px;
-    align-items: start;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 56px;
+    align-items: center;
   }
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .contact-info h2 { font-size: 38px !important; }
+  .contact-info p { margin-bottom: 28px !important; }
+  .contact-channels { margin-top: 0; }
+  .contact-form { align-self: center; }
 
   @media (max-width: 768px) {
     .contact-grid { grid-template-columns: 1fr; }
@@ -846,9 +854,40 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 24px;
     position: relative;
     z-index: 1;
+  }
+
+  .footer-logo-img img {
+    height: 28px;
+    width: auto;
+    display: block;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+  .footer-logo-img { display: inline-block; }
+  .footer-logo-img:hover img { opacity: 1; }
+
+  .footer-social {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .social-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid oklch(1 0 0 / 0.08);
+    background: oklch(1 0 0 / 0.03);
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .social-icon:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    background: oklch(1 0 0 / 0.06);
   }
 
   .footer-logo {
@@ -864,27 +903,6 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   .footer-links a:hover { color: var(--text); }
 
   .footer-copy { font-size: 13px; color: oklch(1 0 0 / 0.2); }
-
-  .footer-logo-img img { height: 36px; width: auto; object-fit: contain; opacity: 0.85; }
-  .footer-logo-img:hover img { opacity: 1; }
-
-  .footer-social { display: flex; align-items: center; gap: 10px; }
-  .social-icon {
-    width: 38px; height: 38px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    background: oklch(1 0 0 / 0.06);
-    border: 1px solid oklch(1 0 0 / 0.08);
-    color: var(--muted);
-    text-decoration: none;
-    transition: background 0.2s, color 0.2s, transform 0.2s;
-  }
-  .social-icon:hover {
-    background: linear-gradient(135deg, var(--accent), var(--secondary));
-    color: #fff;
-    border-color: transparent;
-    transform: translateY(-3px);
-  }
 
   /* ─── THEME VARIANTS ─── */
   body.theme-aurora {
@@ -1409,7 +1427,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     <li><a href="#botlar">Botlar</a></li>
     <li><a href="#sss">SSS</a></li>
   </ul>
-  <a href="https://t.me/virex_uzay" class="nav-cta" target="_blank">Demo Talep Et →</a>
+  <a href="https://t.me/virex_uzay" class="nav-cta" target="_blank">Bot Demo Talep Et →</a>
 </nav>
 
 <div class="content">
@@ -1418,10 +1436,10 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   <section class="hero" id="home">
   <!-- FLOATING POSTS -->
   <div class="floating-posts" id="floatingPosts" aria-hidden="true">
-    <img class="fp fp1" src="images/posts/post-sosyal.png" alt="">
-    <img class="fp fp2" src="images/posts/post-gelecek.png" alt="">
-    <img class="fp fp4" src="images/posts/post-guven.png" alt="">
-    <img class="fp fp5" src="images/posts/post-arkaniza.png" alt="">
+    <img class="fp fp1" src="posts/post-sosyal.png" alt="">
+    <img class="fp fp2" src="posts/post-gelecek.png" alt="">
+    <img class="fp fp4" src="posts/post-guven.png" alt="">
+    <img class="fp fp5" src="posts/post-arkaniza.png" alt="">
   </div>
     <div class="hero-tag" id="heroTagEl">#gerikalma</div>
     <h1>Dijital Dünyada<br><span class="accent-text">İzinizi Bırakın</span></h1>
@@ -1485,7 +1503,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         <img src="https://virexmedia.net/images/logos/rams_clean.png" alt="RAMS Bahis">
         <img src="https://virexmedia.net/images/logos/goldengate.png" alt="GoldenGate">
         <img src="https://virexmedia.net/images/logos/sekabet.webp" alt="SekaBet">
-        <img src="images/logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
+        <img src="logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
         <img src="https://virexmedia.net/images/logos/viabahis.png" alt="ViaBahis">
         <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet">
         <img src="https://virexmedia.net/images/logos/robobet.png" alt="RoboBet">
@@ -1493,7 +1511,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         <img src="https://virexmedia.net/images/logos/rams_clean.png" alt="RAMS Bahis">
         <img src="https://virexmedia.net/images/logos/goldengate.png" alt="GoldenGate">
         <img src="https://virexmedia.net/images/logos/sekabet.webp" alt="SekaBet">
-        <img src="images/logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
+        <img src="logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
         <img src="https://virexmedia.net/images/logos/viabahis.png" alt="ViaBahis">
         <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet">
         <img src="https://virexmedia.net/images/logos/robobet.png" alt="RoboBet">
@@ -1604,14 +1622,18 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
         <h3>AiMod</h3>
         <p class="bot-sub">Niyet Okuyan Hibrit AI Kalkanı</p>
         <ul class="bot-features">
-          <li>DeepSeek ve Gemini entegrasyonu ile mesajların niyetini 0.8s içinde analiz eder</li>
+          <li>DeepSeek, Gemini ve OpenAI GPT-4.5 Nano entegrasyonu ile mesajların niyetini 0.8s içinde analiz eder</li>
           <li>3 uyarılı limit sistemi, sahte admin ve görsel üzeri reklamları anında yakalar</li>
           <li>Gruplara belirlediğiniz saatlerde otomatik duyurular (gece sessiz mod)</li>
+          <li>Moderatör Performans Rapor Sistemi — yanıt süresi, çözüm oranı ve aktiflik raporları</li>
+          <li>Etkileşim Odaklı Loyalty Sistemi — XP, seviye, ödül ve sadakat rozetleri</li>
         </ul>
         <div class="bot-chips">
           <span class="chip">Hibrit AI</span>
           <span class="chip">OCR</span>
           <span class="chip">Zamanlayıcı</span>
+          <span class="chip">Mod Raporu</span>
+          <span class="chip">Loyalty</span>
         </div>
         <a href="https://t.me/virex_uzay" class="bot-link" target="_blank">Demo Talep Et →</a>
       </div>
@@ -1627,11 +1649,15 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
           <li>15+ farklı oyun modu ile etkileşimi zirveye taşıyın</li>
           <li>Etkinlikleri önceden zamanlayın, bot geri sayım yapsın ve otonom başlatsın</li>
           <li>XP, Rütbe, Hediye Kodları ve Davet mekanizmalarıyla üyeleri bağlayın</li>
+          <li>Grup özel site ID kayıt sistemi — her kullanıcıya benzersiz takip</li>
+          <li>Etkinlikleri otomatik sonuçlandırma ve kazananları anında duyurma</li>
         </ul>
         <div class="bot-chips">
           <span class="chip">15+ Oyun</span>
           <span class="chip">Zamanlı Etkinlik</span>
           <span class="chip">Davet</span>
+          <span class="chip">Site ID Kayıt</span>
+          <span class="chip">Otonom Sonuç</span>
         </div>
         <a href="https://t.me/virex_uzay" class="bot-link" target="_blank">Demo Talep Et →</a>
       </div>
@@ -1647,11 +1673,13 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
           <li>Dekont/bilgi yüklemeden bilet açtırmayan akıllı sistem</li>
           <li>Web paneline giriş sıfır — her şeyi Telegram içinden yönetin</li>
           <li>CSAT anketleriyle personel kalitesini ölçün ve raporlayın</li>
+          <li>Bot üzerinden üyeye anında geri dönüş ve biletin tek tıkla sonuçlandırılması</li>
         </ul>
         <div class="bot-chips">
           <span class="chip">Ticket</span>
           <span class="chip">CSAT</span>
           <span class="chip">Sıfır Altyapı</span>
+          <span class="chip">Üye Geri Dönüş</span>
         </div>
         <a href="https://t.me/virex_uzay" class="bot-link" target="_blank">Demo Talep Et →</a>
       </div>
@@ -1705,11 +1733,31 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       </div>
       <div class="faq-item">
         <div class="faq-q"><span>Botlar 7/24 çalışıyor mu?</span><span class="faq-icon">+</span></div>
-        <div class="faq-a">Yüksek uptime garantisiyle kesintisiz çalışır. Gece, gündüz, tatil fark etmeksizin aktiftir. Herhangi bir teknik sorun oluştuğunda ekibimiz anında müdahale eder.</div>
+        <div class="faq-a">Evet, kesinlikle. Botlarınız size özel ayrılmış yüksek performanslı sunucularda 7/24 kesintisiz çalışır. Gece, gündüz, tatil fark etmeksizin topluluğunuzun başında olur. Teknik ekibimiz sistemi 7/24 izler; herhangi bir aksaklıkta siz fark etmeden müdahale ederiz.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q"><span>CRM botu hangi platformlarla uyumlu?</span><span class="faq-icon">+</span></div>
         <div class="faq-a">Tamamen Telegram tabanlı çalışır. Harici web paneli, ek lisans veya özel yazılım gerektirmez. Yöneticiler her şeyi Telegram arayüzünden yönetir.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Sosyal medya ekibiniz kaç saat çalışıyor?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Ekibimiz neredeyse 7/24 aktif. İçerik planlaması, topluluk yönetimi ve acil durumlara anlık müdahale için vardiya sistemimiz var. Hafta sonu ve gece mesaileri dahil, markanız hiçbir zaman sahipsiz kalmaz.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Günlük/haftalık raporlar veriliyor mu?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Evet. Her gece detaylı performans raporu iletilir — etkileşim oranları, kazanılan üye sayısı, içerik performansı ve rakip analizi dahil. Haftalık özet ve aylık stratejik değerlendirme raporlarımız da mevcuttur.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Hangi sosyal medya platformlarında hizmet veriyorsunuz?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Twitter (X), Telegram, Instagram, YouTube ve Pinterest üzerinde aktif hizmet veriyoruz. Her platform için özel içerik stratejisi, Reels/Shorts dahil video prodüksiyonu ve trend takibi sunuyoruz.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Marketing & Partnerlik süreci nasıl işliyor?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">Önce markanızın DNA'sını analiz ediyoruz, ardından sektöre ve hedef kitleye en uygun partnerleri seçip kanıtlanmış büyüme modelleri uyguluyoruz. Her kampanyanın ROI'si şeffaf şekilde raporlanır, performans düşükse strateji anında revize edilir.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>Ne kadar sürede sonuç görürüm?</span><span class="faq-icon">+</span></div>
+        <div class="faq-a">İlk 48 saatte içerik akışı ve topluluk yönetimi aktif hale gelir. Ölçülebilir büyüme 2-4 hafta içinde başlar; 3 ay sonunda ortalama %40 etkileşim artışı ve organik üye kazanımı sağlanır.</div>
       </div>
     </div>
   </section>
@@ -1742,11 +1790,11 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
               <div class="contact-ch-sub">@virex_uzay — Hızlı iletişim</div>
             </div>
           </a>
-          <a href="mailto:info@virexmedia.net" class="contact-ch">
+          <a href="/cdn-cgi/l/email-protection#5d34333b321d2b342f3825303839343c73333829" class="contact-ch">
             <div class="contact-ch-icon">✉️</div>
             <div>
               <div class="contact-ch-title">E-posta</div>
-              <div class="contact-ch-sub">info@virexmedia.net</div>
+              <div class="contact-ch-sub"><span class="__cf_email__" data-cfemail="066f68606946706f74637e6b63626f6728686372">[email&#160;protected]</span></div>
             </div>
           </a>
         </div>
@@ -1794,9 +1842,6 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
       <a href="https://x.com/virex_media" target="_blank" class="social-icon" title="X/Twitter">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.776-8.903L1.254 2.25H8.08l4.251 5.625 5.913-5.625zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
-      <a href="https://youtube.com" target="_blank" class="social-icon" title="YouTube">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-      </a>
       <a href="https://tr.pinterest.com/virexmedia/" target="_blank" class="social-icon" title="Pinterest">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
       </a>
@@ -1806,8 +1851,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 </div>
 
 <div class="mobile-cta-bar"><a href="https://t.me/virex_uzay" target="_blank">Demo Talep Et →</a></div>
-
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ─── INTRO ───
 (function() {
   const intro = document.getElementById('intro');
@@ -1991,11 +2035,11 @@ window.parent.postMessage({type:'__edit_mode_available'}, '*');
   }
   if (d.starCount) {
     currentStarCount = d.starCount;
-    document.querySelector('.tweak-slider').value = d.starCount;
+    const slider = document.querySelector('.tweak-slider'); if(slider) slider.value = d.starCount;
   }
   if (d.heroTagline) {
     document.getElementById('heroTagEl').textContent = d.heroTagline;
-    document.getElementById('taglineInput').value = d.heroTagline;
+    const ti = document.getElementById('taglineInput'); if(ti) ti.value = d.heroTagline;
   }
 })();
 
@@ -2165,157 +2209,7 @@ document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe
   setInterval(() => goTo((cur + 1) % pages), 4000);
 })();
 
-// ─── PLANETS REMOVED ───
-if (false) (function() {
-  const canvas = document.getElementById('starCanvas');
-  const planets = [
-    // Mars
-    { x: 0.12, y: 0.25, r: 38, color: '#c1440e', color2: '#8b2a00', speed: 0.00008, angle: 0, drift: 0.00004,
-      craters: [{x:-8,y:-10,r:7},{x:10,y:5,r:5},{x:-3,y:12,r:4}] },
-    // Jupiter
-    { x: 0.88, y: 0.55, r: 72, color: '#c88b3a', color2: '#a0522d', speed: 0.00005, angle: 0.5, drift: 0.00003,
-      bands: true },
-    // Saturn
-    { x: 0.22, y: 0.78, r: 44, color: '#e4d191', color2: '#b8a050', speed: 0.00006, angle: 1.2, drift: 0.000035,
-      ring: true },
-    // Small blue planet
-    { x: 0.78, y: 0.15, r: 22, color: '#1a6b8a', color2: '#0d3d5c', speed: 0.0001, angle: 2, drift: 0.00007,
-      craters: [{x:-4,y:-6,r:4},{x:6,y:4,r:3}] },
-  ];
 
-  const offscreen = document.createElement('canvas');
-  const octx = offscreen.getContext('2d');
-
-  function drawPlanet(ctx, p, W, H) {
-    const px = p.x * W + Math.sin(p.angle * 0.7) * 30;
-    const py = p.y * H + Math.cos(p.angle * 0.5) * 20;
-
-    ctx.save();
-    ctx.translate(px, py);
-
-    // Glow
-    const glow = ctx.createRadialGradient(0, 0, p.r * 0.5, 0, 0, p.r * 2.2);
-    glow.addColorStop(0, p.color + '18');
-    glow.addColorStop(1, 'transparent');
-    ctx.beginPath();
-    ctx.arc(0, 0, p.r * 2.2, 0, Math.PI * 2);
-    ctx.fillStyle = glow;
-    ctx.fill();
-
-    // Planet body
-    ctx.beginPath();
-    ctx.arc(0, 0, p.r, 0, Math.PI * 2);
-    ctx.clip();
-
-    const grad = ctx.createRadialGradient(-p.r * 0.3, -p.r * 0.3, 0, 0, 0, p.r * 1.1);
-    grad.addColorStop(0, lighten(p.color, 40));
-    grad.addColorStop(0.5, p.color);
-    grad.addColorStop(1, p.color2);
-    ctx.fillStyle = grad;
-    ctx.fillRect(-p.r, -p.r, p.r * 2, p.r * 2);
-
-    // Jupiter bands
-    if (p.bands) {
-      const bandColors = ['rgba(180,100,30,0.35)','rgba(220,160,80,0.25)','rgba(150,70,20,0.3)','rgba(200,140,60,0.2)'];
-      [-28,-14,0,14,28].forEach((by, i) => {
-        ctx.fillStyle = bandColors[i % bandColors.length];
-        ctx.fillRect(-p.r, by - 8, p.r * 2, 16);
-      });
-      // Great red spot
-      ctx.beginPath();
-      ctx.ellipse(8, 10, 14, 9, 0, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(160,50,20,0.5)';
-      ctx.fill();
-    }
-
-    // Craters
-    if (p.craters) {
-      p.craters.forEach(c => {
-        ctx.beginPath();
-        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0,0,0,0.2)';
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(c.x - 1, c.y - 1, c.r * 0.6, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.08)';
-        ctx.fill();
-      });
-    }
-
-    // Atmosphere rim
-    const rim = ctx.createRadialGradient(0, 0, p.r * 0.7, 0, 0, p.r);
-    rim.addColorStop(0, 'transparent');
-    rim.addColorStop(1, 'rgba(255,255,255,0.08)');
-    ctx.fillStyle = rim;
-    ctx.fillRect(-p.r, -p.r, p.r * 2, p.r * 2);
-
-    ctx.restore();
-
-    // Saturn ring (outside clip)
-    if (p.ring) {
-      ctx.save();
-      ctx.translate(px, py);
-      ctx.rotate(0.4);
-      ctx.scale(1, 0.3);
-      for (let i = 0; i < 4; i++) {
-        const rr = p.r * (1.5 + i * 0.22);
-        const rw = p.r * 0.18;
-        ctx.beginPath();
-        ctx.arc(0, 0, rr, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(200,180,100,${0.18 - i * 0.03})`;
-        ctx.lineWidth = rw;
-        ctx.stroke();
-      }
-      ctx.restore();
-    }
-  }
-
-  function lighten(hex, amt) {
-    const n = parseInt(hex.slice(1), 16);
-    const r = Math.min(255, (n >> 16) + amt);
-    const g = Math.min(255, ((n >> 8) & 0xff) + amt);
-    const b = Math.min(255, (n & 0xff) + amt);
-    return `rgb(${r},${g},${b})`;
-  }
-
-  // Inject planet drawing into existing star draw loop
-  const origDraw = window._planetDraw = function() {
-    planets.forEach(p => {
-      p.angle += p.speed * 16;
-      drawPlanet(ctx, p, W, H);
-    });
-  };
-
-  // Patch the existing draw loop by adding planet layer
-  const origRAF = window.requestAnimationFrame;
-  const starDrawOrig = draw;
-  window.draw = function() {
-    ctx.clearRect(0, 0, W, H);
-    origDraw();
-
-    // shooting stars
-    shooters = shooters.filter(s => s.life > 0);
-    for (const s of shooters) {
-      s.x += s.vx; s.y += s.vy; s.life -= 0.025;
-      const grad2 = ctx.createLinearGradient(s.x - s.vx * 10, s.y - s.vy * 10, s.x, s.y);
-      grad2.addColorStop(0, 'rgba(255,255,255,0)');
-      grad2.addColorStop(1, `rgba(255,255,255,${s.life * 0.8})`);
-      ctx.beginPath(); ctx.strokeStyle = grad2; ctx.lineWidth = 1.5;
-      ctx.moveTo(s.x - s.vx * 10, s.y - s.vy * 10); ctx.lineTo(s.x, s.y); ctx.stroke();
-    }
-    for (const s of stars) {
-      s.x += s.vx; s.y += s.vy; s.twinkle += 0.012;
-      if (s.x < 0) s.x = W; if (s.x > W) s.x = 0;
-      if (s.y < 0) s.y = H; if (s.y > H) s.y = 0;
-      const op = s.opacity * (0.7 + 0.3 * Math.sin(s.twinkle));
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${op})`; ctx.fill();
-    }
-    requestAnimationFrame(window.draw);
-  };
-  // Stop old loop, start new one
-  window.draw = window.draw;
-}); // PLANETS REMOVED
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -2332,5 +2226,34 @@ document.querySelectorAll('.service-card, .bot-card, .step, .faq-item').forEach(
   observer.observe(el);
 });
 </script>
+
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel">
+  <h4>Tweaks</h4>
+  <div class="tweak-group">
+    <div class="tweak-label">Tema Rengi</div>
+    <div class="theme-options">
+      <div class="theme-opt active" data-theme="cosmic" onclick="setTheme('cosmic',this)">
+        <span class="theme-swatch" style="background:linear-gradient(135deg,#7c5cfc,#00d4ff)"></span>Cosmic
+      </div>
+      <div class="theme-opt" data-theme="aurora" onclick="setTheme('aurora',this)">
+        <span class="theme-swatch" style="background:linear-gradient(135deg,oklch(0.62 0.22 155),oklch(0.65 0.2 200))"></span>Aurora
+      </div>
+      <div class="theme-opt" data-theme="solar" onclick="setTheme('solar',this)">
+        <span class="theme-swatch" style="background:linear-gradient(135deg,oklch(0.72 0.22 38),oklch(0.75 0.2 55))"></span>Solar
+      </div>
+    </div>
+  </div>
+  <div class="tweak-group">
+    <div class="tweak-label">Yıldız Yoğunluğu</div>
+    <input class="tweak-slider" type="range" min="80" max="400" value="226" oninput="setStarCount(this.value)">
+  </div>
+  <div class="tweak-group">
+    <div class="tweak-label">Hero Tagline</div>
+    <input style="width:100%;background:oklch(1 0 0/0.06);border:1px solid oklch(1 0 0/0.12);border-radius:8px;padding:8px 12px;color:var(--text);font-size:13px;outline:none;" type="text" id="taglineInput" value="#GeriKalma" oninput="setTagline(this.value)">
+  </div>
+</div>
+
 </body>
 </html>
