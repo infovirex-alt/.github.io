@@ -17,7 +17,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "secondaryColor": "#00d4ff",
   "glowIntensity": "high",
   "starCount": 226,
-  "heroTagline": "#GeriKalma"
+  "heroTagline": "#GeriKalma",
+  "videoOpacity": 70
 }/*EDITMODE-END*/;
 </script>
 
@@ -160,11 +161,12 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   .hero h1 {
     font-family: var(--font-head);
     font-size: clamp(42px, 7vw, 96px);
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.05;
     letter-spacing: -0.03em;
     max-width: 900px;
     margin-bottom: 24px;
+    color: #fff;
   }
 
   .hero h1 .accent-text {
@@ -253,8 +255,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     width: 170px;
     border-radius: 16px;
     box-shadow: 0 20px 60px oklch(0 0 0 / 0.7);
-    opacity: 0.38;
-    filter: blur(0.5px) saturate(1.1);
+    opacity: 0.82;
+    filter: blur(0px) saturate(1.15);
     border: 1px solid oklch(1 0 0 / 0.12);
     will-change: transform;
     animation: floatPost 9s ease-in-out infinite;
@@ -376,6 +378,14 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     transition: filter 0.4s, opacity 0.4s;
   }
   .logos-track img:hover {
+    filter: none;
+    opacity: 1;
+  }
+  .logos-track img.jagler-logo {
+    filter: brightness(0) invert(1);
+    opacity: 0.35;
+  }
+  .logos-track img.jagler-logo:hover {
     filter: none;
     opacity: 1;
   }
@@ -1467,7 +1477,7 @@ body.intro-active {
     <img class="fp fp5" src="images/posts/post-arkaniza.png" alt="">
   </div>
     <div class="hero-tag" id="heroTagEl">#gerikalma</div>
-    <h1>Dijital Dünyada<br><span class="accent-text">İzinizi Bırakın</span></h1>
+    <h1>Dijital Dünyada<br><span class="accent-text" style="display:inline-block;background:linear-gradient(90deg, #06b6d4 0%, #818cf8 50%, #a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:800;">İzinizi Bırakın</span></h1>
     <p class="hero-sub">Markanızın potansiyelini modern tasarım, stratejik dijital çözümler ve yaratıcı vizyonumuzla açığa çıkarıyoruz. Sadece var olmayın, fark yaratın.</p>
     <div class="hero-btns">
       <a href="https://t.me/virex_uzay" class="btn-primary" target="_blank">Projenizi Başlatın →</a>
@@ -1530,17 +1540,19 @@ body.intro-active {
         <img src="https://virexmedia.net/images/logos/sekabet.webp" alt="SekaBet">
         <img src="images/logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
         <img src="https://virexmedia.net/images/logos/viabahis.png" alt="ViaBahis">
-        <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet">
+        <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet" style="height:56px;">
         <img src="https://virexmedia.net/images/logos/robobet.png" alt="RoboBet">
         <img src="https://virexmedia.net/images/logos/norabahis.png" alt="NoraBahis">
+        <img src="images/logos/jaglerbet.png" alt="JaglerBet" class="jagler-logo" style="mix-blend-mode:screen;height:64px;">
         <img src="https://virexmedia.net/images/logos/rams_clean.png" alt="RAMS Bahis">
         <img src="https://virexmedia.net/images/logos/goldengate.png" alt="GoldenGate">
         <img src="https://virexmedia.net/images/logos/sekabet.webp" alt="SekaBet">
         <img src="images/logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
         <img src="https://virexmedia.net/images/logos/viabahis.png" alt="ViaBahis">
-        <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet">
+        <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet" style="height:56px;">
         <img src="https://virexmedia.net/images/logos/robobet.png" alt="RoboBet">
         <img src="https://virexmedia.net/images/logos/norabahis.png" alt="NoraBahis">
+        <img src="images/logos/jaglerbet.png" alt="JaglerBet" class="jagler-logo" style="mix-blend-mode:screen;height:64px;">
       </div>
     </div>
   </div>
@@ -1815,11 +1827,11 @@ body.intro-active {
               <div class="contact-ch-sub">@virex_uzay — Hızlı iletişim</div>
             </div>
           </a>
-          <a href="/cdn-cgi/l/email-protection#5d34333b321d2b342f3825303839343c73333829" class="contact-ch">
+          <a href="mailto:info@virexmedia.net" class="contact-ch">
             <div class="contact-ch-icon">✉️</div>
             <div>
               <div class="contact-ch-title">E-posta</div>
-              <div class="contact-ch-sub"><span class="__cf_email__" data-cfemail="066f68606946706f74637e6b63626f6728686372">[email&#160;protected]</span></div>
+              <div class="contact-ch-sub">info@virexmedia.net</div>
             </div>
           </a>
         </div>
@@ -1876,7 +1888,7 @@ body.intro-active {
 </div>
 
 <div class="mobile-cta-bar"><a href="https://t.me/virex_uzay" target="_blank">Demo Talep Et →</a></div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ─── INTRO ───
 (function() {
   const intro = document.getElementById('intro');
@@ -2020,6 +2032,67 @@ function handleSubmit(e) {
 }
 
 // ─── TWEAKS ───
+function setVideoOpacity(v) {
+  const vid = document.getElementById('heroBgVideo');
+  if (vid) vid.style.opacity = v / 100;
+  document.getElementById('videoOpacityVal').textContent = v + '%';
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{videoOpacity:parseInt(v)}}, '*');
+}
+
+function setOverlay(level, el) {
+  document.querySelectorAll('#tweaks-panel .tweak-group:nth-child(3) .theme-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('overlayVal').textContent = level;
+  const overlayEl = document.querySelector('.hero > div[style*="linear-gradient"]');
+  if (!overlayEl) return;
+  const map = {
+    'az':   'linear-gradient(to bottom, oklch(0.05 0.02 255/0.2) 0%, oklch(0.05 0.02 255/0.05) 40%, oklch(0.07 0.02 255/0.7) 100%)',
+    'orta': 'linear-gradient(to bottom, oklch(0.05 0.02 255/0.45) 0%, oklch(0.05 0.02 255/0.15) 35%, oklch(0.05 0.02 255/0.15) 65%, oklch(0.07 0.02 255/0.92) 100%)',
+    'cok':  'linear-gradient(to bottom, oklch(0.05 0.02 255/0.75) 0%, oklch(0.05 0.02 255/0.5) 40%, oklch(0.07 0.02 255/0.97) 100%)'
+  };
+  overlayEl.style.background = map[level];
+}
+
+function setFpOpacity(v) {
+  document.querySelectorAll('.fp').forEach(fp => fp.style.opacity = v / 100);
+  document.getElementById('fpOpacityVal').textContent = v + '%';
+}
+
+function setHeroFont(v) {
+  document.querySelector('.hero h1').style.fontSize = v + 'px';
+  document.getElementById('heroFontVal').textContent = v + 'px';
+}
+
+function setNav(style, el) {
+  document.querySelectorAll('#navOpaque,#navTransp').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  const nav = document.querySelector('nav');
+  if (style === 'transparent') {
+    nav.style.background = 'transparent';
+    nav.style.backdropFilter = 'none';
+    nav.style.borderBottom = 'none';
+  } else {
+    nav.style.background = '';
+    nav.style.backdropFilter = 'blur(12px)';
+    nav.style.borderBottom = '';
+  }
+}
+
+let starSpeedMult = 1;
+function setStarSpeed(speed, el) {
+  document.querySelectorAll('#tweaks-panel .tweak-group:nth-child(8) .theme-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('starSpeedVal').textContent = speed;
+  starSpeedMult = speed === 'yavaş' ? 0.3 : speed === 'hızlı' ? 3 : 1;
+}
+
+function setBtnStyle(style, el) {
+  document.querySelectorAll('#tweaks-panel .tweak-group:nth-child(9) .theme-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  const r = style === 'pill' ? '100px' : '8px';
+  document.querySelectorAll('.btn-primary,.btn-outline,.nav-cta').forEach(b => b.style.borderRadius = r);
+}
+
 function setTheme(name, el) {
   document.body.className = document.body.className.replace(/theme-\w+/g, '');
   if (name !== 'cosmic') document.body.classList.add('theme-' + name);
@@ -2255,9 +2328,14 @@ document.querySelectorAll('.service-card, .bot-card, .step, .faq-item').forEach(
 
 <!-- TWEAKS PANEL -->
 <div id="tweaks-panel">
-  <h4>Tweaks</h4>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+    <h4 style="margin:0;font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--text);letter-spacing:0.04em;">⚙️ Tweaks</h4>
+    <button onclick="document.getElementById('tweaks-panel').style.display='none';window.parent.postMessage({type:'__edit_mode_dismissed'},'*')" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;line-height:1;">×</button>
+  </div>
+
+  <!-- TEMA -->
   <div class="tweak-group">
-    <div class="tweak-label">Tema Rengi</div>
+    <div class="tweak-label">🎨 Tema Rengi</div>
     <div class="theme-options">
       <div class="theme-opt active" data-theme="cosmic" onclick="setTheme('cosmic',this)">
         <span class="theme-swatch" style="background:linear-gradient(135deg,#7c5cfc,#00d4ff)"></span>Cosmic
@@ -2270,14 +2348,74 @@ document.querySelectorAll('.service-card, .bot-card, .step, .faq-item').forEach(
       </div>
     </div>
   </div>
+
+  <!-- VIDEO -->
   <div class="tweak-group">
-    <div class="tweak-label">Yıldız Yoğunluğu</div>
+    <div class="tweak-label">🎬 Hero Video Opaklığı <span id="videoOpacityVal">72%</span></div>
+    <input class="tweak-slider" type="range" min="0" max="100" value="72" oninput="setVideoOpacity(this.value)">
+  </div>
+
+  <div class="tweak-group">
+    <div class="tweak-label">🌑 Video Karartma <span id="overlayVal">orta</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+      <div class="theme-opt" onclick="setOverlay('az',this)"><span class="theme-swatch" style="background:rgba(0,0,0,0.2)"></span>Az</div>
+      <div class="theme-opt active" onclick="setOverlay('orta',this)"><span class="theme-swatch" style="background:rgba(0,0,0,0.45)"></span>Orta</div>
+      <div class="theme-opt" onclick="setOverlay('cok',this)"><span class="theme-swatch" style="background:rgba(0,0,0,0.75)"></span>Çok</div>
+    </div>
+  </div>
+
+  <!-- FOTOĞRAFLAR -->
+  <div class="tweak-group">
+    <div class="tweak-label">🖼️ Yan Fotoğraflar <span id="fpOpacityVal">82%</span></div>
+    <input class="tweak-slider" type="range" min="0" max="100" value="82" oninput="setFpOpacity(this.value)">
+  </div>
+
+  <!-- YILDIZLAR -->
+  <div class="tweak-group">
+    <div class="tweak-label">✨ Yıldız Yoğunluğu</div>
     <input class="tweak-slider" type="range" min="80" max="400" value="226" oninput="setStarCount(this.value)">
   </div>
+
+  <!-- TAGLINE -->
   <div class="tweak-group">
-    <div class="tweak-label">Hero Tagline</div>
+    <div class="tweak-label">💬 Hero Tagline</div>
     <input style="width:100%;background:oklch(1 0 0/0.06);border:1px solid oklch(1 0 0/0.12);border-radius:8px;padding:8px 12px;color:var(--text);font-size:13px;outline:none;" type="text" id="taglineInput" value="#GeriKalma" oninput="setTagline(this.value)">
   </div>
+
+  <!-- YAZI BOYUTU -->
+  <div class="tweak-group">
+    <div class="tweak-label">🔤 Hero Başlık Boyutu <span id="heroFontVal">7vw</span></div>
+    <input class="tweak-slider" type="range" min="40" max="110" value="70" oninput="setHeroFont(this.value)">
+  </div>
+
+  <!-- NAV STİLİ -->
+  <div class="tweak-group">
+    <div class="tweak-label">📌 Nav Şeffaflığı</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      <div class="theme-opt active" id="navOpaque" onclick="setNav('opaque',this)">Opak</div>
+      <div class="theme-opt" id="navTransp" onclick="setNav('transparent',this)">Şeffaf</div>
+    </div>
+  </div>
+
+  <!-- ANİMASYON HIZI -->
+  <div class="tweak-group">
+    <div class="tweak-label">⚡ Yıldız Hızı <span id="starSpeedVal">orta</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
+      <div class="theme-opt" onclick="setStarSpeed('yavaş',this)">Yavaş</div>
+      <div class="theme-opt active" onclick="setStarSpeed('orta',this)">Orta</div>
+      <div class="theme-opt" onclick="setStarSpeed('hızlı',this)">Hızlı</div>
+    </div>
+  </div>
+
+  <!-- BUTON STİLİ -->
+  <div class="tweak-group">
+    <div class="tweak-label">🔘 Buton Stili</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      <div class="theme-opt active" onclick="setBtnStyle('pill',this)">Yuvarlak</div>
+      <div class="theme-opt" onclick="setBtnStyle('square',this)">Köşeli</div>
+    </div>
+  </div>
+
 </div>
 
 <script>
