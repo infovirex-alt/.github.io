@@ -384,14 +384,6 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     filter: none;
     opacity: 1;
   }
-  .logos-track img.jagler-logo {
-    filter: brightness(0) invert(1);
-    opacity: 0.35;
-  }
-  .logos-track img.jagler-logo:hover {
-    filter: none;
-    opacity: 1;
-  }
 
   @keyframes scroll {
     0% { transform: translateX(0); }
@@ -1533,29 +1525,13 @@ body.intro-active {
   <!-- PERDE EFEKTİ 1 — kaldırıldı -->
   <div style="height:20px"></div>
 
-  <!-- LOGOS BAND -->
-  <div class="logos-band">
+  <!-- LOGOS BAND — yeni logolar gelene kadar gizli.
+       Logo eklemek için: dosyayı images/logos/ altına koy, aşağıya <img src="images/logos/DOSYA" alt="MARKA">
+       satırlarını iki kez (kesintisiz kayma için) ekle ve bu div'deki style="display:none"'ı kaldır. -->
+  <div class="logos-band" style="display:none">
     <p class="logos-label">Güvenilen Markalar Bizimle Büyüyor</p>
     <div class="logos-track-wrap">
       <div class="logos-track" id="logosTrack">
-        <img src="https://virexmedia.net/images/logos/rams_clean.png" alt="RAMS Bahis">
-        <img src="https://virexmedia.net/images/logos/goldengate.png" alt="GoldenGate">
-        <img src="https://virexmedia.net/images/logos/sekabet.webp" alt="SekaBet">
-        <img src="images/logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
-        <img src="https://virexmedia.net/images/logos/viabahis.png" alt="ViaBahis">
-        <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet" style="height:56px;">
-        <img src="https://virexmedia.net/images/logos/robobet.png" alt="RoboBet">
-        <img src="https://virexmedia.net/images/logos/norabahis.png" alt="NoraBahis">
-        <img src="images/logos/jaglerbet.png" alt="JaglerBet" class="jagler-logo" style="mix-blend-mode:screen;height:64px;">
-        <img src="https://virexmedia.net/images/logos/rams_clean.png" alt="RAMS Bahis">
-        <img src="https://virexmedia.net/images/logos/goldengate.png" alt="GoldenGate">
-        <img src="https://virexmedia.net/images/logos/sekabet.webp" alt="SekaBet">
-        <img src="images/logos/slotspor-new.png" alt="SlotSpor" style="mix-blend-mode:screen">
-        <img src="https://virexmedia.net/images/logos/viabahis.png" alt="ViaBahis">
-        <img src="https://virexmedia.net/images/logos/vertubet.png" alt="VertuBet" style="height:56px;">
-        <img src="https://virexmedia.net/images/logos/robobet.png" alt="RoboBet">
-        <img src="https://virexmedia.net/images/logos/norabahis.png" alt="NoraBahis">
-        <img src="images/logos/jaglerbet.png" alt="JaglerBet" class="jagler-logo" style="mix-blend-mode:screen;height:64px;">
       </div>
     </div>
   </div>
