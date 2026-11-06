@@ -385,9 +385,13 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     opacity: 1;
   }
 
+  /* --logos-shift: bir logo setinin genişliği, aşağıdaki script hesaplar */
   @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    100% { transform: translateX(calc(-1 * var(--logos-shift, 50%))); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logos-track { animation: none; }
   }
 
   /* ─── SECTIONS ─── */
@@ -1525,16 +1529,51 @@ body.intro-active {
   <!-- PERDE EFEKTİ 1 — kaldırıldı -->
   <div style="height:20px"></div>
 
-  <!-- LOGOS BAND — yeni logolar gelene kadar gizli.
-       Logo eklemek için: dosyayı images/logos/ altına koy, aşağıya <img src="images/logos/DOSYA" alt="MARKA">
-       satırlarını iki kez (kesintisiz kayma için) ekle ve bu div'deki style="display:none"'ı kaldır. -->
-  <div class="logos-band" style="display:none">
+  <!-- LOGOS BAND
+       Logo eklemek için: dosyayı images/logos/ altına koy ve aşağıya BİR KEZ <img src="images/logos/DOSYA" alt="MARKA"> ekle.
+       Kesintisiz kayma için çoğaltmayı ve hızı alttaki script ekran genişliğine göre kendisi yapar. -->
+  <div class="logos-band">
     <p class="logos-label">Güvenilen Markalar Bizimle Büyüyor</p>
     <div class="logos-track-wrap">
       <div class="logos-track" id="logosTrack">
+        <img src="images/logos/arsenalbahis.png" alt="ArsenalBahis" style="height:44px;">
+        <img src="images/logos/betbeymen.png" alt="Betbeymen" style="height:34px;">
+        <img src="images/logos/milanbahis.png" alt="MilanBahis" style="height:44px;">
+        <img src="images/logos/makrobet.svg" alt="Makrobet" style="height:30px;">
+        <img src="images/logos/dumanbet.svg" alt="Dumanbet" style="height:26px;">
       </div>
     </div>
   </div>
+  <script>
+  // Logo şeridi: tek seti ekranı dolduracak kadar çoğaltır, bir set genişliği kadar kaydırır ve hızı sabit tutar
+  (function () {
+    var track = document.getElementById('logosTrack');
+    if (!track) return;
+    var base = Array.prototype.slice.call(track.children);
+    var SPEED = 55; // px/sn
+    function build() {
+      track.querySelectorAll('[data-clone]').forEach(function (n) { n.remove(); });
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      var unit = base.reduce(function (w, el) { return w + el.getBoundingClientRect().width + gap; }, 0);
+      if (!unit) return;
+      var copies = Math.ceil(track.parentElement.clientWidth / unit) + 1;
+      for (var i = 1; i < copies; i++) {
+        base.forEach(function (el) {
+          var c = el.cloneNode(true);
+          c.setAttribute('data-clone', '');
+          c.setAttribute('aria-hidden', 'true');
+          c.alt = '';
+          track.appendChild(c);
+        });
+      }
+      track.style.setProperty('--logos-shift', unit + 'px');
+      track.style.animationDuration = (unit / SPEED) + 's';
+    }
+    var t;
+    window.addEventListener('load', build);
+    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 200); });
+  })();
+  </script>
 
   <!-- PERDE EFEKTİ 2 — kaldırıldı -->
 
